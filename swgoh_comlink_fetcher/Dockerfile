@@ -1,0 +1,7 @@
+FROM python:3.11-slim
+WORKDIR /src
+COPY ./requirements.txt /src/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /src/requirements.txt
+COPY ./swgoh_comlink_fetcher/ /src/swgoh_comlink_fetcher
+EXPOSE 3201
+CMD ["uvicorn", "swgoh_comlink_fetcher.main:app", "--host", "localhost", "--port", "3201"]
