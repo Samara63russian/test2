@@ -10,6 +10,7 @@ class UserSettings:
     chat_id: int
     username: str | None
     first_name: str
+    created_at: datetime
     timezone: str
     repeat_minutes: int
     enabled: bool

@@ -20,7 +20,6 @@ from medication_bot.database import Database
 from medication_bot.models import ConfirmationStatus, Statistics, UserSettings
 from medication_bot.service import statistics_start
 
-
 router = Router(name=__name__)
 
 TIMEZONE_PRESETS = (
@@ -188,9 +187,7 @@ async def save_schedule_time(
 
 
 @router.callback_query(F.data == "settings:timezone")
-async def choose_timezone(
-    callback: CallbackQuery, app_settings: Settings
-) -> None:
+async def choose_timezone(callback: CallbackQuery, app_settings: Settings) -> None:
     if not await _allow_callback(callback, app_settings):
         return
     rows = [
@@ -210,13 +207,7 @@ async def choose_timezone(
             )
         ]
     )
-    rows.append(
-        [
-            InlineKeyboardButton(
-                text="⬅️ Назад", callback_data="settings:open"
-            )
-        ]
-    )
+    rows.append([InlineKeyboardButton(text="⬅️ Назад", callback_data="settings:open")])
     if callback.message is not None:
         await callback.message.edit_text(
             "Выберите свой часовой пояс:",
@@ -304,13 +295,7 @@ async def choose_repeat_interval(
         ]
         for pair in ((5, 10, 15), (30, 60, 120))
     ]
-    rows.append(
-        [
-            InlineKeyboardButton(
-                text="⬅️ Назад", callback_data="settings:open"
-            )
-        ]
-    )
+    rows.append([InlineKeyboardButton(text="⬅️ Назад", callback_data="settings:open")])
     if callback.message is not None:
         await callback.message.edit_text(
             "Как часто повторять неподтверждённое напоминание?",
@@ -507,11 +492,7 @@ def statistics_keyboard() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(text="7 дней", callback_data="stats:7"),
                 InlineKeyboardButton(text="30 дней", callback_data="stats:30"),
             ],
-            [
-                InlineKeyboardButton(
-                    text="⚙️ Настройки", callback_data="settings:open"
-                )
-            ],
+            [InlineKeyboardButton(text="⚙️ Настройки", callback_data="settings:open")],
         ]
     )
 

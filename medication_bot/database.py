@@ -13,7 +13,6 @@ from medication_bot.models import (
     UserSettings,
 )
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS users (
     chat_id INTEGER PRIMARY KEY,
@@ -305,9 +304,7 @@ class Database:
             await connection.commit()
             return cursor.rowcount == 1
 
-    async def _touch_user(
-        self, connection: aiosqlite.Connection, chat_id: int
-    ) -> None:
+    async def _touch_user(self, connection: aiosqlite.Connection, chat_id: int) -> None:
         await connection.execute(
             "UPDATE users SET updated_at = ? WHERE chat_id = ?",
             (_to_db(datetime.now(UTC)), chat_id),
@@ -329,15 +326,14 @@ def _from_db(value: str | None) -> datetime | None:
     return datetime.fromisoformat(value) if value is not None else None
 
 
-def _user_from_row(
-    row: aiosqlite.Row, times: tuple[str, ...]
-) -> UserSettings:
+def _user_from_row(row: aiosqlite.Row, times: tuple[str, ...]) -> UserSettings:
     if len(times) != 3:
         raise RuntimeError(f"User {row['chat_id']} does not have three schedule times")
     return UserSettings(
         chat_id=row["chat_id"],
         username=row["username"],
         first_name=row["first_name"],
+        created_at=_required_datetime(row["created_at"], "User has no created_at"),
         timezone=row["timezone"],
         repeat_minutes=row["repeat_minutes"],
         enabled=bool(row["enabled"]),
@@ -346,9 +342,7 @@ def _user_from_row(
 
 
 def _dose_from_row(row: aiosqlite.Row) -> Dose:
-    scheduled_at = _from_db(row["scheduled_at"])
-    if scheduled_at is None:
-        raise RuntimeError("Dose has no scheduled_at")
+    scheduled_at = _required_datetime(row["scheduled_at"], "Dose has no scheduled_at")
     return Dose(
         id=row["id"],
         chat_id=row["chat_id"],
@@ -361,3 +355,10 @@ def _dose_from_row(row: aiosqlite.Row) -> Dose:
         timezone=row["timezone"],
         repeat_minutes=row["repeat_minutes"],
     )
+
+
+def _required_datetime(value: str | None, error: str) -> datetime:
+    parsed = _from_db(value)
+    if parsed is None:
+        raise RuntimeError(error)
+    return parsed

@@ -34,3 +34,7 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 88
 target-version = "py311"
+exclude = ["streamlit_app", "swgoh_comlink_fetcher"]
+
+[tool.ruff.format]
+line-ending = "lf"

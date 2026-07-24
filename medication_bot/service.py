@@ -12,7 +12,6 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from medication_bot.database import Database
 from medication_bot.models import Dose
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -77,8 +76,9 @@ class ReminderService:
                     tzinfo=timezone,
                 )
                 scheduled_at = scheduled_local.astimezone(UTC)
-                if scheduled_at <= current and await self.database.create_dose(
-                    user.chat_id, scheduled_at
+                if (
+                    user.created_at <= scheduled_at <= current
+                    and await self.database.create_dose(user.chat_id, scheduled_at)
                 ):
                     created += 1
         return created

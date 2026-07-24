@@ -13,7 +13,6 @@ from medication_bot.database import Database
 from medication_bot.handlers import router
 from medication_bot.service import ReminderService, scheduler_loop
 
-
 logger = logging.getLogger(__name__)
 
 

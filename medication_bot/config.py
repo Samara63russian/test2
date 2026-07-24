@@ -3,8 +3,8 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 from pathlib import Path
+from typing import cast
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
-
 
 DEFAULT_SCHEDULE = ("09:00", "14:00", "21:00")
 
@@ -20,7 +20,7 @@ class Settings:
     scheduler_interval_seconds: int
 
     @classmethod
-    def from_env(cls) -> "Settings":
+    def from_env(cls) -> Settings:
         token = os.getenv("BOT_TOKEN", "").strip()
         if not token:
             raise ValueError("Переменная окружения BOT_TOKEN обязательна")
@@ -52,7 +52,7 @@ class Settings:
             ).expanduser(),
             target_user_id=target_user_id,
             default_timezone=timezone_name,
-            default_times=parsed_times,  # type: ignore[arg-type]
+            default_times=cast(tuple[str, str, str], parsed_times),
             default_repeat_minutes=repeat_minutes,
             scheduler_interval_seconds=scheduler_interval,
         )
