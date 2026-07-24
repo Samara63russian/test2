@@ -1,0 +1,13 @@
+services:
+  medication-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - medication-data:/data
+
+volumes:
+  medication-data:
