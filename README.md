@@ -1,6 +1,97 @@
-# swgoh_guild_webapp
-Demo hosted at: https://ir940-swgoh.streamlit.app/
+# Telegram-бот для напоминания о таблетках
 
-A Streamlit webapp for the mobile game Star Wars: Galaxy of Heroes to monitor guild performance and activity. WIP
+Бот отправляет персональные напоминания три раза в день. Если получатель не
+нажал кнопку «Я выпила», сообщение повторяется с выбранным интервалом. Все
+подтверждения записываются в SQLite и отображаются в статистике за сегодня,
+7 или 30 дней.
 
-![Flowchart displaying the layout of the data backend processes](/docs/flowchart.jpg)
+## Возможности
+
+- три настраиваемых времени приёма;
+- выбор часового пояса;
+- повтор через 5, 10, 15, 30, 60 или 120 минут до подтверждения;
+- кнопка «Я выпила» в каждом напоминании;
+- статистика выполненных и ожидающих приёмов;
+- приостановка и возобновление напоминаний;
+- опциональное ограничение доступа одним Telegram user ID;
+- сохранение расписания, неподтверждённых приёмов и статистики после перезапуска.
+
+> Бот помогает соблюдать расписание, но не заменяет назначения врача или
+> медицинскую консультацию.
+
+## Быстрый запуск в Docker
+
+1. Создайте бота через [@BotFather](https://t.me/BotFather) и получите токен.
+2. Подготовьте конфигурацию:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Укажите токен в `.env`:
+
+   ```dotenv
+   BOT_TOKEN=токен_от_BotFather
+   ```
+
+4. Запустите сервис:
+
+   ```bash
+   docker compose -f docker-compose.bot.yml up -d --build
+   ```
+
+5. Получатель должен открыть личный чат с ботом и нажать `/start`. Telegram не
+   разрешает боту первым начинать диалог с пользователем.
+
+База данных хранится в Docker volume `medication-data`. Для обновления
+контейнера volume удалять не нужно.
+
+## Запуск без Docker
+
+Нужен Python 3.11 или новее.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install .
+cp .env.example .env
+set -a && source .env && set +a
+python -m medication_bot
+```
+
+## Конфигурация
+
+| Переменная | Значение по умолчанию | Назначение |
+| --- | --- | --- |
+| `BOT_TOKEN` | — | Обязательный токен от BotFather |
+| `TARGET_TELEGRAM_USER_ID` | пусто | Разрешить доступ только одному пользователю |
+| `DATABASE_PATH` | `./data/medication_bot.db` | Путь к SQLite |
+| `DEFAULT_TIMEZONE` | `Europe/Moscow` | Начальный часовой пояс |
+| `DEFAULT_TIMES` | `09:00,14:00,21:00` | Начальные три времени |
+| `DEFAULT_REPEAT_MINUTES` | `15` | Начальный интервал повтора |
+| `SCHEDULER_INTERVAL_SECONDS` | `30` | Частота проверки расписания |
+
+Если бот предназначен только для одного человека, рекомендуется задать
+`TARGET_TELEGRAM_USER_ID`. Узнать ID можно у ботов вроде `@userinfobot`.
+Получатель всё равно должен один раз отправить вашему боту `/start`.
+
+## Команды
+
+- `/start` — зарегистрировать получателя и открыть настройки;
+- `/settings` — изменить расписание, часовой пояс или интервал;
+- `/stats` — открыть статистику;
+- `/cancel` — отменить ввод настройки;
+- `/help` — показать справку.
+
+## Разработка
+
+```bash
+pip install -e ".[dev]"
+python -m pytest
+```
+
+## Существующий SWGOH-проект
+
+Ранее репозиторий содержал Streamlit-приложение для Star Wars: Galaxy of
+Heroes. Его исходный код сохранён в `streamlit_app/` и
+`swgoh_comlink_fetcher/`.

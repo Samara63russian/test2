@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medication-reminder-bot"
+version = "1.0.0"
+description = "Telegram bot with persistent medication reminders and statistics"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiogram==3.30.0",
+    "aiosqlite==0.22.1",
+    "tzdata==2026.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "pytest-asyncio==1.4.0",
+    "ruff==0.16.0",
+]
+
+[project.scripts]
+medication-bot = "medication_bot.main:run"
+
+[tool.setuptools.packages.find]
+include = ["medication_bot*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+exclude = ["streamlit_app", "swgoh_comlink_fetcher"]
+
+[tool.ruff.format]
+line-ending = "lf"
