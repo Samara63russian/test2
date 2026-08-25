@@ -10,7 +10,7 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Avatar } from "./ui-elements";
 import { people } from "@/lib/demo-data";
 
@@ -21,12 +21,14 @@ interface TopbarProps {
 }
 
 export function Topbar({ onMenu, onSearch, onCreateTask }: TopbarProps) {
-  const [mounted, setMounted] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [read, setRead] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
 
   return (
     <header className="topbar">

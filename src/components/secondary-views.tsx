@@ -54,7 +54,6 @@ import {
   AvatarStack,
   Progress,
   SectionHeading,
-  StateBadge,
 } from "./ui-elements";
 
 export function ProjectsView({ onCreate }: { onCreate: () => void }) {

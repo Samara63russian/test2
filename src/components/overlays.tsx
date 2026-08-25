@@ -10,7 +10,6 @@ import {
   Command,
   FolderKanban,
   Link2,
-  MessageSquare,
   Paperclip,
   Plus,
   Search,
@@ -20,18 +19,16 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { people, projects } from "@/lib/demo-data";
 import {
   formatLongDate,
   priorityLabels,
-  stateLabels,
   statusLabels,
 } from "@/lib/locale";
-import type { Task, TaskPriority, TaskStatus, ViewId } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import type { Task, TaskStatus, ViewId } from "@/lib/types";
 import {
   Avatar,
   PriorityBadge,
@@ -372,10 +369,6 @@ export function CommandPalette({
     const value = query.toLocaleLowerCase("ru-RU");
     return tasks.filter((task) => !value || task.title.toLocaleLowerCase("ru-RU").includes(value) || task.project.toLocaleLowerCase("ru-RU").includes(value)).slice(0, 5);
   }, [query, tasks]);
-
-  useEffect(() => {
-    if (!open) setQuery("");
-  }, [open]);
 
   return (
     <AnimatePresence>

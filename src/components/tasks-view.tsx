@@ -8,7 +8,6 @@ import {
   Download,
   Filter,
   GripVertical,
-  LayoutGrid,
   List,
   MessageSquare,
   MoreHorizontal,

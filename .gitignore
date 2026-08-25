@@ -8,3 +8,5 @@ out/
 .DS_Store
 coverage/
 prisma/dev.db
+src/generated/prisma/
+tsconfig.tsbuildinfo
