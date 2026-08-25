@@ -1,0 +1,195 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+enum ProjectStatus {
+  PLANNED
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  ARCHIVED
+}
+
+enum TaskStatus {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  REVIEW
+  BLOCKED
+  DONE
+}
+
+enum TaskPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum NotificationType {
+  TASK_ASSIGNED
+  TASK_DUE_SOON
+  TASK_OVERDUE
+  COMMENT_MENTION
+  TASK_BLOCKED
+  PROJECT_DUE_SOON
+}
+
+model Organization {
+  id           String        @id @default(cuid())
+  name         String
+  logo         String?
+  slug         String        @unique
+  users        User[]
+  projects     Project[]
+  tasks        Task[]
+  activityLogs ActivityLog[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String
+  avatar        String?
+  position      String?
+  role          UserRole       @default(MEMBER)
+  organization  Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  ownedProjects Project[]      @relation("ProjectOwner")
+  assignedTasks Task[]         @relation("TaskAssignee")
+  createdTasks  Task[]         @relation("TaskCreator")
+  comments      Comment[]
+  activityLogs  ActivityLog[]
+  notifications Notification[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@unique([organizationId, email])
+  @@index([organizationId])
+  @@index([organizationId, role])
+}
+
+model Project {
+  id             String         @id @default(cuid())
+  name           String
+  description    String?
+  color          String         @default("#315AE8")
+  status         ProjectStatus  @default(PLANNED)
+  owner          User           @relation("ProjectOwner", fields: [ownerId], references: [id])
+  ownerId        String
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  tasks          Task[]
+  startDate      DateTime?
+  dueDate        DateTime?
+  progress       Int            @default(0)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([organizationId])
+  @@index([organizationId, status])
+  @@index([organizationId, ownerId])
+  @@index([organizationId, dueDate])
+}
+
+model Task {
+  id               String           @id @default(cuid())
+  title            String
+  description      String?
+  project          Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  projectId        String?
+  assignee         User?            @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  assigneeId       String?
+  creator          User             @relation("TaskCreator", fields: [creatorId], references: [id])
+  creatorId        String
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId   String
+  status           TaskStatus       @default(TODO)
+  priority         TaskPriority     @default(MEDIUM)
+  startDate        DateTime?
+  dueDate          DateTime?
+  progress         Int              @default(0)
+  category         String?
+  nextStep         String?
+  dependencies     TaskDependency[] @relation("DependentTask")
+  dependedOnBy     TaskDependency[] @relation("RequiredTask")
+  comments         Comment[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  completedAt      DateTime?
+
+  @@index([organizationId])
+  @@index([organizationId, projectId])
+  @@index([organizationId, assigneeId])
+  @@index([organizationId, status])
+  @@index([organizationId, priority])
+  @@index([organizationId, dueDate])
+  @@index([organizationId, createdAt])
+}
+
+model TaskDependency {
+  id              String @id @default(cuid())
+  task            Task   @relation("DependentTask", fields: [taskId], references: [id], onDelete: Cascade)
+  taskId          String
+  dependsOnTask   Task   @relation("RequiredTask", fields: [dependsOnTaskId], references: [id], onDelete: Cascade)
+  dependsOnTaskId String
+
+  @@unique([taskId, dependsOnTaskId])
+  @@index([dependsOnTaskId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId    String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([taskId, createdAt])
+  @@index([authorId])
+}
+
+model ActivityLog {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  user           User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId         String?
+  entityType     String
+  entityId       String
+  action         String
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+
+  @@index([organizationId, createdAt])
+  @@index([organizationId, entityType, entityId])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  type      NotificationType
+  entityId  String?
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId, read, createdAt])
+}
