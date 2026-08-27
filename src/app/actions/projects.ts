@@ -5,8 +5,7 @@ import { z } from "zod";
 import { requireActor, requireRole } from "@/lib/auth";
 import { getDb } from "@/lib/db";
 
-const projectSchema = z
-  .object({
+const projectFieldsSchema = z.object({
     name: z.string().trim().min(2).max(180),
     description: z.string().trim().max(4_000).optional(),
     color: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default("#315AE8"),
@@ -17,7 +16,9 @@ const projectSchema = z
     startDate: z.coerce.date().nullable().optional(),
     dueDate: z.coerce.date().nullable().optional(),
     progress: z.number().int().min(0).max(100).default(0),
-  })
+  });
+
+const projectSchema = projectFieldsSchema
   .refine(
     ({ startDate, dueDate }) =>
       !startDate || !dueDate || dueDate >= startDate,
@@ -47,7 +48,15 @@ export async function createProject(input: unknown) {
 export async function updateProject(input: unknown) {
   const actor = await requireActor();
   requireRole(actor, ["OWNER", "ADMIN", "MANAGER"]);
-  const values = projectSchema.partial().extend({ id: z.string().cuid() }).parse(input);
+  const values = projectFieldsSchema
+    .partial()
+    .extend({ id: z.string().cuid() })
+    .refine(
+      ({ startDate, dueDate }) =>
+        !startDate || !dueDate || dueDate >= startDate,
+      { path: ["dueDate"], message: "Некорректный срок проекта" },
+    )
+    .parse(input);
   const project = await getDb().project.findFirst({
     where: { id: values.id, organizationId: actor.organizationId },
     select: { id: true },

@@ -15,8 +15,7 @@ const statusSchema = z.enum([
 ]);
 const prioritySchema = z.enum(["CRITICAL", "HIGH", "MEDIUM", "LOW"]);
 
-const createTaskSchema = z
-  .object({
+const taskFieldsSchema = z.object({
     title: z.string().trim().min(2).max(240),
     description: z.string().trim().max(10_000).optional(),
     projectId: z.string().cuid().nullable().optional(),
@@ -28,16 +27,25 @@ const createTaskSchema = z
     progress: z.number().int().min(0).max(100).default(0),
     category: z.string().trim().max(100).optional(),
     nextStep: z.string().trim().max(500).optional(),
-  })
+  });
+
+const createTaskSchema = taskFieldsSchema
   .refine(
     ({ startDate, dueDate }) =>
       !startDate || !dueDate || dueDate >= startDate,
     { path: ["dueDate"], message: "Некорректный дедлайн" },
   );
 
-const updateTaskSchema = createTaskSchema.partial().extend({
-  id: z.string().cuid(),
-});
+const updateTaskSchema = taskFieldsSchema
+  .partial()
+  .extend({
+    id: z.string().cuid(),
+  })
+  .refine(
+    ({ startDate, dueDate }) =>
+      !startDate || !dueDate || dueDate >= startDate,
+    { path: ["dueDate"], message: "Некорректный дедлайн" },
+  );
 
 async function assertTaskAccess(
   id: string,
