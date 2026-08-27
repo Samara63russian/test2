@@ -115,6 +115,7 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
             projects={projects}
             people={people}
             currentUser={currentUser}
+            currentDateLabel={initialData.currentDateLabel}
             onOpenTask={setSelectedTask}
             onNavigate={navigate}
             onCreateTask={() => setCreateTaskOpen(true)}

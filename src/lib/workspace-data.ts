@@ -36,6 +36,7 @@ function taskState(
 
 export interface WorkspaceData {
   organizationName: string;
+  currentDateLabel: string;
   currentUser: Person;
   people: Person[];
   projects: Project[];
@@ -196,6 +197,11 @@ export async function loadWorkspaceData(
 
   return {
     organizationName: organization.name,
+    currentDateLabel: new Intl.DateTimeFormat("ru-RU", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+    }).format(new Date()),
     currentUser,
     people,
     projects,

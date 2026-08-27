@@ -39,6 +39,7 @@ interface OverviewProps {
   projects: Project[];
   people: Person[];
   currentUser: Person;
+  currentDateLabel: string;
   onOpenTask: (task: Task) => void;
   onNavigate: (view: ViewId) => void;
   onCreateTask: () => void;
@@ -49,6 +50,7 @@ export function OverviewView({
   projects,
   people,
   currentUser,
+  currentDateLabel,
   onOpenTask,
   onNavigate,
   onCreateTask,
@@ -65,12 +67,11 @@ export function OverviewView({
   const critical = tasks.filter(
     (task) => task.priority === "CRITICAL" && task.status !== "DONE",
   ).length;
-  const weekLimit = Date.now() + 7 * 24 * 60 * 60 * 1000;
   const dueThisWeek = tasks.filter(
     (task) =>
       task.dueDate &&
       task.status !== "DONE" &&
-      new Date(task.dueDate).getTime() <= weekLimit,
+      ["DUE_SOON", "OVERDUE"].includes(task.state),
   ).length;
   const completion = tasks.length
     ? Math.round((completed / tasks.length) * 100)
@@ -86,17 +87,12 @@ export function OverviewView({
   const completionData = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(
     (day) => ({ day, created: 0, completed: 0 }),
   );
-  const currentDate = new Intl.DateTimeFormat("ru-RU", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(new Date());
 
   return (
     <div className="page overview-page">
       <div className="page-intro overview-intro">
         <div>
-          <span className="eyebrow">{currentDate}</span>
+          <span className="eyebrow">{currentDateLabel}</span>
           <h1>Добрый день, {currentUser.name.split(" ")[0]}</h1>
           <p>Вот что происходит в вашей организации сегодня.</p>
         </div>
