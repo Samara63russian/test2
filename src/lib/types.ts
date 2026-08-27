@@ -24,6 +24,7 @@ export interface Person {
   initials: string;
   position: string;
   color: string;
+  role?: "OWNER" | "ADMIN" | "MANAGER" | "MEMBER";
   activeTasks: number;
   overdueTasks: number;
   completedMonth: number;

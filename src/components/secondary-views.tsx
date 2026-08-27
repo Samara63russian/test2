@@ -12,7 +12,9 @@ import {
   Link2,
   Lock,
   Mail,
+  Monitor,
   MoreHorizontal,
+  Moon,
   Palette,
   Plus,
   Search,
@@ -20,8 +22,11 @@ import {
   ShieldCheck,
   SlidersHorizontal,
   Star,
+  Sun,
   Users,
 } from "lucide-react";
+import { useState } from "react";
+import { useTheme } from "next-themes";
 import {
   Area,
   AreaChart,
@@ -137,7 +142,22 @@ export function ProjectsView({
   );
 }
 
-export function TeamView({ people }: { people: Person[] }) {
+const roleLabels = {
+  OWNER: "Владелец",
+  ADMIN: "Администратор",
+  MANAGER: "Руководитель",
+  MEMBER: "Сотрудник",
+};
+
+export function TeamView({
+  people,
+  organizationName,
+  onInvite,
+}: {
+  people: Person[];
+  organizationName: string;
+  onInvite: () => void;
+}) {
   const completed = people.reduce(
     (sum, person) => sum + person.completedMonth,
     0,
@@ -147,11 +167,11 @@ export function TeamView({ people }: { people: Person[] }) {
     <div className="page">
       <div className="page-intro">
         <div>
-          <span className="eyebrow">Север Групп</span>
+          <span className="eyebrow">{organizationName}</span>
           <h1>Команда</h1>
           <p>Загрузка, эффективность и текущие приоритеты сотрудников.</p>
         </div>
-        <button className="primary-button"><Plus size={17} /> Пригласить сотрудника</button>
+        <button className="primary-button" onClick={onInvite}><Plus size={17} /> Пригласить сотрудника</button>
       </div>
       <div className="portfolio-summary team-summary">
         <div><span>Участники</span><strong>{people.length}</strong><small>в организации</small></div>
@@ -179,7 +199,7 @@ export function TeamView({ people }: { people: Person[] }) {
               </div>
               <h2>{person.name}</h2>
               <p>{person.position}</p>
-              <span className="role-badge">{person.id === "user-alexander" ? "Владелец" : "Сотрудник"}</span>
+              <span className="role-badge">{roleLabels[person.role ?? "MEMBER"]}</span>
               <div className="member-stats">
                 <span><strong>{person.activeTasks}</strong><small>активных</small></span>
                 <span><strong className={person.overdueTasks ? "danger-text" : ""}>{person.overdueTasks}</strong><small>просрочено</small></span>
@@ -389,15 +409,157 @@ const settingsSections = [
   { id: "appearance", label: "Внешний вид", icon: Palette },
   { id: "security", label: "Безопасность", icon: Lock },
   { id: "integrations", label: "Интеграции", icon: Link2 },
-];
+] as const;
 
 export function SettingsView({
   organizationName,
   currentUser,
+  people,
+  onInvite,
 }: {
   organizationName: string;
   currentUser: Person;
+  people: Person[];
+  onInvite: () => void;
 }) {
+  const [activeSection, setActiveSection] = useState(
+    settingsSections[0].id,
+  );
+  const [weeklySummary, setWeeklySummary] = useState(true);
+  const [deadlineAlerts, setDeadlineAlerts] = useState(true);
+  const [mentions, setMentions] = useState(true);
+  const [saved, setSaved] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const sectionMeta = {
+    general: ["Общие настройки", "Основные параметры рабочего пространства"],
+    organization: ["Организация", "Информация и правила вашей организации"],
+    members: ["Участники", "Пользователи и роли рабочего пространства"],
+    notifications: ["Уведомления", "Выберите события, о которых нужно сообщать"],
+    appearance: ["Внешний вид", "Настройте подходящую тему интерфейса"],
+    security: ["Безопасность", "Защита учётной записи и активные сессии"],
+    integrations: ["Интеграции", "Подключение внешних сервисов"],
+  } as const;
+  const [sectionTitle, sectionDescription] = sectionMeta[activeSection];
+
+  const toggle = (
+    value: boolean,
+    setter: (value: boolean) => void,
+    label: string,
+  ) => (
+    <button
+      className={cn("toggle", value && "active")}
+      onClick={() => setter(!value)}
+      aria-label={`${label}: ${value ? "включено" : "выключено"}`}
+      aria-pressed={value}
+    >
+      <i />
+    </button>
+  );
+
+  const sectionContent = () => {
+    switch (activeSection) {
+      case "general":
+        return (
+          <div className="settings-form">
+            <label><span>Название организации</span><input defaultValue={organizationName} readOnly /></label>
+            <label><span>Владелец пространства</span><input defaultValue={currentUser.name} readOnly /></label>
+            <label><span>Часовой пояс</span><select defaultValue="moscow"><option value="moscow">Москва (UTC+3)</option></select></label>
+            <label><span>Язык интерфейса</span><select defaultValue="ru"><option value="ru">Русский</option></select></label>
+          </div>
+        );
+      case "organization":
+        return (
+          <div className="settings-form single-column-settings">
+            <div className="settings-info-card">
+              <span className="settings-info-icon"><Globe2 size={18} /></span>
+              <span><strong>{organizationName}</strong><small>Рабочее пространство организации</small></span>
+            </div>
+            <div className="settings-info-card">
+              <span className="settings-info-icon success"><ShieldCheck size={18} /></span>
+              <span><strong>Изоляция данных включена</strong><small>Пользователи видят данные только своей организации.</small></span>
+            </div>
+          </div>
+        );
+      case "members":
+        return (
+          <div className="settings-members">
+            <div className="settings-members-toolbar">
+              <span>Всего участников: <strong>{people.length}</strong></span>
+              <button className="primary-button" onClick={onInvite}><Plus size={15} /> Пригласить сотрудника</button>
+            </div>
+            {people.map((person) => (
+              <div className="settings-member-row" key={person.id}>
+                <Avatar person={person} size="medium" />
+                <span><strong>{person.name}</strong><small>{person.position}</small></span>
+                <span className="role-badge">{roleLabels[person.role ?? "MEMBER"]}</span>
+              </div>
+            ))}
+          </div>
+        );
+      case "notifications":
+        return (
+          <div className="settings-list">
+            <div className="setting-toggle-row">
+              <span><strong>Еженедельная сводка</strong><small>Получать обзор по понедельникам</small></span>
+              {toggle(weeklySummary, setWeeklySummary, "Еженедельная сводка")}
+            </div>
+            <div className="setting-toggle-row">
+              <span><strong>Напоминания о сроках</strong><small>Предупреждать за два дня до дедлайна</small></span>
+              {toggle(deadlineAlerts, setDeadlineAlerts, "Напоминания о сроках")}
+            </div>
+            <div className="setting-toggle-row">
+              <span><strong>Упоминания и комментарии</strong><small>Сообщать о новых обсуждениях</small></span>
+              {toggle(mentions, setMentions, "Упоминания и комментарии")}
+            </div>
+          </div>
+        );
+      case "appearance":
+        return (
+          <div className="appearance-options">
+            {[
+              { id: "light", label: "Светлая", icon: Sun },
+              { id: "dark", label: "Тёмная", icon: Moon },
+              { id: "system", label: "Как в системе", icon: Monitor },
+            ].map((option) => (
+              <button
+                key={option.id}
+                className={theme === option.id ? "active" : ""}
+                onClick={() => setTheme(option.id)}
+              >
+                <span><option.icon size={20} /></span>
+                <strong>{option.label}</strong>
+                <small>{option.id === "system" ? "Следовать настройкам устройства" : `Использовать ${option.label.toLocaleLowerCase("ru-RU")} тему`}</small>
+              </button>
+            ))}
+          </div>
+        );
+      case "security":
+        return (
+          <div className="settings-list">
+            <div className="settings-info-card">
+              <span className="settings-info-icon success"><Lock size={18} /></span>
+              <span><strong>Защищённая сессия</strong><small>Вход подтверждён, cookie недоступна JavaScript и передаётся только по HTTPS.</small></span>
+              <span className="security-status">Активна</span>
+            </div>
+            <div className="settings-info-card">
+              <span className="settings-info-icon"><ShieldCheck size={18} /></span>
+              <span><strong>Защита от перебора</strong><small>После пяти неверных попыток вход временно блокируется.</small></span>
+              <span className="security-status">Включена</span>
+            </div>
+          </div>
+        );
+      case "integrations":
+        return (
+          <div className="integration-empty">
+            <span><Link2 size={22} /></span>
+            <strong>Интеграции пока не подключены</strong>
+            <small>Подключение внешних сервисов будет доступно в следующих версиях.</small>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="page">
       <div className="page-intro">
@@ -405,26 +567,27 @@ export function SettingsView({
       </div>
       <div className="settings-layout">
         <aside className="settings-nav">
-          {settingsSections.map((item, index) => <button key={item.id} className={index === 0 ? "active" : ""}><item.icon size={16} />{item.label}</button>)}
+          {settingsSections.map((item) => (
+            <button
+              key={item.id}
+              className={activeSection === item.id ? "active" : ""}
+              onClick={() => {
+                setActiveSection(item.id);
+                setSaved(false);
+              }}
+            >
+              <item.icon size={16} />{item.label}
+            </button>
+          ))}
         </aside>
         <section className="settings-panel dashboard-card">
-          <SectionHeading title="Общие настройки" description="Основная информация о вашем рабочем пространстве" />
-          <div className="settings-form">
-            <label><span>Название организации</span><input defaultValue={organizationName} /></label>
-            <label><span>Владелец пространства</span><input defaultValue={currentUser.name} readOnly /></label>
-            <label><span>Часовой пояс</span><select defaultValue="moscow"><option value="moscow">Москва (UTC+3)</option></select></label>
-            <label><span>Язык интерфейса</span><select defaultValue="ru"><option value="ru">Русский</option></select></label>
-            <div className="settings-divider" />
-            <div className="setting-toggle-row">
-              <span><strong>Еженедельная сводка</strong><small>Получать обзор по понедельникам</small></span>
-              <button className="toggle active" aria-label="Еженедельная сводка включена"><i /></button>
-            </div>
-            <div className="setting-toggle-row">
-              <span><strong>Уведомления о сроках</strong><small>Напоминать за два дня до дедлайна</small></span>
-              <button className="toggle active" aria-label="Уведомления о сроках включены"><i /></button>
-            </div>
-          </div>
-          <footer className="settings-actions"><button className="secondary-button">Отмена</button><button className="primary-button">Сохранить изменения</button></footer>
+          <SectionHeading title={sectionTitle} description={sectionDescription} />
+          {sectionContent()}
+          <footer className="settings-actions">
+            {saved && <span className="settings-saved">Изменения сохранены</span>}
+            <button className="secondary-button" onClick={() => setSaved(false)}>Отмена</button>
+            <button className="primary-button" onClick={() => setSaved(true)}>Сохранить изменения</button>
+          </footer>
         </section>
       </div>
     </div>

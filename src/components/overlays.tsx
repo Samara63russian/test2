@@ -433,6 +433,148 @@ export function CommandPalette({
   );
 }
 
+export interface InviteMemberForm {
+  name: string;
+  email: string;
+  position: string;
+  role: "ADMIN" | "MANAGER" | "MEMBER";
+  temporaryPassword: string;
+}
+
+export function InviteMemberDialog({
+  open,
+  onClose,
+  onInvite,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onInvite: (values: InviteMemberForm) => void | Promise<void>;
+}) {
+  const [submitting, setSubmitting] = useState(false);
+  const [temporaryPassword, setTemporaryPassword] = useState("");
+
+  const generatePassword = () => {
+    const bytes = new Uint32Array(3);
+    crypto.getRandomValues(bytes);
+    setTemporaryPassword(`Sever-${bytes[0].toString(36)}-${bytes[1].toString(36)}9`);
+  };
+
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
+    setSubmitting(true);
+    try {
+      await onInvite({
+        name: String(form.get("name") ?? ""),
+        email: String(form.get("email") ?? ""),
+        position: String(form.get("position") ?? ""),
+        role: String(form.get("role") ?? "MEMBER") as InviteMemberForm["role"],
+        temporaryPassword,
+      });
+      formElement.reset();
+      setTemporaryPassword("");
+    } catch {
+      // Ошибка уже отображена вызывающим компонентом.
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="modal-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onMouseDown={onClose}
+        >
+          <motion.div
+            className="modal project-modal"
+            initial={{ opacity: 0, scale: 0.98, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            onMouseDown={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="invite-member-title"
+          >
+            <header className="modal-header">
+              <div>
+                <span className="modal-icon"><UserRound size={19} /></span>
+                <div>
+                  <h2 id="invite-member-title">Пригласить сотрудника</h2>
+                  <p>Создайте защищённую учётную запись участника</p>
+                </div>
+              </div>
+              <button className="icon-button" onClick={onClose} aria-label="Закрыть">
+                <X size={18} />
+              </button>
+            </header>
+            <form onSubmit={submit}>
+              <div className="modal-body">
+                <div className="form-grid">
+                  <label className="form-field">
+                    <span>Имя и фамилия <b>*</b></span>
+                    <input name="name" required minLength={2} autoFocus placeholder="Например: Мария Соколова" />
+                  </label>
+                  <label className="form-field">
+                    <span>Электронная почта <b>*</b></span>
+                    <input name="email" required type="email" placeholder="name@company.ru" />
+                  </label>
+                  <label className="form-field">
+                    <span>Должность</span>
+                    <input name="position" placeholder="Например: Руководитель проектов" />
+                  </label>
+                  <label className="form-field">
+                    <span>Роль</span>
+                    <span className="select-wrap">
+                      <select name="role" defaultValue="MEMBER">
+                        <option value="MEMBER">Сотрудник</option>
+                        <option value="MANAGER">Руководитель</option>
+                        <option value="ADMIN">Администратор</option>
+                      </select>
+                      <ChevronDown size={14} />
+                    </span>
+                  </label>
+                </div>
+                <label className="form-field">
+                  <span>Временный пароль <b>*</b></span>
+                  <span className="generated-password">
+                    <input
+                      name="temporaryPassword"
+                      value={temporaryPassword}
+                      onChange={(event) => setTemporaryPassword(event.target.value)}
+                      minLength={10}
+                      required
+                      placeholder="Не менее 10 символов, буквы и цифры"
+                    />
+                    <button type="button" onClick={generatePassword}>Сгенерировать</button>
+                  </span>
+                </label>
+                <div className="invite-note">
+                  Передайте сотруднику электронную почту и временный пароль по
+                  защищённому каналу. Он сможет войти через обычное окно входа.
+                </div>
+              </div>
+              <footer className="modal-footer">
+                <span />
+                <div>
+                  <button type="button" className="secondary-button" onClick={onClose}>Отмена</button>
+                  <button type="submit" className="primary-button" disabled={submitting}>
+                    <Plus size={16} /> {submitting ? "Добавляем..." : "Добавить сотрудника"}
+                  </button>
+                </div>
+              </footer>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export interface ProjectForm {
   name: string;
   description: string;

@@ -123,6 +123,7 @@ export async function loadWorkspaceData(
         user.position ??
         (user.role === "OWNER" ? "Владелец организации" : "Сотрудник"),
       color: colorFromId(user.id),
+      role: user.role,
       activeTasks: stats.active,
       overdueTasks: stats.overdue,
       completedMonth: stats.completed,

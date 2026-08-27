@@ -6,6 +6,7 @@ import { Toaster, toast } from "sonner";
 import { createTask as createTaskAction, updateTaskStatus } from "@/app/actions/tasks";
 import { createProject as createProjectAction } from "@/app/actions/projects";
 import { logoutAction } from "@/app/actions/auth";
+import { inviteMember as inviteMemberAction } from "@/app/actions/members";
 import type { Project, Task, TaskStatus, ViewId } from "@/lib/types";
 import type { WorkspaceData } from "@/lib/workspace-data";
 import { Sidebar } from "./sidebar";
@@ -25,6 +26,7 @@ import {
   CommandPalette,
   CreateProjectDialog,
   CreateTaskDialog,
+  InviteMemberDialog,
   TaskDetailSheet,
 } from "./overlays";
 
@@ -35,10 +37,12 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [tasks, setTasks] = useState<Task[]>(initialData.tasks);
   const [projects, setProjects] = useState<Project[]>(initialData.projects);
-  const { people, currentUser, organizationName } = initialData;
+  const [people, setPeople] = useState(initialData.people);
+  const { currentUser, organizationName } = initialData;
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [createTaskOpen, setCreateTaskOpen] = useState(false);
   const [createProjectOpen, setCreateProjectOpen] = useState(false);
+  const [inviteMemberOpen, setInviteMemberOpen] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
 
   const navigate = useCallback((nextView: ViewId) => {
@@ -56,6 +60,7 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
         setCommandOpen(false);
         setCreateTaskOpen(false);
         setCreateProjectOpen(false);
+        setInviteMemberOpen(false);
         setSelectedTask(null);
       }
     };
@@ -150,7 +155,13 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
           />
         );
       case "team":
-        return <TeamView people={people} />;
+        return (
+          <TeamView
+            people={people}
+            organizationName={organizationName}
+            onInvite={() => setInviteMemberOpen(true)}
+          />
+        );
       case "calendar":
         return <CalendarView tasks={tasks} onOpenTask={setSelectedTask} />;
       case "analytics":
@@ -164,6 +175,8 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
           <SettingsView
             organizationName={organizationName}
             currentUser={currentUser}
+            people={people}
+            onInvite={() => setInviteMemberOpen(true)}
           />
         );
       case "favorites":
@@ -309,6 +322,42 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
             });
             throw new Error("Не удалось создать проект");
           }
+        }}
+      />
+      <InviteMemberDialog
+        open={inviteMemberOpen}
+        onClose={() => setInviteMemberOpen(false)}
+        onInvite={async (values) => {
+          const result = await inviteMemberAction(values);
+          if (!result.success) {
+            toast.error("Не удалось добавить сотрудника", {
+              description: result.error,
+            });
+            throw new Error(result.error);
+          }
+          setPeople((current) => [
+            ...current,
+            {
+              id: result.member.id,
+              name: result.member.name,
+              initials: result.member.name
+                .split(/\s+/)
+                .slice(0, 2)
+                .map((part) => part.charAt(0).toLocaleUpperCase("ru-RU"))
+                .join(""),
+              position: result.member.position ?? "Сотрудник",
+              color: "#3276a8",
+              role: result.member.role,
+              activeTasks: 0,
+              overdueTasks: 0,
+              completedMonth: 0,
+              workload: 0,
+            },
+          ]);
+          setInviteMemberOpen(false);
+          toast.success("Сотрудник добавлен", {
+            description: `${result.member.name} может войти в рабочее пространство.`,
+          });
         }}
       />
       <TaskDetailSheet

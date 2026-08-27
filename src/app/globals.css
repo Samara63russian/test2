@@ -2948,6 +2948,204 @@ button.fake-checkbox.checked {
   padding: 20px;
 }
 
+.single-column-settings {
+  grid-template-columns: 1fr;
+}
+
+.settings-list,
+.settings-members {
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.settings-list {
+  gap: 4px;
+}
+
+.settings-list .setting-toggle-row {
+  min-height: 68px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.settings-info-card {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-soft);
+}
+
+.settings-info-card > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.settings-info-card strong {
+  font-size: 10px;
+}
+
+.settings-info-card small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.settings-info-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.settings-info-icon.success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.security-status {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: var(--success-soft);
+  color: var(--success);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.settings-members-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.settings-member-row {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.settings-member-row > span:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.settings-member-row strong {
+  font-size: 9px;
+}
+
+.settings-member-row small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.appearance-options {
+  display: grid;
+  min-height: 330px;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: start;
+  gap: 12px;
+  padding: 20px;
+}
+
+.appearance-options > button {
+  display: flex;
+  min-height: 150px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-soft);
+  text-align: center;
+}
+
+.appearance-options > button:hover,
+.appearance-options > button.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.appearance-options > button > span {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  margin-bottom: 9px;
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--accent);
+}
+
+.appearance-options strong {
+  font-size: 10px;
+}
+
+.appearance-options small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.integration-empty {
+  display: flex;
+  min-height: 330px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  text-align: center;
+}
+
+.integration-empty > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  margin-bottom: 11px;
+  border-radius: 10px;
+  background: var(--surface-strong);
+  color: var(--muted);
+}
+
+.integration-empty strong {
+  font-size: 11px;
+}
+
+.integration-empty small {
+  max-width: 310px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.settings-saved {
+  margin-right: auto;
+  color: var(--success);
+  font-size: 9px;
+  font-weight: 600;
+}
+
 .settings-form label {
   display: flex;
   flex-direction: column;
@@ -3261,6 +3459,40 @@ button.fake-checkbox.checked {
 .field-error {
   color: var(--danger);
   font-size: 8px;
+}
+
+.generated-password {
+  display: flex;
+  gap: 7px;
+}
+
+.generated-password input {
+  flex: 1;
+}
+
+.generated-password button {
+  min-width: 112px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.generated-password button:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.invite-note {
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--text-soft);
+  font-size: 8px;
+  line-height: 1.55;
 }
 
 .add-dependency {
@@ -4069,6 +4301,15 @@ button.fake-checkbox.checked {
 
   .settings-form {
     grid-template-columns: 1fr;
+  }
+
+  .appearance-options {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-members-toolbar {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .settings-divider {
