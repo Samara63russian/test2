@@ -23,7 +23,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import {
 import { formatDate, projectStateLabels } from "@/lib/locale";
 import type { Person, Project, Task, ViewId } from "@/lib/types";
 import { cn } from "@/lib/utils";

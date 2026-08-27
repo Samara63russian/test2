@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Toaster, toast } from "sonner";
 import { createTask as createTaskAction, updateTaskStatus } from "@/app/actions/tasks";
 import { createProject as createProjectAction } from "@/app/actions/projects";
@@ -28,6 +29,7 @@ import {
 } from "./overlays";
 
 export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
+  const router = useRouter();
   const [view, setView] = useState<ViewId>("overview");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -182,7 +184,7 @@ export function WorkspaceApp({ initialData }: { initialData: WorkspaceData }) {
         onMobileClose={() => setMobileMenuOpen(false)}
         onLogout={async () => {
           await logoutAction();
-          window.location.assign("/");
+          router.refresh();
         }}
       />
       <div className="app-main">

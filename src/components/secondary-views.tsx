@@ -5,9 +5,7 @@ import {
   ArrowRight,
   Bell,
   CalendarDays,
-  Check,
   ChevronDown,
-  Clock3,
   ExternalLink,
   Filter,
   Globe2,
@@ -21,7 +19,6 @@ import {
   Settings,
   ShieldCheck,
   SlidersHorizontal,
-  Sparkles,
   Star,
   Users,
 } from "lucide-react";
