@@ -1,0 +1,11 @@
+.git
+.gitignore
+.next
+node_modules
+*.log
+.env
+.env.*
+!.env.example
+streamlit_app
+swgoh_comlink_fetcher
+docs
