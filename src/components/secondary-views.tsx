@@ -411,6 +411,8 @@ const settingsSections = [
   { id: "integrations", label: "Интеграции", icon: Link2 },
 ] as const;
 
+type SettingsSectionId = (typeof settingsSections)[number]["id"];
+
 export function SettingsView({
   organizationName,
   currentUser,
@@ -422,7 +424,7 @@ export function SettingsView({
   people: Person[];
   onInvite: () => void;
 }) {
-  const [activeSection, setActiveSection] = useState(
+  const [activeSection, setActiveSection] = useState<SettingsSectionId>(
     settingsSections[0].id,
   );
   const [weeklySummary, setWeeklySummary] = useState(true);
