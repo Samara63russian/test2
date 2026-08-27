@@ -2,7 +2,6 @@
 
 import {
   Bell,
-  CheckCheck,
   Menu,
   Moon,
   Plus,
@@ -11,8 +10,6 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState, useSyncExternalStore } from "react";
-import { Avatar } from "./ui-elements";
-import { people } from "@/lib/demo-data";
 
 interface TopbarProps {
   onMenu: () => void;
@@ -22,7 +19,6 @@ interface TopbarProps {
 
 export function Topbar({ onMenu, onSearch, onCreateTask }: TopbarProps) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
-  const [read, setRead] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(
     () => () => undefined,
@@ -70,47 +66,20 @@ export function Topbar({ onMenu, onSearch, onCreateTask }: TopbarProps) {
             aria-expanded={notificationsOpen}
           >
             <Bell size={19} />
-            {!read && <span className="notification-dot" />}
           </button>
           {notificationsOpen && (
             <div className="popover notification-popover">
               <div className="popover-heading">
                 <div>
                   <strong>Уведомления</strong>
-                  <span>{read ? "Нет непрочитанных" : "3 новых"}</span>
+                  <span>Нет непрочитанных</span>
                 </div>
-                <button onClick={() => setRead(true)}>
-                  <CheckCheck size={15} />
-                  Отметить все
-                </button>
               </div>
-              <div className="notification-list">
-                <button className={read ? "" : "notification-unread"}>
-                  <span className="notification-icon warning">!</span>
-                  <span>
-                    <strong>Срок задачи скоро истекает</strong>
-                    <small>«Подготовить материалы к запуску» — завтра</small>
-                    <time>15 минут назад</time>
-                  </span>
-                </button>
-                <button className={read ? "" : "notification-unread"}>
-                  <Avatar person={people[1]} size="small" />
-                  <span>
-                    <strong>Мария упомянула вас</strong>
-                    <small>«Обновить коммерческое предложение»</small>
-                    <time>1 час назад</time>
-                  </span>
-                </button>
-                <button className={read ? "" : "notification-unread"}>
-                  <span className="notification-icon danger">!</span>
-                  <span>
-                    <strong>Задача заблокирована</strong>
-                    <small>«Настроить синхронизацию с CRM»</small>
-                    <time>2 часа назад</time>
-                  </span>
-                </button>
+              <div className="notifications-empty">
+                <span><Bell size={19} /></span>
+                <strong>Новых уведомлений нет</strong>
+                <small>Здесь появятся важные события и напоминания.</small>
               </div>
-              <button className="popover-footer">Показать все уведомления</button>
             </div>
           )}
         </div>

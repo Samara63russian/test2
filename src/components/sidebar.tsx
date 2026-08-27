@@ -9,6 +9,7 @@ import {
   FolderKanban,
   LayoutDashboard,
   ListChecks,
+  LogOut,
   PanelLeftClose,
   Settings,
   Star,
@@ -16,7 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import type { ViewId } from "@/lib/types";
+import type { Person, ViewId } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const primaryItems: {
@@ -26,7 +27,7 @@ const primaryItems: {
   count?: number;
 }[] = [
   { id: "overview", label: "Обзор", icon: LayoutDashboard },
-  { id: "my-tasks", label: "Мои задачи", icon: ListChecks, count: 7 },
+  { id: "my-tasks", label: "Мои задачи", icon: ListChecks },
   { id: "tasks", label: "Все задачи", icon: PanelLeftClose },
   { id: "projects", label: "Проекты", icon: FolderKanban },
   { id: "team", label: "Команда", icon: Users },
@@ -49,18 +50,24 @@ interface SidebarProps {
   active: ViewId;
   collapsed: boolean;
   mobileOpen: boolean;
+  organizationName: string;
+  currentUser: Person;
   onNavigate: (view: ViewId) => void;
   onToggle: () => void;
   onMobileClose: () => void;
+  onLogout: () => void;
 }
 
 export function Sidebar({
   active,
   collapsed,
   mobileOpen,
+  organizationName,
+  currentUser,
   onNavigate,
   onToggle,
   onMobileClose,
+  onLogout,
 }: SidebarProps) {
   const navigate = (view: ViewId) => {
     onNavigate(view);
@@ -104,13 +111,15 @@ export function Sidebar({
           </button>
         </div>
 
-        <div className="organization-switcher" title="Север Групп">
-          <span className="organization-logo">СГ</span>
+        <div className="organization-switcher" title={organizationName}>
+          <span className="organization-logo">
+            {organizationName.slice(0, 2).toLocaleUpperCase("ru-RU")}
+          </span>
           {!collapsed && (
             <>
               <span className="organization-copy">
-                <strong>Север Групп</strong>
-                <small>26 участников</small>
+                <strong>{organizationName}</strong>
+                <small>Рабочее пространство</small>
               </span>
               <span className="organization-chevron">⌄</span>
             </>
@@ -149,16 +158,20 @@ export function Sidebar({
         </nav>
 
         <div className="sidebar-profile">
-          <span className="avatar avatar-medium" style={{ background: "#2d5be3" }}>
-            АВ
+          <span className="avatar avatar-medium" style={{ background: currentUser.color }}>
+            {currentUser.initials}
           </span>
           {!collapsed && (
             <span className="profile-copy">
-              <strong>Александр Волков</strong>
+              <strong>{currentUser.name}</strong>
               <small>Владелец</small>
             </span>
           )}
-          {!collapsed && <span className="profile-more">•••</span>}
+          {!collapsed && (
+            <button className="profile-logout" onClick={onLogout} aria-label="Выйти">
+              <LogOut size={15} />
+            </button>
+          )}
         </div>
 
         <button

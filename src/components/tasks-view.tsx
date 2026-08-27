@@ -52,6 +52,7 @@ const quickFilters = [
 interface TasksViewProps {
   tasks: Task[];
   mode?: "all" | "mine";
+  currentUserId: string;
   onOpenTask: (task: Task) => void;
   onCreateTask: () => void;
   onStatusChange: (id: string, status: TaskStatus) => void;
@@ -60,6 +61,7 @@ interface TasksViewProps {
 export function TasksView({
   tasks,
   mode = "all",
+  currentUserId,
   onOpenTask,
   onCreateTask,
   onStatusChange,
@@ -73,7 +75,7 @@ export function TasksView({
   const shownTasks = useMemo(() => {
     let result =
       mode === "mine"
-        ? tasks.filter((task) => task.assignee.id === "user-alexander")
+        ? tasks.filter((task) => task.assignee.id === currentUserId)
         : tasks;
     const normalized = query.toLocaleLowerCase("ru-RU");
     if (normalized) {
@@ -97,10 +99,10 @@ export function TasksView({
       result = result.filter((task) => task.status === "BLOCKED");
     }
     if (quickFilter === "Назначенные мне") {
-      result = result.filter((task) => task.assignee.id === "user-alexander");
+      result = result.filter((task) => task.assignee.id === currentUserId);
     }
     return result;
-  }, [mode, query, quickFilter, statusFilter, tasks]);
+  }, [currentUserId, mode, query, quickFilter, statusFilter, tasks]);
 
   const toggleSelected = (id: string) => {
     setSelected((current) =>

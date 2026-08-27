@@ -22,13 +22,12 @@ import {
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { people, projects } from "@/lib/demo-data";
 import {
   formatLongDate,
   priorityLabels,
   statusLabels,
 } from "@/lib/locale";
-import type { Task, TaskStatus, ViewId } from "@/lib/types";
+import type { Person, Project, Task, TaskStatus, ViewId } from "@/lib/types";
 import {
   Avatar,
   PriorityBadge,
@@ -41,8 +40,8 @@ const taskSchema = z
   .object({
     title: z.string().min(2, "Введите название задачи"),
     description: z.string().optional(),
-    project: z.string(),
-    assignee: z.string(),
+    projectId: z.string(),
+    assigneeId: z.string(),
     status: z.enum([
       "BACKLOG",
       "TODO",
@@ -68,16 +67,20 @@ const taskSchema = z
     },
   );
 
-type TaskForm = z.infer<typeof taskSchema>;
+export type TaskForm = z.infer<typeof taskSchema>;
 
 export function CreateTaskDialog({
   open,
+  people,
+  projects,
   onClose,
   onCreate,
 }: {
   open: boolean;
+  people: Person[];
+  projects: Project[];
   onClose: () => void;
-  onCreate: (values: TaskForm) => void;
+  onCreate: (values: TaskForm) => void | Promise<void>;
 }) {
   const {
     register,
@@ -89,20 +92,24 @@ export function CreateTaskDialog({
     defaultValues: {
       title: "",
       description: "",
-      project: projects[0].name,
-      assignee: people[1].id,
+      projectId: projects[0]?.id ?? "",
+      assigneeId: people[0]?.id ?? "",
       status: "TODO",
       priority: "MEDIUM",
-      startDate: "2026-08-25",
+      startDate: new Date().toISOString().slice(0, 10),
       dueDate: "",
       category: "",
       nextStep: "",
     },
   });
 
-  const submit = (values: TaskForm) => {
-    onCreate(values);
-    reset();
+  const submit = async (values: TaskForm) => {
+    try {
+      await onCreate(values);
+      reset();
+    } catch {
+      // Ошибка уже отображена вызывающим компонентом.
+    }
   };
 
   return (
@@ -161,9 +168,10 @@ export function CreateTaskDialog({
                   <label className="form-field">
                     <span>Проект</span>
                     <span className="select-wrap">
-                      <select {...register("project")}>
+                      <select {...register("projectId")}>
+                        <option value="">Без проекта</option>
                         {projects.map((project) => (
-                          <option key={project.id}>{project.name}</option>
+                          <option key={project.id} value={project.id}>{project.name}</option>
                         ))}
                       </select>
                       <ChevronDown size={14} />
@@ -172,7 +180,8 @@ export function CreateTaskDialog({
                   <label className="form-field">
                     <span>Ответственный</span>
                     <span className="select-wrap">
-                      <select {...register("assignee")}>
+                      <select {...register("assigneeId")}>
+                        <option value="">Не назначен</option>
                         {people.map((person) => (
                           <option key={person.id} value={person.id}>{person.name}</option>
                         ))}
@@ -243,10 +252,12 @@ export function CreateTaskDialog({
 
 export function TaskDetailSheet({
   task,
+  currentUser,
   onClose,
   onStatusChange,
 }: {
   task: Task | null;
+  currentUser: Person;
   onClose: () => void;
   onStatusChange: (id: string, status: TaskStatus) => void;
 }) {
@@ -319,15 +330,11 @@ export function TaskDetailSheet({
                   <h3>Комментарии <span>{task.comments}</span></h3>
                   <button><Paperclip size={14} /> Прикрепить</button>
                 </div>
-                <div className="comment">
-                  <Avatar person={people[1]} size="small" />
-                  <div>
-                    <span><strong>Мария Соколова</strong><time>сегодня, 13:42</time></span>
-                    <p>Пожалуйста, проверьте последние изменения. После согласования сможем передать задачу дальше.</p>
-                  </div>
-                </div>
+                {task.comments === 0 && (
+                  <p className="comments-empty">Комментариев пока нет.</p>
+                )}
                 <div className="comment-input">
-                  <Avatar person={people[0]} size="small" />
+                  <Avatar person={currentUser} size="small" />
                   <div>
                     <textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Добавить комментарий..." rows={2} />
                     <button aria-label="Отправить комментарий" disabled={!comment.trim()} onClick={() => setComment("")}><Send size={15} /></button>
@@ -426,18 +433,67 @@ export function CommandPalette({
   );
 }
 
-export function CreateProjectDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
+export interface ProjectForm {
+  name: string;
+  description: string;
+  ownerId: string;
+  dueDate: string;
+}
+
+export function CreateProjectDialog({
+  open,
+  people,
+  onClose,
+  onCreate,
+}: {
+  open: boolean;
+  people: Person[];
+  onClose: () => void;
+  onCreate: (values: ProjectForm) => void | Promise<void>;
+}) {
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
+    setSubmitting(true);
+    try {
+      await onCreate({
+        name: String(form.get("name") ?? ""),
+        description: String(form.get("description") ?? ""),
+        ownerId: String(form.get("ownerId") ?? ""),
+        dueDate: String(form.get("dueDate") ?? ""),
+      });
+      formElement.reset();
+    } catch {
+      // Ошибка уже отображена вызывающим компонентом.
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <AnimatePresence>
       {open && <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={onClose}>
         <motion.div className="modal project-modal" initial={{ opacity: 0, scale: 0.98, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }} onMouseDown={(event) => event.stopPropagation()}>
           <header className="modal-header"><div><span className="modal-icon"><FolderKanban size={19} /></span><div><h2>Создать проект</h2><p>Соберите задачи и команду вокруг общей цели</p></div></div><button className="icon-button" onClick={onClose}><X size={18} /></button></header>
-          <div className="modal-body">
-            <label className="form-field"><span>Название проекта <b>*</b></span><input autoFocus placeholder="Например: Запуск нового продукта" /></label>
-            <label className="form-field"><span>Описание</span><textarea rows={3} placeholder="Цель и ожидаемый результат проекта..." /></label>
-            <div className="form-grid"><label className="form-field"><span>Руководитель</span><select><option>Мария Соколова</option></select></label><label className="form-field"><span>Дедлайн</span><input type="date" /></label></div>
-          </div>
-          <footer className="modal-footer"><span /><div><button className="secondary-button" onClick={onClose}>Отмена</button><button className="primary-button" onClick={onClose}><Plus size={16} /> Создать проект</button></div></footer>
+          <form onSubmit={submit}>
+            <div className="modal-body">
+              <label className="form-field"><span>Название проекта <b>*</b></span><input name="name" required minLength={2} autoFocus placeholder="Например: Запуск нового продукта" /></label>
+              <label className="form-field"><span>Описание</span><textarea name="description" rows={3} placeholder="Цель и ожидаемый результат проекта..." /></label>
+              <div className="form-grid">
+                <label className="form-field">
+                  <span>Руководитель</span>
+                  <select name="ownerId" defaultValue={people[0]?.id} required>
+                    {people.map((person) => <option key={person.id} value={person.id}>{person.name}</option>)}
+                  </select>
+                </label>
+                <label className="form-field"><span>Дедлайн</span><input name="dueDate" type="date" /></label>
+              </div>
+            </div>
+            <footer className="modal-footer"><span /><div><button type="button" className="secondary-button" onClick={onClose}>Отмена</button><button type="submit" className="primary-button" disabled={submitting}><Plus size={16} /> {submitting ? "Создаём..." : "Создать проект"}</button></div></footer>
+          </form>
         </motion.div>
       </motion.div>}
     </AnimatePresence>

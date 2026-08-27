@@ -39,15 +39,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import {
-  activityItems,
-  completionData,
-  people,
-  priorityData,
-  projects,
-} from "@/lib/demo-data";
 import { formatDate, projectStateLabels } from "@/lib/locale";
-import type { Task, ViewId } from "@/lib/types";
+import type { Person, Project, Task, ViewId } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
   Avatar,
@@ -56,7 +49,23 @@ import {
   SectionHeading,
 } from "./ui-elements";
 
-export function ProjectsView({ onCreate }: { onCreate: () => void }) {
+export function ProjectsView({
+  projects,
+  onCreate,
+}: {
+  projects: Project[];
+  onCreate: () => void;
+}) {
+  const totalTasks = projects.reduce((sum, project) => sum + project.tasks, 0);
+  const averageProgress = projects.length
+    ? Math.round(
+        projects.reduce((sum, project) => sum + project.progress, 0) /
+          projects.length,
+      )
+    : 0;
+  const attentionProjects = projects.filter(
+    (project) => project.state !== "ON_TRACK",
+  ).length;
   return (
     <div className="page">
       <div className="page-intro">
@@ -71,10 +80,10 @@ export function ProjectsView({ onCreate }: { onCreate: () => void }) {
       </div>
 
       <div className="portfolio-summary">
-        <div><span>Активные проекты</span><strong>5</strong><small>в работе</small></div>
-        <div><span>Общий прогресс</span><strong>56%</strong><small>+4% за месяц</small></div>
-        <div><span>Задач открыто</span><strong>73</strong><small>из 111 задач</small></div>
-        <div><span>Требуют внимания</span><strong className="text-warning">2</strong><small>есть риск</small></div>
+        <div><span>Активные проекты</span><strong>{projects.length}</strong><small>в рабочем пространстве</small></div>
+        <div><span>Общий прогресс</span><strong>{averageProgress}%</strong><small>среднее значение</small></div>
+        <div><span>Задач открыто</span><strong>{totalTasks}</strong><small>во всех проектах</small></div>
+        <div><span>Требуют внимания</span><strong className="text-warning">{attentionProjects}</strong><small>есть риск</small></div>
       </div>
 
       <div className="content-toolbar">
@@ -131,7 +140,12 @@ export function ProjectsView({ onCreate }: { onCreate: () => void }) {
   );
 }
 
-export function TeamView() {
+export function TeamView({ people }: { people: Person[] }) {
+  const completed = people.reduce(
+    (sum, person) => sum + person.completedMonth,
+    0,
+  );
+  const highWorkload = people.filter((person) => person.workload > 80).length;
   return (
     <div className="page">
       <div className="page-intro">
@@ -143,10 +157,10 @@ export function TeamView() {
         <button className="primary-button"><Plus size={17} /> Пригласить сотрудника</button>
       </div>
       <div className="portfolio-summary team-summary">
-        <div><span>Участники</span><strong>26</strong><small>3 команды</small></div>
-        <div><span>Оптимальная загрузка</span><strong>18</strong><small>69% команды</small></div>
-        <div><span>Высокая загрузка</span><strong className="text-warning">5</strong><small>нужно внимание</small></div>
-        <div><span>Выполнено за месяц</span><strong>96</strong><small>+14% к июлю</small></div>
+        <div><span>Участники</span><strong>{people.length}</strong><small>в организации</small></div>
+        <div><span>Оптимальная загрузка</span><strong>{people.filter((person) => person.workload <= 80).length}</strong><small>участников</small></div>
+        <div><span>Высокая загрузка</span><strong className="text-warning">{highWorkload}</strong><small>нужно внимание</small></div>
+        <div><span>Выполнено за месяц</span><strong>{completed}</strong><small>задач</small></div>
       </div>
       <div className="content-toolbar">
         <label className="inline-search wide-search">
@@ -233,7 +247,29 @@ export function CalendarView({ tasks, onOpenTask }: { tasks: Task[]; onOpenTask:
   );
 }
 
-export function AnalyticsView() {
+export function AnalyticsView({
+  tasks,
+  projects,
+  people,
+}: {
+  tasks: Task[];
+  projects: Project[];
+  people: Person[];
+}) {
+  const completed = tasks.filter((task) => task.status === "DONE").length;
+  const overdue = tasks.filter((task) => task.state === "OVERDUE").length;
+  const completion = tasks.length
+    ? Math.round((completed / tasks.length) * 100)
+    : 0;
+  const completionData = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(
+    (day) => ({ day, created: 0, completed: 0 }),
+  );
+  const priorityData = [
+    { name: "Критические", value: tasks.filter((task) => task.priority === "CRITICAL").length, color: "#e5484d" },
+    { name: "Высокие", value: tasks.filter((task) => task.priority === "HIGH").length, color: "#f59e0b" },
+    { name: "Средние", value: tasks.filter((task) => task.priority === "MEDIUM").length, color: "#3b70ef" },
+    { name: "Низкие", value: tasks.filter((task) => task.priority === "LOW").length, color: "#94a3b8" },
+  ];
   return (
     <div className="page">
       <div className="page-intro">
@@ -245,10 +281,10 @@ export function AnalyticsView() {
         <div className="period-control"><button>7 дней</button><button className="active">30 дней</button><button>90 дней</button><button>Свой период</button></div>
       </div>
       <div className="analytics-kpis">
-        <div><span>Выполнено задач</span><strong>96</strong><small className="positive">↗ 14% за месяц</small></div>
-        <div><span>Процент выполнения</span><strong>72%</strong><small className="positive">↗ 6% за месяц</small></div>
-        <div><span>Просрочено</span><strong>5</strong><small className="positive">↓ 3 за месяц</small></div>
-        <div><span>Среднее время выполнения</span><strong>3,8 дня</strong><small className="positive">↓ 0,4 дня</small></div>
+        <div><span>Выполнено задач</span><strong>{completed}</strong><small>за выбранный период</small></div>
+        <div><span>Процент выполнения</span><strong>{completion}%</strong><small>по всем задачам</small></div>
+        <div><span>Просрочено</span><strong>{overdue}</strong><small>требуют внимания</small></div>
+        <div><span>Среднее время выполнения</span><strong>—</strong><small>недостаточно данных</small></div>
       </div>
       <div className="analytics-grid">
         <section className="dashboard-card analytics-main-chart">
@@ -284,7 +320,7 @@ export function AnalyticsView() {
                   <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 10 }} />
                 </PieChart>
               </ResponsiveContainer>
-              <span><strong>42</strong><small>задачи</small></span>
+              <span><strong>{tasks.length}</strong><small>задач</small></span>
             </div>
             <div className="pie-legend">
               {priorityData.map((item) => <span key={item.name}><i style={{ background: item.color }} />{item.name}<strong>{item.value}</strong></span>)}
@@ -329,34 +365,18 @@ export function ActivityView() {
             <button className="secondary-button"><Filter size={15} /> Тип действия <ChevronDown size={14} /></button>
             <button className="secondary-button"><CalendarDays size={15} /> 30 дней</button>
           </div>
-          <div className="activity-date"><span>Сегодня, 25 августа</span></div>
-          <div className="activity-feed">
-            {[...activityItems, ...activityItems.slice(1, 4)].map((item, index) => (
-              <div className="activity-feed-item" key={`${item.id}-${index}`}>
-                <Avatar person={item.person} size="medium" />
-                <span className="activity-line" />
-                <span className={cn("activity-type-icon", `activity-${item.type}`)}>
-                  {item.type === "done" ? <Check size={13} /> : item.type === "priority" ? <Sparkles size={13} /> : <Activity size={13} />}
-                </span>
-                <div>
-                  <p><strong>{item.person.name}</strong> {item.text} <b>«{item.target}»</b></p>
-                  <small><Clock3 size={12} /> {item.time}</small>
-                </div>
-              </div>
-            ))}
+          <div className="large-empty-state activity-empty-state">
+            <span><Activity size={25} /></span>
+            <h2>Активности пока нет</h2>
+            <p>Изменения задач и проектов будут отображаться здесь.</p>
           </div>
-          <button className="load-more">Показать более ранние события</button>
         </section>
         <aside className="activity-aside">
           <div className="dashboard-card">
             <h3>Сегодня</h3>
-            <div className="aside-stat"><span>Изменений</span><strong>18</strong></div>
-            <div className="aside-stat"><span>Завершено задач</span><strong>6</strong></div>
-            <div className="aside-stat"><span>Комментариев</span><strong>11</strong></div>
-          </div>
-          <div className="dashboard-card">
-            <h3>Самые активные</h3>
-            {people.slice(1, 4).map((person, index) => <div className="active-person" key={person.id}><Avatar person={person} size="small" /><span><strong>{person.name}</strong><small>{15 - index * 3} действий</small></span></div>)}
+            <div className="aside-stat"><span>Изменений</span><strong>0</strong></div>
+            <div className="aside-stat"><span>Завершено задач</span><strong>0</strong></div>
+            <div className="aside-stat"><span>Комментариев</span><strong>0</strong></div>
           </div>
         </aside>
       </div>
@@ -374,7 +394,13 @@ const settingsSections = [
   { id: "integrations", label: "Интеграции", icon: Link2 },
 ];
 
-export function SettingsView() {
+export function SettingsView({
+  organizationName,
+  currentUser,
+}: {
+  organizationName: string;
+  currentUser: Person;
+}) {
   return (
     <div className="page">
       <div className="page-intro">
@@ -387,8 +413,8 @@ export function SettingsView() {
         <section className="settings-panel dashboard-card">
           <SectionHeading title="Общие настройки" description="Основная информация о вашем рабочем пространстве" />
           <div className="settings-form">
-            <label><span>Название организации</span><input defaultValue="Север Групп" /></label>
-            <label><span>Адрес рабочего пространства</span><div className="input-prefix"><span>sever.ru/</span><input defaultValue="sever-group" /></div></label>
+            <label><span>Название организации</span><input defaultValue={organizationName} /></label>
+            <label><span>Владелец пространства</span><input defaultValue={currentUser.name} readOnly /></label>
             <label><span>Часовой пояс</span><select defaultValue="moscow"><option value="moscow">Москва (UTC+3)</option></select></label>
             <label><span>Язык интерфейса</span><select defaultValue="ru"><option value="ru">Русский</option></select></label>
             <div className="settings-divider" />

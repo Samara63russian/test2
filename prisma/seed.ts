@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
+import { hash } from "bcryptjs";
 import {
   NotificationType,
   PrismaClient,
@@ -47,6 +48,7 @@ const taskTitles = [
 ] as const;
 
 async function main() {
+  const passwordHash = await hash("ChangeMe-2026!", 12);
   const organization = await prisma.organization.upsert({
     where: { slug: "sever-group" },
     update: {},
@@ -56,16 +58,12 @@ async function main() {
   const users = await Promise.all(
     names.map(([name, email, position, role]) =>
       prisma.user.upsert({
-        where: {
-          organizationId_email: {
-            organizationId: organization.id,
-            email,
-          },
-        },
+        where: { email },
         update: { name, position, role },
         create: {
           name,
           email,
+          passwordHash,
           position,
           role,
           organizationId: organization.id,

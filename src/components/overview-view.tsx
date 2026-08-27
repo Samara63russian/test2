@@ -8,7 +8,6 @@ import {
   CalendarClock,
   CheckCircle2,
   CircleGauge,
-  Clock3,
   Flame,
   MoreHorizontal,
   Plus,
@@ -25,14 +24,8 @@ import {
   YAxis,
 } from "recharts";
 import {
-  activityItems,
-  completionData,
-  initialTasks,
-  people,
-  projects,
-} from "@/lib/demo-data";
 import { formatDate, projectStateLabels } from "@/lib/locale";
-import type { Task, ViewId } from "@/lib/types";
+import type { Person, Project, Task, ViewId } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
   Avatar,
@@ -42,87 +35,70 @@ import {
   StateBadge,
 } from "./ui-elements";
 
-const kpis = [
-  {
-    label: "Активные задачи",
-    value: "38",
-    change: "+12%",
-    direction: "up",
-    icon: CircleGauge,
-    tone: "blue",
-    detail: "за неделю",
-  },
-  {
-    label: "Выполнено",
-    value: "24",
-    change: "+8%",
-    direction: "up",
-    icon: CheckCircle2,
-    tone: "green",
-    detail: "за неделю",
-  },
-  {
-    label: "Просрочено",
-    value: "5",
-    change: "−2",
-    direction: "down",
-    icon: AlertTriangle,
-    tone: "red",
-    detail: "с прошлой недели",
-  },
-  {
-    label: "Критические",
-    value: "3",
-    change: "1 новая",
-    direction: "neutral",
-    icon: Flame,
-    tone: "orange",
-    detail: "требуют внимания",
-  },
-  {
-    label: "Срок на этой неделе",
-    value: "11",
-    change: "4 сегодня",
-    direction: "neutral",
-    icon: CalendarClock,
-    tone: "purple",
-    detail: "ближайшие сроки",
-  },
-  {
-    label: "Процент выполнения",
-    value: "68%",
-    change: "+6%",
-    direction: "up",
-    icon: TrendingUp,
-    tone: "cyan",
-    detail: "за месяц",
-  },
-];
-
 interface OverviewProps {
+  tasks: Task[];
+  projects: Project[];
+  people: Person[];
+  currentUser: Person;
   onOpenTask: (task: Task) => void;
   onNavigate: (view: ViewId) => void;
   onCreateTask: () => void;
 }
 
 export function OverviewView({
+  tasks,
+  projects,
+  people,
+  currentUser,
   onOpenTask,
   onNavigate,
   onCreateTask,
 }: OverviewProps) {
-  const attentionTasks = initialTasks.filter((task) =>
+  const attentionTasks = tasks.filter((task) =>
     ["OVERDUE", "BLOCKED", "DUE_SOON", "ATTENTION"].includes(task.state),
   );
-  const upcomingTasks = initialTasks
+  const upcomingTasks = tasks
     .filter((task) => task.dueDate && task.state !== "DONE")
     .slice(0, 4);
+  const active = tasks.filter((task) => task.status !== "DONE").length;
+  const completed = tasks.filter((task) => task.status === "DONE").length;
+  const overdue = tasks.filter((task) => task.state === "OVERDUE").length;
+  const critical = tasks.filter(
+    (task) => task.priority === "CRITICAL" && task.status !== "DONE",
+  ).length;
+  const weekLimit = Date.now() + 7 * 24 * 60 * 60 * 1000;
+  const dueThisWeek = tasks.filter(
+    (task) =>
+      task.dueDate &&
+      task.status !== "DONE" &&
+      new Date(task.dueDate).getTime() <= weekLimit,
+  ).length;
+  const completion = tasks.length
+    ? Math.round((completed / tasks.length) * 100)
+    : 0;
+  const kpis = [
+    { label: "Активные задачи", value: String(active), change: "Актуально", direction: "neutral", icon: CircleGauge, tone: "blue", detail: "в работе" },
+    { label: "Выполнено", value: String(completed), change: "Актуально", direction: "neutral", icon: CheckCircle2, tone: "green", detail: "всего задач" },
+    { label: "Просрочено", value: String(overdue), change: overdue ? "Проверьте" : "Нет рисков", direction: "neutral", icon: AlertTriangle, tone: "red", detail: "требуют внимания" },
+    { label: "Критические", value: String(critical), change: critical ? "Проверьте" : "Нет задач", direction: "neutral", icon: Flame, tone: "orange", detail: "высший приоритет" },
+    { label: "Срок на этой неделе", value: String(dueThisWeek), change: "7 дней", direction: "neutral", icon: CalendarClock, tone: "purple", detail: "ближайшие сроки" },
+    { label: "Процент выполнения", value: `${completion}%`, change: "Актуально", direction: "neutral", icon: TrendingUp, tone: "cyan", detail: "по всем задачам" },
+  ];
+  const completionData = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].map(
+    (day) => ({ day, created: 0, completed: 0 }),
+  );
+  const currentDate = new Intl.DateTimeFormat("ru-RU", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(new Date());
 
   return (
     <div className="page overview-page">
       <div className="page-intro overview-intro">
         <div>
-          <span className="eyebrow">Вторник, 25 августа</span>
-          <h1>Добрый день, Александр</h1>
+          <span className="eyebrow">{currentDate}</span>
+          <h1>Добрый день, {currentUser.name.split(" ")[0]}</h1>
           <p>Вот что происходит в вашей организации сегодня.</p>
         </div>
         <button className="primary-button page-create" onClick={onCreateTask}>
@@ -230,6 +206,15 @@ export function OverviewView({
               </span>
             </button>
           ))}
+          {attentionTasks.length === 0 && (
+            <div className="dashboard-empty-row">
+              <CheckCircle2 size={18} />
+              <span>
+                <strong>Задач, требующих внимания, нет</strong>
+                <small>Риски и просрочки появятся здесь автоматически.</small>
+              </span>
+            </div>
+          )}
         </div>
       </section>
 
@@ -287,6 +272,12 @@ export function OverviewView({
                 </span>
               </button>
             ))}
+            {projects.length === 0 && (
+              <div className="dashboard-empty-block">
+                <strong>Проектов пока нет</strong>
+                <small>Создайте первый проект, чтобы отслеживать прогресс.</small>
+              </div>
+            )}
           </div>
         </section>
 
@@ -327,6 +318,12 @@ export function OverviewView({
                 <Avatar person={task.assignee} size="small" />
               </button>
             ))}
+            {upcomingTasks.length === 0 && (
+              <div className="dashboard-empty-block">
+                <strong>Ближайших сроков нет</strong>
+                <small>Задачи с дедлайнами появятся здесь.</small>
+              </div>
+            )}
           </div>
         </section>
       </div>
@@ -427,18 +424,10 @@ export function OverviewView({
           </button>
         </div>
         <div className="activity-preview-grid">
-          {activityItems.slice(0, 4).map((item) => (
-            <div key={item.id} className="activity-preview-item">
-              <Avatar person={item.person} size="small" />
-              <span>
-                <p>
-                  <strong>{item.person.name.split(" ")[0]}</strong> {item.text}{" "}
-                  <b>«{item.target}»</b>
-                </p>
-                <small><Clock3 size={12} /> {item.time}</small>
-              </span>
-            </div>
-          ))}
+          <div className="dashboard-empty-block activity-empty">
+            <strong>Активности пока нет</strong>
+            <small>История изменений появится после начала работы.</small>
+          </div>
         </div>
       </section>
     </div>
