@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Сводные справки</string>
+    <string name="title_activity_main">Сводные справки</string>
+    <string name="package_name">ru.spravka.app</string>
+    <string name="custom_url_scheme">ru.spravka.app</string>
+</resources>

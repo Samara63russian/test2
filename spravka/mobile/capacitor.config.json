@@ -1,0 +1,12 @@
+{
+  "appId": "ru.spravka.app",
+  "appName": "Сводные справки",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
