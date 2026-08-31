@@ -1,13 +1,23 @@
-import { ArrowRight, CheckCircle2, ClipboardList, Eye, EyeOff, LockKeyhole } from 'lucide-react'
+import {
+  ArrowRight,
+  CheckCircle2,
+  ClipboardList,
+  Eye,
+  EyeOff,
+  Link2,
+  LockKeyhole,
+} from 'lucide-react'
 import { useState, type FormEvent } from 'react'
+import { serverConfig } from '../api'
 
 interface LoginPageProps {
-  onLogin: (username: string, password: string) => Promise<void>
+  onLogin: (username: string, password: string, serverUrl: string) => Promise<void>
 }
 
 export function LoginPage({ onLogin }: LoginPageProps) {
   const [username, setUsername] = useState('admin')
   const [password, setPassword] = useState('admin123')
+  const [serverUrl, setServerUrl] = useState(serverConfig.getDisplayUrl())
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -17,7 +27,11 @@ export function LoginPage({ onLogin }: LoginPageProps) {
     setError('')
     setLoading(true)
     try {
-      await onLogin(username, password)
+      if (serverConfig.isNative() && !serverUrl.trim()) {
+        setError('Укажите HTTPS-адрес сервера')
+        return
+      }
+      await onLogin(username, password, serverUrl)
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Не удалось войти')
     } finally {
@@ -82,6 +96,26 @@ export function LoginPage({ onLogin }: LoginPageProps) {
               {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
             </button>
           </div>
+          {serverConfig.isNative() && (
+            <div className="native-server-field">
+              <label className="field-label" htmlFor="server-url">Адрес сервера</label>
+              <div className="input-with-icon">
+                <Link2 size={18} />
+                <input
+                  id="server-url"
+                  className="text-input"
+                  type="url"
+                  value={serverUrl}
+                  onChange={(event) => setServerUrl(event.target.value)}
+                  placeholder="https://reports.example.ru"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  required
+                />
+              </div>
+              <small>Адрес выдаёт администратор вашей организации</small>
+            </div>
+          )}
           {error && <div className="form-error">{error}</div>}
           <button className="primary-button login-submit" disabled={loading}>
             {loading ? 'Выполняется вход…' : 'Войти в систему'}

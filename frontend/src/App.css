@@ -195,6 +195,9 @@ input:disabled, select:disabled { background: #f3f5f8; color: #737e8e; }
   position: absolute; right: 4px; top: 4px; height: 38px; width: 38px;
   display: grid; place-items: center; border: 0; background: transparent; color: #7a8798;
 }
+.native-server-field { margin: 2px 0 17px; }
+.native-server-field .text-input { margin: 0; padding-left: 39px; }
+.native-server-field > small { display: block; color: #8994a3; font-size: 9px; margin-top: 5px; }
 .form-error { color: #a93e47; background: #fff0f1; border: 1px solid #f1cdd0; border-radius: 7px; padding: 10px 12px; font-size: 12px; margin: -5px 0 15px; }
 .login-submit { width: 100%; height: 48px; margin-top: 5px; justify-content: space-between; padding-inline: 20px; }
 .demo-hint {

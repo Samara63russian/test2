@@ -1,6 +1,6 @@
 import { CheckCircle2, CircleAlert, ClipboardList, X } from 'lucide-react'
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
-import { api, ApiError, auth } from './api'
+import { api, ApiError, auth, serverConfig } from './api'
 import './App.css'
 import { Layout } from './components/Layout'
 import { offlineStorage } from './storage'
@@ -176,7 +176,8 @@ function App() {
     }
   }, [syncQueue])
 
-  const login = async (username: string, password: string) => {
+  const login = async (username: string, password: string, serverUrl: string) => {
+    serverConfig.setUrl(serverUrl)
     const result = await api.login(username, password)
     auth.setToken(result.token)
     auth.setUser(result.user)

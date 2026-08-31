@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core'
 import type {
   AnalyticsData,
   Institution,
@@ -9,9 +10,35 @@ import type {
   User,
 } from './types'
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api'
 const TOKEN_KEY = 'svodka.auth.token'
 const USER_KEY = 'svodka.auth.user'
+const SERVER_KEY = 'svodka.api.server'
+const ENV_API_BASE = import.meta.env.VITE_API_URL || ''
+
+function normalizeServerUrl(value: string): string {
+  const trimmed = value.trim().replace(/\/+$/, '')
+  if (!trimmed) return ''
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`
+}
+
+export const serverConfig = {
+  isNative: () => Capacitor.isNativePlatform(),
+  getUrl: () => {
+    const saved = localStorage.getItem(SERVER_KEY)
+    if (saved) return saved
+    if (ENV_API_BASE) return normalizeServerUrl(ENV_API_BASE)
+    return Capacitor.isNativePlatform() ? '' : '/api'
+  },
+  getDisplayUrl: () => {
+    const url = localStorage.getItem(SERVER_KEY) || ENV_API_BASE
+    return url.replace(/\/api\/?$/, '')
+  },
+  setUrl: (value: string) => {
+    const normalized = normalizeServerUrl(value)
+    if (normalized) localStorage.setItem(SERVER_KEY, normalized)
+    else localStorage.removeItem(SERVER_KEY)
+  },
+}
 
 export class ApiError extends Error {
   status: number
@@ -45,6 +72,10 @@ async function request<T>(
   options: RequestInit = {},
   authenticated = true,
 ): Promise<T> {
+  const apiBase = serverConfig.getUrl()
+  if (!apiBase) {
+    throw new ApiError('Укажите адрес сервера для подключения', 0)
+  }
   const headers = new Headers(options.headers)
   if (options.body && !(options.body instanceof FormData)) {
     headers.set('Content-Type', 'application/json')
@@ -55,7 +86,7 @@ async function request<T>(
   }
   let response: Response
   try {
-    response = await fetch(`${API_BASE}${path}`, { ...options, headers })
+    response = await fetch(`${apiBase}${path}`, { ...options, headers })
   } catch {
     throw new ApiError('Нет соединения с сервером', 0)
   }
@@ -139,10 +170,12 @@ export const api = {
   knowledge: () => request<KnowledgeArticle[]>('/knowledge'),
 
   async downloadDocument(id: number): Promise<void> {
+    const apiBase = serverConfig.getUrl()
+    if (!apiBase) throw new ApiError('Укажите адрес сервера для подключения', 0)
     const headers = new Headers()
     const token = auth.getToken()
     if (token) headers.set('Authorization', `Bearer ${token}`)
-    const response = await fetch(`${API_BASE}/reports/${id}/document`, { headers })
+    const response = await fetch(`${apiBase}/reports/${id}/document`, { headers })
     if (!response.ok) throw new ApiError('Не удалось сформировать документ', response.status)
     const blob = await response.blob()
     const disposition = response.headers.get('Content-Disposition') || ''
