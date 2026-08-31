@@ -7,7 +7,7 @@ import { randomUUID } from 'node:crypto'
 const databasePath = resolve(process.env.DATABASE_PATH ?? 'server/data/reports.db')
 mkdirSync(dirname(databasePath), { recursive: true })
 
-export const db = new Database(databasePath)
+export const db: InstanceType<typeof Database> = new Database(databasePath)
 db.pragma('journal_mode = WAL')
 db.pragma('foreign_keys = ON')
 

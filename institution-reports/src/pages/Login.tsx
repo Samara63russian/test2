@@ -1,12 +1,15 @@
 import { useState, type FormEvent } from 'react'
-import { BarChart3, Building2, CheckCircle2, Eye, EyeOff, FileCheck2, ShieldCheck, WifiOff } from 'lucide-react'
+import { BarChart3, Building2, CheckCircle2, Eye, EyeOff, FileCheck2, Server, ShieldCheck, WifiOff } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { getServerUrl, isNativeApp, setServerUrl } from '../lib/api'
 
 export function LoginPage() {
   const { login } = useAuth()
   const [username, setUsername] = useState('admin')
   const [password, setPassword] = useState('admin123')
   const [showPassword, setShowPassword] = useState(false)
+  const native = isNativeApp()
+  const [serverUrl, setServerUrlValue] = useState(getServerUrl)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -15,6 +18,10 @@ export function LoginPage() {
     setLoading(true)
     setError('')
     try {
+      if (native) {
+        if (!serverUrl.trim()) throw new Error('Укажите HTTPS-адрес сервера')
+        setServerUrl(serverUrl)
+      }
       await login(username, password)
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : 'Не удалось войти')
@@ -78,6 +85,23 @@ export function LoginPage() {
               </button>
             </span>
           </label>
+          {native && (
+            <label className="field server-field">
+              <span>Адрес сервера</span>
+              <span className="input-with-icon">
+                <Server size={17} />
+                <input
+                  type="url"
+                  value={serverUrl}
+                  onChange={(event) => setServerUrlValue(event.target.value)}
+                  placeholder="https://reports.example.ru"
+                  autoCapitalize="none"
+                  required
+                />
+              </span>
+              <small>Введите адрес, полученный у администратора</small>
+            </label>
+          )}
           <button className="button primary login-button" type="submit" disabled={loading}>
             {loading ? 'Выполняется вход…' : 'Войти в систему'}
           </button>

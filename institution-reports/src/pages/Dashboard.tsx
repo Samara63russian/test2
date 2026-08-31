@@ -42,6 +42,7 @@ export function DashboardPage() {
   const [details, setDetails] = useState<ReportDetails | null>(null)
   const [detailsLoading, setDetailsLoading] = useState(false)
   const [downloading, setDownloading] = useState(false)
+  const [downloaded, setDownloaded] = useState(false)
 
   const loadReports = useCallback(async () => {
     if (!user) return
@@ -101,6 +102,7 @@ export function DashboardPage() {
   }, [loadReports])
 
   useEffect(() => {
+    setDownloaded(false)
     if (!selectedId) {
       setDetails(null)
       return
@@ -144,6 +146,7 @@ export function DashboardPage() {
     setDownloading(true)
     try {
       await downloadReport(selectedReport.id, selectedReport.reportDate)
+      setDownloaded(true)
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : 'Не удалось скачать документ')
     } finally {
@@ -271,7 +274,8 @@ export function DashboardPage() {
             <div className="modal-actions">
               {user?.role !== 'viewer' && <Link className="button secondary" to={`/reports/${details.id}/edit`}><Pencil size={17} /> Редактировать</Link>}
               <button className="button primary" onClick={() => void handleDownload()} disabled={selectedReport?.pending || downloading}>
-                <Download size={17} /> {selectedReport?.pending ? 'После синхронизации' : downloading ? 'Подготовка…' : 'Скачать DOCX'}
+                {downloaded ? <CheckCircle2 size={17} /> : <Download size={17} />}
+                {selectedReport?.pending ? 'После синхронизации' : downloading ? 'Подготовка…' : downloaded ? 'Документ скачан' : 'Скачать DOCX'}
               </button>
             </div>
           </div>

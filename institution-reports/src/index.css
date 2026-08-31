@@ -857,6 +857,19 @@ textarea:focus {
   margin-top: 18px;
 }
 
+.server-field {
+  padding: 12px;
+  border: 1px solid #dfe5ee;
+  border-radius: 9px;
+  background: #f8fafc;
+}
+
+.server-field > small {
+  color: #8e99a8;
+  font-size: 8px;
+  font-weight: 500;
+}
+
 .password-field {
   position: relative;
 }

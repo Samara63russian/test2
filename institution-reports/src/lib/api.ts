@@ -1,5 +1,7 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? '/api'
+import { Capacitor } from '@capacitor/core'
+
 const TOKEN_KEY = 'forma-svodki-token'
+const SERVER_URL_KEY = 'forma-svodki-server-url'
 
 export class ApiError extends Error {
   status: number
@@ -19,7 +21,30 @@ export function setToken(token: string | null) {
   else localStorage.removeItem(TOKEN_KEY)
 }
 
+export function isNativeApp() {
+  return Capacitor.isNativePlatform()
+}
+
+export function getServerUrl() {
+  return localStorage.getItem(SERVER_URL_KEY) ?? ''
+}
+
+export function setServerUrl(url: string) {
+  const normalized = url.trim().replace(/\/+$/, '')
+  if (normalized) localStorage.setItem(SERVER_URL_KEY, normalized)
+  else localStorage.removeItem(SERVER_URL_KEY)
+}
+
+function getApiBase() {
+  if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL
+  const configured = getServerUrl()
+  if (configured) return configured.endsWith('/api') ? configured : `${configured}/api`
+  return isNativeApp() ? '' : '/api'
+}
+
 export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const apiBase = getApiBase()
+  if (!apiBase) throw new ApiError('Укажите адрес сервера перед входом', 0)
   const token = getToken()
   const headers = new Headers(options.headers)
   if (options.body && !(options.body instanceof FormData)) headers.set('Content-Type', 'application/json')
@@ -27,7 +52,7 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
 
   let response: Response
   try {
-    response = await fetch(`${API_BASE}${path}`, { ...options, headers })
+    response = await fetch(`${apiBase}${path}`, { ...options, headers })
   } catch {
     throw new ApiError('Нет соединения с сервером', 0)
   }
@@ -43,8 +68,10 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
 }
 
 export async function downloadReport(reportId: string, date: string) {
+  const apiBase = getApiBase()
+  if (!apiBase) throw new ApiError('Адрес сервера не настроен', 0)
   const token = getToken()
-  const response = await fetch(`${API_BASE}/reports/${reportId}/export`, {
+  const response = await fetch(`${apiBase}/reports/${reportId}/export`, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   })
   if (!response.ok) {

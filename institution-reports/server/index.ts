@@ -319,7 +319,7 @@ app.put('/api/reports/:id', (req: AuthRequest, res) => {
     return
   }
   try {
-    const id = saveReport(parsed.data, req.user!, req.params.id)
+    const id = saveReport(parsed.data, req.user!, String(req.params.id))
     res.json({ id })
   } catch (error) {
     const code = error instanceof Error ? error.message : ''
