@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Форма Сводки</string>
+    <string name="title_activity_main">Форма Сводки</string>
+    <string name="package_name">ru.formasvodki.app</string>
+    <string name="custom_url_scheme">ru.formasvodki.app</string>
+</resources>
