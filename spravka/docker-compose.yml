@@ -1,0 +1,9 @@
+services:
+  spravka:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      SPRAVKA_SECRET: change-me-in-production

@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+*.db
+.pytest_cache/
+.idea/
+.gradle/
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+/data/
+*.apk
