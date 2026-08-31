@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+venv/
+*.db
+.env
+node_modules/
+frontend_dist/
+dist/
+ios/
+.capacitor/
+*.log

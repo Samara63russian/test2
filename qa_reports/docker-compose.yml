@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  qa-reports:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - qa_data:/app/qa_reports.db
+    environment:
+      - SECRET_KEY=change-me-in-production
+      - CORS_ORIGINS=*
+
+volumes:
+  qa_data:
