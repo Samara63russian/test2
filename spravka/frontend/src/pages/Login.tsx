@@ -49,6 +49,9 @@ export default function Login() {
         </button>
         <div className="hint-box">
           Демо: <b>admin / admin123</b> — полный доступ; <b>operator / operator123</b> — заполнение справок.
+          <div style={{ marginTop: 8 }}>
+            <a href="/api/apk">Скачать приложение для Android (APK)</a>
+          </div>
         </div>
       </form>
     </div>
