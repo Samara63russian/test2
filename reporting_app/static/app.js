@@ -5,6 +5,8 @@ const state = {
   token: localStorage.getItem("reportingToken") || "",
   user: JSON.parse(localStorage.getItem("reportingUser") || "null"),
   bootstrap: JSON.parse(localStorage.getItem("reportingBootstrap") || "null"),
+  dashboardCache: JSON.parse(localStorage.getItem("reportingDashboard") || "null"),
+  analyticsCache: JSON.parse(localStorage.getItem("reportingAnalytics") || "null"),
   page: "dashboard",
   settingsTab: "questions",
 };
@@ -209,11 +211,34 @@ async function renderDashboard(filter = {}) {
   if (filter.institution_id) params.set("institution_id", filter.institution_id);
   params.set("date_from", filter.date_from || monthStart());
   params.set("date_to", filter.date_to || today());
-  const [reports, analytics] = await Promise.all([
-    api(`/api/reports?${params}`),
-    api(`/api/analytics?${params}`),
-  ]);
-  const summary = analytics.summary;
+  let reports;
+  let analytics;
+  let fromCache = false;
+  try {
+    [reports, analytics] = await Promise.all([
+      api(`/api/reports?${params}`),
+      api(`/api/analytics?${params}`),
+    ]);
+    state.dashboardCache = { reports, analytics };
+    localStorage.setItem("reportingDashboard", JSON.stringify(state.dashboardCache));
+  } catch (error) {
+    if (!error.network || !state.dashboardCache) throw error;
+    ({ reports, analytics } = state.dashboardCache);
+    fromCache = true;
+  }
+  const queued = await pendingReports();
+  const queuedRows = queued.map((report) => ({
+    id: null,
+    institution_name: state.bootstrap.institutions.find((item) => item.id === report.institution_id)?.name || "Учреждение",
+    report_date: report.report_date,
+    author_name: state.user.full_name,
+    status: "pending",
+  }));
+  reports = [...queuedRows, ...reports];
+  const summary = {
+    ...analytics.summary,
+    total_reports: Number(analytics.summary.total_reports) + queuedRows.length,
+  };
   $("#page-content").innerHTML = `
     <section class="hero">
       <div>
@@ -234,6 +259,7 @@ async function renderDashboard(filter = {}) {
         <div><h2>Справки учреждений</h2><p>Просмотр и выгрузка итоговых документов</p></div>
         <div class="panel-actions"><span class="muted">${reports.length} записей</span></div>
       </div>
+      ${fromCache ? `<div class="offline-banner"><b>Офлайн-режим</b><span>Показаны последние загруженные данные. Новые справки сохраняются на этом устройстве.</span></div>` : ""}
       ${dashboardFilters()}
       <div id="reports-table">${reportsTable(reports)}</div>
     </section>`;
@@ -268,10 +294,10 @@ function reportsTable(reports) {
       <td class="primary-cell">${escapeHtml(report.institution_name)}</td>
       <td>${formatDate(report.report_date)}</td>
       <td>${escapeHtml(report.author_name)}</td>
-      <td><span class="badge ${report.status === "submitted" ? "success" : "draft"}">${report.status === "submitted" ? "Отправлена" : "Черновик"}</span></td>
-      <td><div class="row-actions">
+      <td><span class="badge ${report.status === "submitted" ? "success" : "draft"}">${report.status === "submitted" ? "Отправлена" : report.status === "pending" ? "Ожидает отправки" : "Черновик"}</span></td>
+      <td><div class="row-actions">${report.id ? `
         <button class="mini-button view-report" data-id="${report.id}" title="Просмотреть">○</button>
-        <button class="mini-button download-report" data-id="${report.id}" title="Скачать DOCX">↓ DOCX</button>
+        <button class="mini-button download-report" data-id="${report.id}" title="Скачать DOCX">↓ DOCX</button>` : ""}
       </div></td>
     </tr>`).join("")}</tbody>
   </table></div>`;
@@ -409,13 +435,24 @@ async function renderAnalytics(filter = {}) {
   if (filter.institution_id) params.set("institution_id", filter.institution_id);
   if (filter.date_from) params.set("date_from", filter.date_from);
   if (filter.date_to) params.set("date_to", filter.date_to);
-  const data = await api(`/api/analytics?${params}`);
+  let data;
+  let fromCache = false;
+  try {
+    data = await api(`/api/analytics?${params}`);
+    state.analyticsCache = data;
+    localStorage.setItem("reportingAnalytics", JSON.stringify(data));
+  } catch (error) {
+    if (!error.network || !state.analyticsCache) throw error;
+    data = state.analyticsCache;
+    fromCache = true;
+  }
   const summary = data.summary;
   const maxReports = Math.max(1, ...data.by_institution.map((item) => item.reports));
   const maxTrend = Math.max(1, ...data.trend.map((item) => item.reports));
   $("#page-content").innerHTML = `
     <section class="panel">
       <div class="panel-head"><div><h2>Период анализа</h2><p>Фильтры применяются ко всем показателям</p></div></div>
+      ${fromCache ? `<div class="offline-banner"><b>Офлайн-режим</b><span>Показан последний доступный снимок аналитики.</span></div>` : ""}
       <div class="filters">
         <label>Учреждение<select id="analytics-institution">${institutionOptions(filter.institution_id, true)}</select></label>
         <label>Дата с<input id="analytics-from" type="date" value="${filter.date_from || monthStart()}"></label>

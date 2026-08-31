@@ -315,6 +315,9 @@ input:focus, select:focus, textarea:focus { border-color: var(--green-2); box-sh
 
 .filters { display: grid; grid-template-columns: minmax(220px, 1.7fr) 1fr 1fr auto; gap: 12px; margin-bottom: 20px; padding: 16px; background: var(--background); border-radius: 12px; }
 .filters label { margin: 0; }
+.offline-banner { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 15px; color: #795918; background: #fbf1d8; border: 1px solid #efdda9; border-radius: 10px; font-size: 12px; }
+.offline-banner b { flex: 0 0 auto; }
+.offline-banner span { color: #8a713e; }
 
 .data-table { width: 100%; border-collapse: collapse; }
 .data-table th { padding: 10px 14px; color: #83908b; border-bottom: 1px solid var(--line); text-align: left; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
@@ -430,4 +433,5 @@ input:focus, select:focus, textarea:focus { border-color: var(--green-2); box-sh
   .panel { padding: 18px; }
   .panel-head { align-items: flex-start; }
   .panel-actions { flex-wrap: wrap; justify-content: flex-end; }
+  .offline-banner { align-items: flex-start; flex-direction: column; gap: 3px; }
 }
