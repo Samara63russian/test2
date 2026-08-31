@@ -1,0 +1,12 @@
+{
+  "appId": "ru.svodka.reporting",
+  "appName": "Сводка",
+  "webDir": "reporting_app/static",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

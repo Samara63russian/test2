@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#174f46">
+  <meta name="description" content="Сбор и анализ справок учреждений">
+  <title>Сводка</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <section id="login-screen" class="login-screen">
+    <div class="login-visual">
+      <div class="brand brand-light">
+        <span class="brand-mark">С</span>
+        <span>Сводка</span>
+      </div>
+      <div class="login-message">
+        <span class="eyebrow">Единая информационная система</span>
+        <h1>Справки учреждений.<br>Быстро и без лишней бумаги.</h1>
+        <p>Заполняйте формы даже без интернета. Данные отправятся на сервер автоматически после восстановления связи.</p>
+        <div class="feature-row">
+          <span>✓ Офлайн-режим</span>
+          <span>✓ Аналитика</span>
+          <span>✓ Готовые документы</span>
+        </div>
+      </div>
+      <div class="visual-orb"></div>
+    </div>
+    <div class="login-panel">
+      <form id="login-form" class="login-card">
+        <div class="mobile-brand brand">
+          <span class="brand-mark">С</span>
+          <span>Сводка</span>
+        </div>
+        <span class="eyebrow green">Вход в систему</span>
+        <h2>С возвращением</h2>
+        <p class="muted">Введите данные вашей учётной записи</p>
+        <label>Логин
+          <input id="login-username" name="username" autocomplete="username" required placeholder="Введите логин">
+        </label>
+        <label>Пароль
+          <span class="password-field">
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required placeholder="Введите пароль">
+            <button type="button" id="toggle-password" class="icon-button" aria-label="Показать пароль">◉</button>
+          </span>
+        </label>
+        <details class="server-settings">
+          <summary>Адрес сервера для Android</summary>
+          <label>Сервер
+            <input id="server-url" type="url" placeholder="https://example.ru">
+          </label>
+        </details>
+        <button class="button primary large" type="submit">Войти в систему <span>→</span></button>
+        <p id="login-error" class="form-error"></p>
+        <p class="demo-hint">Первый вход: <b>admin</b> / <b>Admin123!</b></p>
+      </form>
+    </div>
+  </section>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">С</span>
+        <span>Сводка</span>
+      </div>
+      <nav id="main-nav" class="main-nav">
+        <button data-page="dashboard" class="active"><span>⌂</span> Главная</button>
+        <button data-page="new-report" class="editor-only"><span>＋</span> Новая справка</button>
+        <button data-page="directory"><span>▤</span> Справочник</button>
+        <button data-page="analytics"><span>⌁</span> Аналитика</button>
+        <button data-page="settings" class="admin-only"><span>⚙</span> Настройки</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div id="connection-state" class="connection-state"><i></i><span>Подключено</span></div>
+        <div id="user-card" class="user-card"></div>
+        <button id="logout-button" class="logout-button">Выйти <span>↗</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="menu-button" class="menu-button" aria-label="Меню">☰</button>
+        <div>
+          <p id="page-kicker" class="page-kicker">Обзор</p>
+          <h1 id="page-title">Главная</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="sync-button" class="sync-pill" title="Синхронизировать">
+            <span>↻</span><b id="pending-count">0</b>
+          </button>
+          <button class="button primary compact editor-only" data-go="new-report">＋ Новая справка</button>
+        </div>
+      </header>
+      <div id="page-content" class="page-content"></div>
+    </main>
+  </div>
+
+  <dialog id="entity-dialog" class="dialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-head">
+        <div>
+          <span id="dialog-kicker" class="eyebrow green"></span>
+          <h2 id="dialog-title"></h2>
+        </div>
+        <button class="dialog-close" value="cancel" aria-label="Закрыть">×</button>
+      </div>
+      <div id="dialog-body" class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button class="button secondary" value="cancel">Отмена</button>
+        <button id="dialog-submit" class="button primary" value="default">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

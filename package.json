@@ -1,0 +1,30 @@
+{
+  "name": "svodka-reporting",
+  "version": "1.0.0",
+  "description": "Android wrapper for the Сводка institutional reporting application",
+  "private": true,
+  "scripts": {
+    "android:sync": "cap sync android",
+    "android:open": "cap open android",
+    "android:apk": "cap sync android && cd android && ./gradlew assembleDebug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samara63russian/test2.git"
+  },
+  "keywords": [
+    "reporting",
+    "capacitor",
+    "android"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Samara63russian/test2/issues"
+  },
+  "homepage": "https://github.com/Samara63russian/test2#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/cli": "^8.4.2",
+    "@capacitor/core": "^8.4.2"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Сводка — справки учреждений",
+  "short_name": "Сводка",
+  "description": "Офлайн-сбор и анализ справок учреждений",
+  "lang": "ru",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f6f2",
+  "theme_color": "#174f46",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
