@@ -56,7 +56,7 @@ export function AnalyticsPage({ institutions, user, notify }: AnalyticsPageProps
 
   useEffect(() => {
     let active = true
-    setLoading(true)
+    queueMicrotask(() => active && setLoading(true))
     api.analytics(institutionId, days)
       .then((result) => active && setData(result))
       .catch((reason) => notify(reason instanceof Error ? reason.message : 'Не удалось загрузить аналитику', 'error'))

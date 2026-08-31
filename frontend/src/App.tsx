@@ -1,15 +1,10 @@
 import { CheckCircle2, CircleAlert, ClipboardList, X } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { api, ApiError, auth } from './api'
 import './App.css'
 import { Layout } from './components/Layout'
 import { offlineStorage } from './storage'
-import { AnalyticsPage } from './pages/AnalyticsPage'
-import { DirectoryPage } from './pages/DirectoryPage'
-import { FormPage } from './pages/FormPage'
-import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
-import { SettingsPage } from './pages/SettingsPage'
 import type {
   Institution,
   KnowledgeArticle,
@@ -18,6 +13,22 @@ import type {
   ReportSummary,
   User,
 } from './types'
+
+const AnalyticsPage = lazy(() =>
+  import('./pages/AnalyticsPage').then((module) => ({ default: module.AnalyticsPage })),
+)
+const DirectoryPage = lazy(() =>
+  import('./pages/DirectoryPage').then((module) => ({ default: module.DirectoryPage })),
+)
+const FormPage = lazy(() =>
+  import('./pages/FormPage').then((module) => ({ default: module.FormPage })),
+)
+const HomePage = lazy(() =>
+  import('./pages/HomePage').then((module) => ({ default: module.HomePage })),
+)
+const SettingsPage = lazy(() =>
+  import('./pages/SettingsPage').then((module) => ({ default: module.SettingsPage })),
+)
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -239,7 +250,9 @@ function App() {
       onLogout={() => void logout()}
       onSync={() => void syncQueue()}
     >
-      {content}
+      <Suspense fallback={<div className="loading-row">Загрузка раздела…</div>}>
+        {content}
+      </Suspense>
       {toast && (
         <div className={`toast ${toast.kind}`}>
           {toast.kind === 'success' ? <CheckCircle2 size={19} /> : <CircleAlert size={19} />}

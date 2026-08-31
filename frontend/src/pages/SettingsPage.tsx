@@ -90,7 +90,10 @@ export function SettingsPage({ notify, onReferencesChanged }: SettingsPageProps)
     }
   }, [notify])
 
-  useEffect(() => { void load() }, [load])
+  useEffect(() => {
+    const task = window.setTimeout(() => void load(), 0)
+    return () => window.clearTimeout(task)
+  }, [load])
 
   const filteredQuestions = useMemo(
     () => questions.filter((item) => item.text.toLowerCase().includes(search.toLowerCase())),

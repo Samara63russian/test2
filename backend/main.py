@@ -4,6 +4,7 @@ import html
 import json
 import secrets
 import sqlite3
+from contextlib import asynccontextmanager
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Literal
@@ -25,10 +26,17 @@ from .database import (
 )
 
 
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    initialize_database()
+    yield
+
+
 app = FastAPI(
     title="Сводка — API",
     description="API системы сбора ежедневных справок учреждений",
     version="1.0.0",
+    lifespan=lifespan,
 )
 app.add_middleware(
     CORSMiddleware,
@@ -37,13 +45,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-def startup() -> None:
-    initialize_database()
-
-
 class LoginRequest(BaseModel):
     username: str
     password: str
