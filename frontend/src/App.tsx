@@ -90,7 +90,15 @@ function App() {
     setQueueCount(queue.length)
     if (!navigator.onLine || !queue.length || !auth.getToken()) return
     try {
-      const result = await api.sync(queue)
+      const syncPayload = queue.map((item) => ({
+        institution_id: item.institution_id,
+        report_date: item.report_date,
+        status: item.status,
+        comment: item.comment,
+        answers: item.answers,
+        client_id: item.client_id,
+      }))
+      const result = await api.sync(syncPayload)
       const syncedIds = result.results
         .filter((item) => item.status !== 'error' && item.client_id)
         .map((item) => item.client_id as string)
