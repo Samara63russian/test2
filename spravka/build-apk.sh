@@ -8,22 +8,21 @@ mkdir -p "$SDK_ROOT/cmdline-tools"
 if [[ ! -x "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" ]]; then
   echo "Installing Android command-line tools..."
   tmp="$(mktemp -d)"
-  curl -fsSL -o "$tmp/tools.zip" https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+  curl -fL --retry 4 -o "$tmp/tools.zip" https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
   unzip -q "$tmp/tools.zip" -d "$tmp"
   mkdir -p "$SDK_ROOT/cmdline-tools/latest"
   mv "$tmp/cmdline-tools/"* "$SDK_ROOT/cmdline-tools/latest/"
   rm -rf "$tmp"
 fi
 
-yes | "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$SDK_ROOT" --licenses >/dev/null
+yes | "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$SDK_ROOT" --licenses >/dev/null || true
 "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$SDK_ROOT" \
   "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
 if ! command -v gradle >/dev/null 2>&1; then
-  GDIR="$HOME/gradle-8.7"
-  if [[ ! -x "$GDIR/bin/gradle" ]]; then
+  if [[ ! -x "$HOME/gradle-8.7/bin/gradle" ]]; then
     tmp="$(mktemp -d)"
-    curl -fsSL -o "$tmp/gradle.zip" https://services.gradle.org/distributions/gradle-8.7-bin.zip
+    curl -fL --retry 4 -o "$tmp/gradle.zip" https://services.gradle.org/distributions/gradle-8.7-bin.zip
     unzip -q "$tmp/gradle.zip" -d "$HOME"
     rm -rf "$tmp"
   fi
