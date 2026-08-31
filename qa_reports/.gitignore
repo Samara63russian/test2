@@ -9,3 +9,4 @@ dist/
 ios/
 .capacitor/
 *.log
+tsconfig.tsbuildinfo
