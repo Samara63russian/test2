@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">СводСправка Инспектор</string>
+    <string name="sync_button">Синхронизировать с сервером</string>
+    <string name="offline_mode">Офлайн режим (данные сохраняются локально)</string>
+</resources>
