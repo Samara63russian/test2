@@ -214,17 +214,22 @@ async function renderDashboard(filter = {}) {
   let reports;
   let analytics;
   let fromCache = false;
-  try {
-    [reports, analytics] = await Promise.all([
-      api(`/api/reports?${params}`),
-      api(`/api/analytics?${params}`),
-    ]);
-    state.dashboardCache = { reports, analytics };
-    localStorage.setItem("reportingDashboard", JSON.stringify(state.dashboardCache));
-  } catch (error) {
-    if (!error.network || !state.dashboardCache) throw error;
+  if (!navigator.onLine && state.dashboardCache) {
     ({ reports, analytics } = state.dashboardCache);
     fromCache = true;
+  } else {
+    try {
+      [reports, analytics] = await Promise.all([
+        api(`/api/reports?${params}`),
+        api(`/api/analytics?${params}`),
+      ]);
+      state.dashboardCache = { reports, analytics };
+      localStorage.setItem("reportingDashboard", JSON.stringify(state.dashboardCache));
+    } catch (error) {
+      if (!error.network || !state.dashboardCache) throw error;
+      ({ reports, analytics } = state.dashboardCache);
+      fromCache = true;
+    }
   }
   const queued = await pendingReports();
   const queuedRows = queued.map((report) => ({
@@ -437,14 +442,19 @@ async function renderAnalytics(filter = {}) {
   if (filter.date_to) params.set("date_to", filter.date_to);
   let data;
   let fromCache = false;
-  try {
-    data = await api(`/api/analytics?${params}`);
-    state.analyticsCache = data;
-    localStorage.setItem("reportingAnalytics", JSON.stringify(data));
-  } catch (error) {
-    if (!error.network || !state.analyticsCache) throw error;
+  if (!navigator.onLine && state.analyticsCache) {
     data = state.analyticsCache;
     fromCache = true;
+  } else {
+    try {
+      data = await api(`/api/analytics?${params}`);
+      state.analyticsCache = data;
+      localStorage.setItem("reportingAnalytics", JSON.stringify(data));
+    } catch (error) {
+      if (!error.network || !state.analyticsCache) throw error;
+      data = state.analyticsCache;
+      fromCache = true;
+    }
   }
   const summary = data.summary;
   const maxReports = Math.max(1, ...data.by_institution.map((item) => item.reports));
