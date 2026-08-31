@@ -33,7 +33,12 @@ async function request(path, options = {}) {
   const headers = { ...(options.headers || {}) }
   const token = getToken()
   if (token) headers.Authorization = `Bearer ${token}`
-  if (options.body && !(options.body instanceof FormData) && typeof options.body === 'object') {
+  const isJsonBody =
+    options.body &&
+    !(options.body instanceof FormData) &&
+    !(options.body instanceof URLSearchParams) &&
+    typeof options.body === 'object'
+  if (isJsonBody) {
     headers['Content-Type'] = 'application/json'
     options.body = JSON.stringify(options.body)
   }
