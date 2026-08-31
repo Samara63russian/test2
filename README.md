@@ -1,6 +1,7 @@
-# swgoh_guild_webapp
-Demo hosted at: https://ir940-swgoh.streamlit.app/
+# Форма Сводки
 
-A Streamlit webapp for the mobile game Star Wars: Galaxy of Heroes to monitor guild performance and activity. WIP
+Основное приложение находится в каталоге [`institution-reports`](institution-reports/README.md).
 
-![Flowchart displaying the layout of the data backend processes](/docs/flowchart.jpg)
+Это единая веб- и Android-система для сбора вопросов и ответов от учреждений, просмотра справок по датам, аналитики, администрирования пользователей и справочников, офлайн-заполнения и выгрузки итоговых документов DOCX.
+
+Предыдущий экспериментальный Streamlit-проект сохранён в репозитории как архивный код.

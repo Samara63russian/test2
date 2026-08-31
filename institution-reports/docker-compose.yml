@@ -1,0 +1,15 @@
+services:
+  forma-svodki:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-before-production}
+      DATABASE_PATH: /app/data/reports.db
+      SEED_DEMO: ${SEED_DEMO:-true}
+    volumes:
+      - reports-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  reports-data:
