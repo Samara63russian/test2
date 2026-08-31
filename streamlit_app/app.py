@@ -161,11 +161,11 @@ def home_page() -> None:
     st.markdown("<br>", unsafe_allow_html=True)
     a, b = st.columns([1, 1])
     with a:
-        if st.button("＋  Заполнить новую справку", type="primary", use_container_width=True):
+        if st.button("＋  Заполнить новую справку", type="primary", width="stretch"):
             st.session_state.page = "Новая справка"
             st.rerun()
     with b:
-        if st.button("Открыть все справки", use_container_width=True):
+        if st.button("Открыть все справки", width="stretch"):
             st.session_state.page = "Справочник"
             st.rerun()
 
@@ -204,9 +204,9 @@ def questionnaire_page() -> None:
         st.markdown("<br>", unsafe_allow_html=True)
         submit, draft = st.columns([1, 1])
         with submit:
-            submitted = st.form_submit_button("✓  Отправить на проверку", type="primary", use_container_width=True)
+            submitted = st.form_submit_button("✓  Отправить на проверку", type="primary", width="stretch")
         with draft:
-            saved_draft = st.form_submit_button("Сохранить на устройстве", use_container_width=True)
+            saved_draft = st.form_submit_button("Сохранить на устройстве", width="stretch")
     if submitted or saved_draft:
         report_id = f"SPR-{date.today().year}-{len(st.session_state.reports) + len(st.session_state.offline_queue) + 82:03d}"
         new_report = {"id": report_id, "institution": institution, "date": report_date, "author": "Елена Морозова", "status": "На проверке" if submitted else "Черновик", "score": 100, "answers": answers, "kind": form_kind}
@@ -220,7 +220,7 @@ def questionnaire_page() -> None:
             st.success(f"Справка {report_id} отправлена на проверку.")
     if st.session_state.last_report:
         report = st.session_state.last_report
-        st.download_button("↓  Скачать итоговый документ", data=render_document(report), file_name=f'{report["id"]}.doc', mime="application/msword", use_container_width=True)
+        st.download_button("↓  Скачать итоговый документ", data=render_document(report), file_name=f'{report["id"]}.doc', mime="application/msword", width="stretch")
 
 
 def render_document(report: dict) -> str:
@@ -301,7 +301,7 @@ def settings_page() -> None:
     tab_questions, tab_users, tab_system = st.tabs(["Вопросы формы", "Пользователи", "Система"])
     with tab_questions:
         st.markdown("<br><div class='subtle'>Изменения применяются к новым справкам. Всего вопросов: <b>" + str(len(st.session_state.questions)) + "</b></div>", unsafe_allow_html=True)
-        edited = st.data_editor(pd.DataFrame(st.session_state.questions), use_container_width=True, hide_index=True, num_rows="dynamic", column_config={"section": "Раздел", "title": "Формулировка вопроса", "type": "Тип ответа", "required": "Обязательный"})
+        edited = st.data_editor(pd.DataFrame(st.session_state.questions), width="stretch", hide_index=True, num_rows="dynamic", column_config={"section": "Раздел", "title": "Формулировка вопроса", "type": "Тип ответа", "required": "Обязательный"})
         if st.button("Сохранить вопросы", type="primary"):
             st.session_state.questions = edited.fillna("").to_dict("records")
             st.success("Настройки формы сохранены.")
