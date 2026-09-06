@@ -6,6 +6,10 @@
   <title>CryptoStatte — вход в ликвидность без границ</title>
   <meta name="description" content="Обмен фиата на USDT и обратно. USD, EUR, TRY → USDT TRC20/ERC20. Мгновенно. Прозрачно. Защищено. 24/7 по всему миру." />
   <meta name="theme-color" content="#0B0B0C" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
   <meta property="og:title" content="CryptoStatte — вход в ликвидность без границ" />
   <meta property="og:description" content="Обмен USD • EUR • TRY ↔ USDT. Сделки за 2–10 минут. Рыночный курс. Полная конфиденциальность." />
   <meta property="og:type" content="website" />
@@ -14,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -38,6 +42,7 @@
         <a href="#flow">Как это работает</a>
         <a href="#faq">FAQ</a>
         <a class="nav__channel" href="https://t.me/CryptoStatte" target="_blank" rel="noopener noreferrer">Канал</a>
+        <a class="nav__manager" href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer">Менеджер</a>
       </nav>
 
       <div class="header__actions">
@@ -59,11 +64,11 @@
             Работаем 24/7 · USD · EUR · TRY · USDT
           </p>
           <h1>
-            Вход в ликвидность<br />
+            Вход в ликвидность<br class="only-desk" />
             <em>без границ.</em>
           </h1>
           <p class="lede">
-            Обмен фиата на USDT и обратно.<br />
+            Обмен фиата на USDT и обратно.
             <strong>Мгновенно. Прозрачно. Защищено.</strong>
           </p>
           <div class="hero__cta">
@@ -100,7 +105,7 @@
               <label class="field">
                 <span>Отдаёте</span>
                 <div class="field__row">
-                  <input id="give-amount" inputmode="decimal" autocomplete="off" value="1000" />
+                  <input id="give-amount" inputmode="decimal" enterkeyhint="done" autocomplete="off" value="1000" />
                   <select id="give-asset" aria-label="Валюта отдачи"></select>
                 </div>
               </label>
@@ -196,7 +201,7 @@
       <div class="container">
         <header class="section__head">
           <p class="eyebrow">Почему CryptoStatte</p>
-          <h2>Тысячи клиентов уже с нами.<br /><em>Присоединяйся к тем, кто ценит время и активы.</em></h2>
+          <h2>Тысячи клиентов уже с нами. <em>Присоединяйся к тем, кто ценит время и активы.</em></h2>
         </header>
 
         <div class="cards">
@@ -236,7 +241,7 @@
       <div class="container corridors">
         <header class="section__head">
           <p class="eyebrow">Коридоры ликвидности</p>
-          <h2>Фиат ↔ USDT.<br /><em>В обе стороны. По всему миру.</em></h2>
+          <h2>Фиат ↔ USDT. <em>В обе стороны. По всему миру.</em></h2>
         </header>
         <div class="rails">
           <article class="rail">
@@ -272,7 +277,7 @@
       <div class="container">
         <header class="section__head">
           <p class="eyebrow">Как это работает</p>
-          <h2>Четыре шага.<br /><em>Без лишнего трения.</em></h2>
+          <h2>Четыре шага. <em>Без лишнего трения.</em></h2>
         </header>
         <ol class="steps">
           <li>
@@ -303,8 +308,8 @@
       <div class="container manifesto__inner">
         <p class="eyebrow">Манифест</p>
         <blockquote>
-          Технология доверия — это не слоган.<br />
-          Это скорость сделки, честный курс<br />
+          Технология доверия — это не слоган.
+          Это скорость сделки, честный курс
           и тишина вокруг ваших активов.
         </blockquote>
         <p class="manifesto__brand">CryptoStatte</p>
@@ -392,6 +397,6 @@
 
   <a class="dock" href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer">Написать менеджеру</a>
 
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=2"></script>
 </body>
 </html>

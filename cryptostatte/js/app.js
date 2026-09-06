@@ -113,6 +113,12 @@
   });
 
   nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
 
   window.addEventListener("scroll", () => {
     header.classList.toggle("is-scrolled", window.scrollY > 8);
@@ -120,7 +126,8 @@
 
   const canvas = document.getElementById("orbit");
   const ctx = canvas?.getContext("2d");
-  const dots = Array.from({ length: 48 }, () => ({
+  const isPhone = window.matchMedia("(max-width: 640px)").matches;
+  const dots = Array.from({ length: isPhone ? 16 : 48 }, () => ({
     x: Math.random(),
     y: Math.random(),
     r: Math.random() * 1.4 + 0.3,
