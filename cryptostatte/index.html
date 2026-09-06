@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CryptoStatte — обмен USD, EUR и TRY на USDT и обратно за 2–10 минут. Рыночный курс, прозрачные условия и поддержка 24/7."
+    />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta property="og:title" content="CryptoStatte — ликвидность без границ" />
+    <meta
+      property="og:description"
+      content="Фиат ↔ USDT. Мгновенно. Прозрачно. Защищено."
+    />
+    <meta property="og:type" content="website" />
+    <title>CryptoStatte — ликвидность без границ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="CryptoStatte — на главную">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36" role="img">
+              <path d="M24.4 10.8a9 9 0 1 0 0 14.4" />
+              <path d="M21.6 7.2a13 13 0 1 0 0 21.6" />
+              <path d="M25.5 13.5h5M25.5 22.5h5" />
+            </svg>
+          </span>
+          <span>Crypto<span>Statte</span></span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Основная навигация">
+          <a href="#benefits">Преимущества</a>
+          <a href="#process">Как это работает</a>
+          <a href="#security">Безопасность</a>
+        </nav>
+
+        <a
+          class="header-action"
+          href="https://t.me/cryptostatte_ex"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Начать обмен
+          <svg viewBox="0 0 18 18" aria-hidden="true">
+            <path d="M4 14 14 4M6 4h8v8" />
+          </svg>
+        </a>
+
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <nav aria-label="Мобильная навигация">
+          <a href="#benefits">Преимущества</a>
+          <a href="#process">Как это работает</a>
+          <a href="#security">Безопасность</a>
+          <a
+            class="button button-primary"
+            href="https://t.me/cryptostatte_ex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Написать менеджеру
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <div class="eyebrow reveal">
+              <span class="status-dot"></span>
+              Обмен доступен 24/7
+            </div>
+            <h1 class="reveal reveal-delay-1">
+              Ликвидность<br />
+              <span>без границ.</span>
+            </h1>
+            <p class="hero-lead reveal reveal-delay-2">
+              Обменивайте USD, EUR и TRY на USDT — и обратно.
+              Мгновенно. Прозрачно. Защищено.
+            </p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a
+                class="button button-primary"
+                href="https://t.me/cryptostatte_ex"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Совершить обмен
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m4 10 12 0M11 5l5 5-5 5" />
+                </svg>
+              </a>
+              <a class="text-link" href="#process">
+                Как всё устроено
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+            <div class="hero-trust reveal reveal-delay-4">
+              <div>
+                <strong>2–10</strong>
+                <span>минут на сделку</span>
+              </div>
+              <div class="trust-divider"></div>
+              <div>
+                <strong>1 000+</strong>
+                <span>клиентов с нами</span>
+              </div>
+              <div class="trust-divider"></div>
+              <div>
+                <strong>24/7</strong>
+                <span>на связи</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exchange-wrap reveal reveal-delay-2">
+            <div class="orbital orbital-one" aria-hidden="true"></div>
+            <div class="orbital orbital-two" aria-hidden="true"></div>
+            <article class="exchange-card" aria-labelledby="calculator-title">
+              <div class="card-head">
+                <div>
+                  <span class="card-kicker">Калькулятор</span>
+                  <h2 id="calculator-title">Рассчитайте обмен</h2>
+                </div>
+                <div class="live-pill">
+                  <span></span>
+                  Online
+                </div>
+              </div>
+
+              <div class="trade-switch" role="group" aria-label="Направление обмена">
+                <button class="trade-mode active" type="button" data-mode="buy">
+                  Купить USDT
+                </button>
+                <button class="trade-mode" type="button" data-mode="sell">
+                  Продать USDT
+                </button>
+              </div>
+
+              <div class="currency-field">
+                <label for="send-amount">Вы отдаёте</label>
+                <div class="field-control">
+                  <input
+                    id="send-amount"
+                    type="text"
+                    inputmode="decimal"
+                    value="1 000"
+                    autocomplete="off"
+                    aria-describedby="send-hint"
+                  />
+                  <div class="currency-select-wrap">
+                    <span class="currency-symbol" id="send-symbol">$</span>
+                    <select id="send-currency" aria-label="Валюта отправления">
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="TRY">TRY</option>
+                    </select>
+                    <svg viewBox="0 0 12 8" aria-hidden="true">
+                      <path d="m1 1 5 5 5-5" />
+                    </svg>
+                  </div>
+                </div>
+                <span class="field-hint" id="send-hint">Любой удобный способ оплаты</span>
+              </div>
+
+              <button
+                class="swap-button"
+                type="button"
+                aria-label="Поменять направление обмена"
+                title="Поменять направление"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 7h11m0 0-3-3m3 3-3 3M17 17H6m0 0 3 3m-3-3 3-3" />
+                </svg>
+              </button>
+
+              <div class="currency-field receive-field">
+                <label for="receive-amount">Вы получаете</label>
+                <div class="field-control">
+                  <input
+                    id="receive-amount"
+                    type="text"
+                    value="995.00"
+                    readonly
+                    aria-readonly="true"
+                  />
+                  <div class="currency-badge">
+                    <span class="tether-mark">₮</span>
+                    <span id="receive-currency-label">USDT</span>
+                  </div>
+                </div>
+                <span class="field-hint" id="receive-hint">Зачисление прямо на ваш кошелёк</span>
+              </div>
+
+              <div class="network-row">
+                <span>Сеть</span>
+                <div class="network-options" role="group" aria-label="Сеть USDT">
+                  <button class="network active" type="button" data-network="TRC20">
+                    TRC20
+                  </button>
+                  <button class="network" type="button" data-network="ERC20">
+                    ERC20
+                  </button>
+                </div>
+              </div>
+
+              <div class="rate-panel">
+                <div>
+                  <span>Ориентировочный курс</span>
+                  <strong id="rate-label">1 USD ≈ 0.995 USDT</strong>
+                </div>
+                <span class="rate-badge">без скрытых доплат</span>
+              </div>
+
+              <a
+                class="button button-primary calculator-action"
+                id="exchange-link"
+                href="https://t.me/cryptostatte_ex"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Зафиксировать курс
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m4 10 12 0M11 5l5 5-5 5" />
+                </svg>
+              </a>
+              <p class="card-note">
+                Финальный курс менеджер фиксирует до перевода средств.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="ticker" aria-label="Доступные направления обмена">
+          <div class="ticker-track">
+            <span>USD <b>→</b> USDT</span><i></i>
+            <span>EUR <b>→</b> USDT</span><i></i>
+            <span>TRY <b>→</b> USDT</span><i></i>
+            <span>USDT <b>→</b> FIAT</span><i></i>
+            <span>TRC20</span><i></i>
+            <span>ERC20</span><i></i>
+            <span aria-hidden="true">USD <b>→</b> USDT</span><i aria-hidden="true"></i>
+            <span aria-hidden="true">EUR <b>→</b> USDT</span><i aria-hidden="true"></i>
+            <span aria-hidden="true">TRY <b>→</b> USDT</span><i aria-hidden="true"></i>
+            <span aria-hidden="true">USDT <b>→</b> FIAT</span><i aria-hidden="true"></i>
+            <span aria-hidden="true">TRC20</span><i aria-hidden="true"></i>
+            <span aria-hidden="true">ERC20</span><i aria-hidden="true"></i>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits section" id="benefits">
+        <div class="container">
+          <div class="section-heading reveal">
+            <div>
+              <span class="section-label">Почему CryptoStatte</span>
+              <h2>Всё, что важно.<br />Ничего лишнего.</h2>
+            </div>
+            <p>
+              Мы убрали сложные формы, ожидание и непрозрачные условия.
+              Остался обмен, который работает в вашем ритме.
+            </p>
+          </div>
+
+          <div class="benefit-grid">
+            <article class="benefit-card featured reveal">
+              <div class="card-number">01</div>
+              <div class="speed-visual" aria-hidden="true">
+                <div class="speed-ring">
+                  <span>2–10</span>
+                  <small>МИН</small>
+                </div>
+                <span class="speed-line line-one"></span>
+                <span class="speed-line line-two"></span>
+                <span class="speed-line line-three"></span>
+              </div>
+              <div class="benefit-copy">
+                <h3>Скорость без пауз</h3>
+                <p>Большинство сделок закрываем за 2–10 минут.</p>
+              </div>
+            </article>
+
+            <article class="benefit-card reveal reveal-delay-1">
+              <div class="card-number">02</div>
+              <div class="mini-icon shield-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M24 5 40 11v11c0 10-6.5 17.7-16 21-9.5-3.3-16-11-16-21V11l16-6Z" />
+                  <path d="m17 24 5 5 10-11" />
+                </svg>
+              </div>
+              <div class="benefit-copy">
+                <h3>Конфиденциально</h3>
+                <p>Данные сделки остаются между вами и персональным менеджером.</p>
+              </div>
+            </article>
+
+            <article class="benefit-card reveal reveal-delay-2">
+              <div class="card-number">03</div>
+              <div class="mini-icon chart-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M6 37 17 25l8 6L42 12" />
+                  <path d="M33 12h9v9" />
+                </svg>
+              </div>
+              <div class="benefit-copy">
+                <h3>Рыночный курс</h3>
+                <p>Фиксируем курс заранее — итоговая сумма известна до перевода.</p>
+              </div>
+            </article>
+
+            <article class="benefit-card reveal reveal-delay-3">
+              <div class="card-number">04</div>
+              <div class="mini-icon globe-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="18" />
+                  <path d="M6 24h36M24 6c6 6 8 12 8 18s-2 12-8 18c-6-6-8-12-8-18s2-12 8-18Z" />
+                </svg>
+              </div>
+              <div class="benefit-copy">
+                <h3>Весь мир, 24/7</h3>
+                <p>Работаем без выходных и часовых поясов — где бы вы ни были.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="process section" id="process">
+        <div class="container">
+          <div class="process-layout">
+            <div class="process-intro reveal">
+              <span class="section-label light-label">Простой процесс</span>
+              <h2>От заявки<br />до актива —<br /><em>три шага.</em></h2>
+              <p>
+                Один диалог с менеджером. Без регистрации на сложных
+                платформах и бесконечных анкет.
+              </p>
+              <a
+                class="button button-light"
+                href="https://t.me/cryptostatte_ex"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Открыть Telegram
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m4 10 12 0M11 5l5 5-5 5" />
+                </svg>
+              </a>
+            </div>
+
+            <ol class="steps">
+              <li class="step reveal">
+                <span class="step-number">01</span>
+                <div>
+                  <h3>Оставьте заявку</h3>
+                  <p>Напишите менеджеру сумму, валюту и направление обмена.</p>
+                </div>
+                <div class="step-status">~ 1 мин</div>
+              </li>
+              <li class="step reveal reveal-delay-1">
+                <span class="step-number">02</span>
+                <div>
+                  <h3>Зафиксируйте курс</h3>
+                  <p>Получите точный расчёт и реквизиты до совершения перевода.</p>
+                </div>
+                <div class="step-status">прозрачно</div>
+              </li>
+              <li class="step reveal reveal-delay-2">
+                <span class="step-number">03</span>
+                <div>
+                  <h3>Получите средства</h3>
+                  <p>Мы подтверждаем сделку и отправляем активы по вашим реквизитам.</p>
+                </div>
+                <div class="step-status">готово</div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="coverage section">
+        <div class="container coverage-layout">
+          <div class="coverage-copy reveal">
+            <span class="section-label">География без границ</span>
+            <h2>Ваши активы<br />двигаются вместе с вами.</h2>
+            <p>
+              Меняйте фиат на USDT в сетях TRC20 и ERC20 — или возвращайтесь
+              в привычную валюту, когда это нужно.
+            </p>
+            <div class="currency-list" aria-label="Поддерживаемые валюты">
+              <span><b>$</b> USD</span>
+              <span><b>€</b> EUR</span>
+              <span><b>₺</b> TRY</span>
+              <span><b>₮</b> USDT</span>
+            </div>
+          </div>
+
+          <div class="world-visual reveal reveal-delay-2" aria-hidden="true">
+            <div class="world-grid"></div>
+            <div class="orbit orbit-a"></div>
+            <div class="orbit orbit-b"></div>
+            <div class="location location-one"><i></i><span>New York</span></div>
+            <div class="location location-two"><i></i><span>Istanbul</span></div>
+            <div class="location location-three"><i></i><span>Dubai</span></div>
+            <div class="location location-four"><i></i><span>Europe</span></div>
+            <div class="coin coin-usdt">₮</div>
+            <div class="coin coin-euro">€</div>
+            <div class="coin coin-dollar">$</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="security section" id="security">
+        <div class="container">
+          <div class="security-shell">
+            <div class="security-copy reveal">
+              <span class="section-label light-label">Технология доверия</span>
+              <h2>Защищено<br />на каждом шаге.</h2>
+              <p>
+                Вы знаете условия до начала сделки и получаете сопровождение
+                персонального менеджера до финального подтверждения.
+              </p>
+            </div>
+            <div class="security-features">
+              <article class="security-item reveal">
+                <span class="check-mark">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m4 10 4 4 8-9" />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Курс фиксируется заранее</h3>
+                  <p>Никаких изменений суммы в процессе обмена.</p>
+                </div>
+              </article>
+              <article class="security-item reveal reveal-delay-1">
+                <span class="check-mark">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m4 10 4 4 8-9" />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Прямой контакт</h3>
+                  <p>Менеджер остаётся на связи от заявки до получения.</p>
+                </div>
+              </article>
+              <article class="security-item reveal reveal-delay-2">
+                <span class="check-mark">
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="m4 10 4 4 8-9" />
+                  </svg>
+                </span>
+                <div>
+                  <h3>Полная конфиденциальность</h3>
+                  <p>Не передаём детали сделки третьим лицам.</p>
+                </div>
+              </article>
+            </div>
+            <div class="security-watermark" aria-hidden="true">CS</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta section">
+        <div class="container">
+          <div class="cta-shell reveal">
+            <div class="cta-rings" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="section-label">Готовы начать?</span>
+            <h2>Время — ваш<br />главный актив.</h2>
+            <p>Напишите менеджеру. Курс и точная сумма — в течение минуты.</p>
+            <div class="cta-actions">
+              <a
+                class="button button-dark"
+                href="https://t.me/cryptostatte_ex"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Написать менеджеру
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="m4 10 12 0M11 5l5 5-5 5" />
+                </svg>
+              </a>
+              <a
+                class="channel-link"
+                href="https://t.me/CryptoStatte"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m21 4-3 16-6-4-4 3 1-5 9-7-11 6-4-1 18-8Z" />
+                </svg>
+                Канал CryptoStatte
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-top">
+        <a class="brand footer-brand" href="#top" aria-label="CryptoStatte — на главную">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36">
+              <path d="M24.4 10.8a9 9 0 1 0 0 14.4" />
+              <path d="M21.6 7.2a13 13 0 1 0 0 21.6" />
+              <path d="M25.5 13.5h5M25.5 22.5h5" />
+            </svg>
+          </span>
+          <span>Crypto<span>Statte</span></span>
+        </a>
+        <p>Ликвидность без границ.<br />Мгновенно. Прозрачно. Защищено.</p>
+        <div class="footer-links">
+          <a href="#benefits">Преимущества</a>
+          <a href="#process">Как это работает</a>
+          <a href="#security">Безопасность</a>
+        </div>
+        <div class="footer-contact">
+          <span>Связаться</span>
+          <a
+            href="https://t.me/cryptostatte_ex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @cryptostatte_ex
+          </a>
+          <a href="https://t.me/CryptoStatte" target="_blank" rel="noreferrer">
+            Telegram-канал
+          </a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span id="current-year">2026</span> CryptoStatte</span>
+        <span class="footer-status"><i></i> Сервис работает 24/7</span>
+        <button class="to-top" type="button" aria-label="Вернуться наверх">
+          Наверх
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 13V3M4 7l4-4 4 4" />
+          </svg>
+        </button>
+      </div>
+    </footer>
+  </body>
+</html>
