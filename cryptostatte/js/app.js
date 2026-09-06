@@ -61,7 +61,7 @@
     const out = amount * effective;
     getAmount.value = formatAmount(out);
     quoteRate.textContent = `1 ${from} = ${effective.toLocaleString("ru-RU", {
-      minimumFractionDigits: 4,
+      minimumFractionDigits: 2,
       maximumFractionDigits: 4,
     })} ${to}`;
   };
