@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CryptoStatte — обмен фиата на USDT и обратно. Мгновенно, прозрачно, защищено. USD, EUR, TRY → USDT (TRC20/ERC20).">
+  <title>CryptoStatte — вход в ликвидность без границ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+  <header class="header">
+    <nav class="nav container">
+      <a href="#" class="logo">
+        <span class="logo__icon">◆</span>
+        <span class="logo__text">CryptoStatte</span>
+      </a>
+      <div class="nav__links">
+        <a href="#features">Преимущества</a>
+        <a href="#how">Как это работает</a>
+        <a href="#contact">Контакты</a>
+      </div>
+      <a href="https://t.me/cryptostatte_ex" class="btn btn--sm btn--primary" target="_blank" rel="noopener noreferrer">
+        Начать обмен
+      </a>
+      <button class="nav__burger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" hidden>
+      <a href="#features">Преимущества</a>
+      <a href="#how">Как это работает</a>
+      <a href="#contact">Контакты</a>
+      <a href="https://t.me/cryptostatte_ex" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Начать обмен</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero__badge">
+        <span class="pulse"></span>
+        Работаем 24/7 по всему миру
+      </div>
+      <h1 class="hero__title">
+        <span class="hero__emoji">🚀</span>
+        <span class="gradient-text">CryptoStatte</span>
+        <span class="hero__subtitle">— вход в ликвидность без границ</span>
+      </h1>
+      <p class="hero__desc">
+        Обмен фиата на USDT и обратно.<br>
+        <strong>Мгновенно.</strong> <strong>Прозрачно.</strong> <strong>Защищено.</strong>
+      </p>
+
+      <div class="hero__flow">
+        <div class="flow-pill">USD</div>
+        <div class="flow-pill">EUR</div>
+        <div class="flow-pill">TRY</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-pill flow-pill--accent">USDT</div>
+        <div class="flow-tags">
+          <span>TRC20</span>
+          <span>ERC20</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-pill">Фиат</div>
+      </div>
+
+      <div class="hero__actions">
+        <a href="https://t.me/cryptostatte_ex" class="btn btn--primary btn--lg" target="_blank" rel="noopener noreferrer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          Написать менеджеру
+        </a>
+        <a href="https://t.me/CryptoStatte" class="btn btn--outline btn--lg" target="_blank" rel="noopener noreferrer">
+          Telegram-канал
+        </a>
+      </div>
+
+      <div class="hero__stats">
+        <div class="stat">
+          <span class="stat__value" data-count="5000">0</span><span class="stat__suffix">+</span>
+          <span class="stat__label">клиентов</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <span class="stat__value">2–10</span>
+          <span class="stat__label">минут на сделку</span>
+        </div>
+        <div class="stat__divider"></div>
+        <div class="stat">
+          <span class="stat__value">24/7</span>
+          <span class="stat__label">поддержка</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <div class="section-header">
+        <h2>Почему <span class="gradient-text">CryptoStatte</span></h2>
+        <p>Технология доверия для тех, кто ценит время и активы</p>
+      </div>
+      <div class="features__grid">
+        <article class="feature-card">
+          <div class="feature-card__icon">⚡️</div>
+          <h3>Скорость сделок</h3>
+          <p>Обмен за 2–10 минут. Без ожидания и лишних проверок — только результат.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">🔓</div>
+          <h3>Полная конфиденциальность</h3>
+          <p>Ваши данные и транзакции защищены. Мы не раскрываем информацию третьим лицам.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">📊</div>
+          <h3>Рыночный курс</h3>
+          <p>Честный обмен по актуальному рынку — без скрытых наценок и переплат.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">💸</div>
+          <h3>Минимальные комиссии</h3>
+          <p>Прозрачная структура комиссий. Вы всегда знаете, сколько получите.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">🌎</div>
+          <h3>По всему миру</h3>
+          <p>USD, EUR, TRY и другие валюты. Работаем круглосуточно из любой точки планеты.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-card__icon">🛡️</div>
+          <h3>Надёжность</h3>
+          <p>Тысячи успешных сделок. Проверенный сервис с репутацией на рынке.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how" class="how container">
+      <div class="section-header">
+        <h2>Как проходит обмен</h2>
+        <p>Три простых шага до ваших активов</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">01</div>
+          <div class="step__content">
+            <h3>Свяжитесь с менеджером</h3>
+            <p>Напишите в Telegram — укажите сумму, валюту и направление обмена.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">02</div>
+          <div class="step__content">
+            <h3>Получите курс и реквизиты</h3>
+            <p>Менеджер зафиксирует актуальный рыночный курс и отправит данные для перевода.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">03</div>
+          <div class="step__content">
+            <h3>Получите средства</h3>
+            <p>После подтверждения платежа — USDT или фиат на ваш счёт за 2–10 минут.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="cta__inner container">
+        <div class="cta__content">
+          <p class="cta__tag">🖤 CryptoStatte</p>
+          <h2>Технология доверия</h2>
+          <p>Тысячи клиентов уже с нами. Присоединяйся к тем, кто ценит время и активы.</p>
+        </div>
+        <div id="contact" class="cta__cards">
+          <a href="https://t.me/cryptostatte_ex" class="contact-card" target="_blank" rel="noopener noreferrer">
+            <span class="contact-card__icon">👤</span>
+            <div>
+              <span class="contact-card__label">Менеджер</span>
+              <span class="contact-card__value">@cryptostatte_ex</span>
+            </div>
+            <span class="contact-card__arrow">→</span>
+          </a>
+          <a href="https://t.me/CryptoStatte" class="contact-card" target="_blank" rel="noopener noreferrer">
+            <span class="contact-card__icon">🤩</span>
+            <div>
+              <span class="contact-card__label">Канал</span>
+              <span class="contact-card__value">t.me/CryptoStatte</span>
+            </div>
+            <span class="contact-card__arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="logo__icon">◆</span>
+        <span>CryptoStatte</span>
+      </div>
+      <p class="footer__copy">© 2026 CryptoStatte. Все права защищены.</p>
+      <div class="footer__links">
+        <a href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer">Менеджер</a>
+        <a href="https://t.me/CryptoStatte" target="_blank" rel="noopener noreferrer">Канал</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
