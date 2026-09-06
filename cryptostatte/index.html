@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoStatte — Вход в ликвидность без границ | Обмен фиата на USDT</title>
+  <meta name="description" content="CryptoStatte — премиальный криптообменник. Обмен USD, EUR, TRY на USDT (TRC20/ERC20) и обратно за 2-10 минут. Рыночный курс, 0% скрытых комиссий, 24/7 поддержка.">
+  <meta name="keywords" content="CryptoStatte, криптообменник, купить USDT, продать USDT, обмен USD на USDT, обмен EUR на USDT, TRC20, ERC20, крипто обменник">
+  
+  <!-- OpenGraph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CryptoStatte — Вход в ликвидность без границ">
+  <meta property="og:description" content="Обмен фиата на USDT и обратно. Мгновенно. Прозрачно. Защищено. Скорость 2-10 минут.">
+  <meta property="og:image" content="assets/img/og-preview.png">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dark-theme">
+  <!-- Glowing Background Mesh -->
+  <div class="bg-glow-container">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo">
+        <span class="logo-icon">🚀</span>
+        <span class="logo-text">Crypto<span class="gradient-text">Statte</span></span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#calculator" class="nav-link">Калькулятор</a>
+        <a href="#features" class="nav-link">Преимущества</a>
+        <a href="#directions" class="nav-link">Направления</a>
+        <a href="#how-it-works" class="nav-link">Как это работает</a>
+        <a href="#reviews" class="nav-link">Отзывы</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer" class="btn btn-outline header-tg-btn">
+          <i class="fab fa-telegram"></i>
+          <span>@cryptostatte_ex</span>
+        </a>
+        <a href="#calculator" class="btn btn-primary pulse-btn">
+          <span>Начать обмен</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Открыть меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Live Ticker Bar -->
+    <div class="ticker-wrapper">
+      <div class="container">
+        <div class="ticker-inner">
+          <div class="ticker-badge">
+            <span class="live-dot"></span> LIVE РЫНОК
+          </div>
+          <div class="ticker-track" id="ticker-track">
+            <div class="ticker-item"><span class="t-pair">USD / USDT</span> <span class="t-val">1.000</span> <span class="t-up">+0.02%</span></div>
+            <div class="ticker-item"><span class="t-pair">EUR / USDT</span> <span class="t-val">1.085</span> <span class="t-up">+0.14%</span></div>
+            <div class="ticker-item"><span class="t-pair">TRY / USDT</span> <span class="t-val">34.20</span> <span class="t-down">-0.05%</span></div>
+            <div class="ticker-item"><span class="t-pair">BTC / USDT</span> <span class="t-val">68,450.00</span> <span class="t-up">+1.85%</span></div>
+            <div class="ticker-item"><span class="t-pair">ETH / USDT</span> <span class="t-val">2,640.50</span> <span class="t-up">+0.95%</span></div>
+            <div class="ticker-item"><span class="t-pair">Среднее время сделки</span> <span class="t-highlight">⚡ 3.5 мин</span></div>
+            <div class="ticker-item"><span class="t-pair">Резерв USDT</span> <span class="t-highlight">💎 2,500,000+</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="badge-pill">
+            <span class="badge-icon">🖤</span>
+            <span>CryptoStatte — Технология доверия</span>
+          </div>
+          <h1 class="hero-title">
+            Вход в ликвидность <br>
+            <span class="gradient-text">без границ.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Обмен фиата на <strong>USDT</strong> и обратно. <br class="mobile-hide">
+            <strong>Мгновенно. Прозрачно. Защищено.</strong>
+          </p>
+
+          <div class="hero-features-chips">
+            <div class="chip"><i class="fas fa-bolt text-gold"></i> 2–10 минут сделка</div>
+            <div class="chip"><i class="fas fa-lock text-cyan"></i> 100% конфиденциально</div>
+            <div class="chip"><i class="fas fa-globe text-emerald"></i> 24/7 по всему миру</div>
+            <div class="chip"><i class="fas fa-percent text-purple"></i> 0% скрытых комиссий</div>
+          </div>
+
+          <div class="hero-cta-group">
+            <a href="#calculator" class="btn btn-primary btn-lg glow-effect">
+              <i class="fas fa-exchange-alt"></i>
+              <span>Перейти к обмену</span>
+            </a>
+            <a href="https://t.me/CryptoStatte" target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-lg">
+              <i class="fab fa-telegram-plane"></i>
+              <span>Официальный канал</span>
+            </a>
+          </div>
+
+          <!-- Social Proof Bar -->
+          <div class="hero-stats">
+            <div class="stat-block">
+              <div class="stat-number"><span class="counter" data-target="15000">15,000</span>+</div>
+              <div class="stat-label">Успешных сделок</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-block">
+              <div class="stat-number">2–10 <span class="stat-unit">мин</span></div>
+              <div class="stat-label">Скорость обмена</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-block">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Поддержка онлайн</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Exchange Widget -->
+        <div class="hero-widget" id="calculator">
+          <div class="exchange-card glass-card">
+            <div class="card-glow-header">
+              <div class="widget-title">
+                <span class="dot-indicator"></span>
+                <span>Быстрый онлайн расчет</span>
+              </div>
+              <div class="widget-badge">
+                <i class="fas fa-shield-alt"></i> Фиксация курса на 15 мин
+              </div>
+            </div>
+
+            <!-- Direction Toggle (Buy / Sell) -->
+            <div class="direction-tabs">
+              <button class="dir-tab active" data-dir="fiat-to-crypto" id="tab-buy">
+                <i class="fas fa-arrow-down-left"></i> Купить USDT (Фиат → USDT)
+              </button>
+              <button class="dir-tab" data-dir="crypto-to-fiat" id="tab-sell">
+                <i class="fas fa-arrow-up-right"></i> Продать USDT (USDT → Фиат)
+              </button>
+            </div>
+
+            <div class="exchange-body">
+              <!-- Send Input Box -->
+              <div class="currency-input-group">
+                <div class="input-header">
+                  <label for="send-amount" id="send-label">Вы отдаете</label>
+                  <span class="available-balance" id="send-limit">Лимит: $100 – $100,000</span>
+                </div>
+                <div class="input-row">
+                  <input type="number" id="send-amount" value="1000" min="50" step="any" placeholder="0.00">
+                  <div class="select-currency-wrapper">
+                    <select id="send-currency" class="currency-select" aria-label="Валюта отправки">
+                      <option value="USD" data-symbol="$" data-type="fiat" selected>💵 USD</option>
+                      <option value="EUR" data-symbol="€" data-type="fiat">💶 EUR</option>
+                      <option value="TRY" data-symbol="₺" data-type="fiat">🪙 TRY</option>
+                      <option value="RUB" data-symbol="₽" data-type="fiat">💳 RUB</option>
+                      <option value="KZT" data-symbol="₸" data-type="fiat">🇰🇿 KZT</option>
+                      <option value="AED" data-symbol="د.إ" data-type="fiat">🇦🇪 AED</option>
+                      <option value="USDT_TRC20" data-symbol="₮" data-type="crypto">🟢 USDT (TRC20)</option>
+                      <option value="USDT_ERC20" data-symbol="₮" data-type="crypto">🔵 USDT (ERC20)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="quick-amounts">
+                  <button type="button" class="quick-btn" data-val="300">$300</button>
+                  <button type="button" class="quick-btn" data-val="500">$500</button>
+                  <button type="button" class="quick-btn active" data-val="1000">$1,000</button>
+                  <button type="button" class="quick-btn" data-val="5000">$5,000</button>
+                  <button type="button" class="quick-btn" data-val="10000">$10,000</button>
+                </div>
+              </div>
+
+              <!-- Swap Button -->
+              <div class="swap-action-row">
+                <button type="button" class="swap-btn" id="swap-currencies-btn" title="Поменять местами" aria-label="Поменять местами валюты">
+                  <i class="fas fa-sync-alt"></i>
+                </button>
+                <div class="exchange-rate-display" id="rate-display">
+                  1 USD = <span class="highlight">0.998 USDT</span>
+                </div>
+              </div>
+
+              <!-- Receive Input Box -->
+              <div class="currency-input-group">
+                <div class="input-header">
+                  <label for="receive-amount" id="receive-label">Вы получаете (расчетно)</label>
+                  <span class="network-badge" id="network-info">Сеть: TRC20 / ERC20</span>
+                </div>
+                <div class="input-row">
+                  <input type="number" id="receive-amount" value="998.00" readonly placeholder="0.00">
+                  <div class="select-currency-wrapper">
+                    <select id="receive-currency" class="currency-select" aria-label="Валюта получения">
+                      <option value="USDT_TRC20" data-symbol="₮" data-type="crypto" selected>🟢 USDT (TRC20)</option>
+                      <option value="USDT_ERC20" data-symbol="₮" data-type="crypto">🔵 USDT (ERC20)</option>
+                      <option value="USD" data-symbol="$" data-type="fiat">💵 USD Cash / Wire</option>
+                      <option value="EUR" data-symbol="€" data-type="fiat">💶 EUR SEPA / Cash</option>
+                      <option value="TRY" data-symbol="₺" data-type="fiat">🪙 TRY Bank / Cash</option>
+                      <option value="RUB" data-symbol="₽" data-type="fiat">💳 RUB Карта / СБП</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exchange Details Summary -->
+              <div class="exchange-summary-box">
+                <div class="summary-row">
+                  <span>Комиссия сервиса:</span>
+                  <span class="text-emerald font-semibold">0% (Включена в курс)</span>
+                </div>
+                <div class="summary-row">
+                  <span>Регламент выполнения:</span>
+                  <span class="text-white">⚡ 2–10 минут</span>
+                </div>
+                <div class="summary-row">
+                  <span>Формат сделки:</span>
+                  <span class="text-white">Онлайн / Наличные / Банк</span>
+                </div>
+              </div>
+
+              <!-- Action Button -->
+              <button type="button" class="btn btn-primary btn-block btn-exchange" id="initiate-exchange-btn">
+                <span>Обменять сейчас</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+
+              <div class="widget-footer-note">
+                <i class="fas fa-lock"></i> Сделка защищена эскроу-протоколом CryptoStatte
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Proposition Banner -->
+    <section class="trust-banner">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="trust-icon">⚡️</div>
+            <div class="trust-text">
+              <h4>2–10 Минут</h4>
+              <p>Мгновенная обработка и отправка</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🔓</div>
+            <div class="trust-text">
+              <h4>Конфиденциально</h4>
+              <p>Никаких лишних данных и проверок</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">📊</div>
+            <div class="trust-text">
+              <h4>Рыночный курс</h4>
+              <p>Честный курс без скрытых наценок</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">💸</div>
+            <div class="trust-text">
+              <h4>Минимальные комиссии</h4>
+              <p>Максимальная выгода для крупных сумм</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported Directions & Currencies -->
+    <section class="section directions-section" id="directions">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Ликвидность 24/7</span>
+          <h2 class="section-title">Популярные направления обмена</h2>
+          <p class="section-subtitle">Работаем по всему миру: USD • EUR • TRY → USDT (TRC20/ERC20) → обратно в фиат</p>
+        </div>
+
+        <div class="directions-grid">
+          <!-- Card 1 -->
+          <div class="direction-card">
+            <div class="dir-header">
+              <div class="dir-pair-icons">
+                <span class="fiat-badge">USD</span>
+                <i class="fas fa-arrow-right-arrow-left"></i>
+                <span class="crypto-badge">USDT</span>
+              </div>
+              <span class="dir-badge popular">ТОП-1</span>
+            </div>
+            <div class="dir-content">
+              <h3>USD ⇄ USDT</h3>
+              <p class="dir-desc">Наличные доллары (курьер / офис в 20+ странах), Swift / Wire, международные переводы.</p>
+              <ul class="dir-perks">
+                <li><i class="fas fa-check-circle"></i> Сети: TRC-20, ERC-20, BEP-20</li>
+                <li><i class="fas fa-check-circle"></i> Наличные: Стамбул, Дубай, Тбилиси, ЕС</li>
+                <li><i class="fas fa-check-circle"></i> Время: от 3 минут</li>
+              </ul>
+            </div>
+            <div class="dir-footer">
+              <button class="btn btn-sm btn-outline select-pair-btn" data-send="USD" data-receive="USDT_TRC20">Выбрать пару</button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="direction-card featured">
+            <div class="card-ribbon">ХИТ</div>
+            <div class="dir-header">
+              <div class="dir-pair-icons">
+                <span class="fiat-badge eur">EUR</span>
+                <i class="fas fa-arrow-right-arrow-left"></i>
+                <span class="crypto-badge">USDT</span>
+              </div>
+              <span class="dir-badge">Европа</span>
+            </div>
+            <div class="dir-content">
+              <h3>EUR ⇄ USDT</h3>
+              <p class="dir-desc">SEPA / SEPA Instant, Revolut, Wise, наличный расчет в европейских столицах.</p>
+              <ul class="dir-perks">
+                <li><i class="fas fa-check-circle"></i> Мгновенные SEPA Instant переводы</li>
+                <li><i class="fas fa-check-circle"></i> Фиксация курса до подтверждения</li>
+                <li><i class="fas fa-check-circle"></i> Чистый крипто-хедж без рисков</li>
+              </ul>
+            </div>
+            <div class="dir-footer">
+              <button class="btn btn-sm btn-primary select-pair-btn" data-send="EUR" data-receive="USDT_TRC20">Выбрать пару</button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="direction-card">
+            <div class="dir-header">
+              <div class="dir-pair-icons">
+                <span class="fiat-badge try">TRY</span>
+                <i class="fas fa-arrow-right-arrow-left"></i>
+                <span class="crypto-badge">USDT</span>
+              </div>
+              <span class="dir-badge">Турция</span>
+            </div>
+            <div class="dir-content">
+              <h3>TRY ⇄ USDT</h3>
+              <p class="dir-desc">Ziraat, Vakif, Garanti, FAST переводы 24/7 и выдача наличных лир/долларов в офисах.</p>
+              <ul class="dir-perks">
+                <li><i class="fas fa-check-circle"></i> FAST переводы до 2 минут</li>
+                <li><i class="fas fa-check-circle"></i> Офисы: Стамбул, Анталья, Аланья</li>
+                <li><i class="fas fa-check-circle"></i> Лучший курс к лире без скрытой маржи</li>
+              </ul>
+            </div>
+            <div class="dir-footer">
+              <button class="btn btn-sm btn-outline select-pair-btn" data-send="TRY" data-receive="USDT_TRC20">Выбрать пару</button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="direction-card">
+            <div class="dir-header">
+              <div class="dir-pair-icons">
+                <span class="crypto-badge">USDT</span>
+                <i class="fas fa-arrow-right-arrow-left"></i>
+                <span class="fiat-badge rub">RUB</span>
+              </div>
+              <span class="dir-badge">СНГ / РФ</span>
+            </div>
+            <div class="dir-content">
+              <h3>USDT ⇄ RUB / СБП</h3>
+              <p class="dir-desc">Карты любых банков РФ, СБП, выдача наличных рублей и долларов в Moscow City.</p>
+              <ul class="dir-perks">
+                <li><i class="fas fa-check-circle"></i> СБП и Тинькофф / Сбер / Альфа</li>
+                <li><i class="fas fa-check-circle"></i> Доставка наличных инкассацией</li>
+                <li><i class="fas fa-check-circle"></i> 100% чистая валюта</li>
+              </ul>
+            </div>
+            <div class="dir-footer">
+              <button class="btn btn-sm btn-outline select-pair-btn" data-send="USDT_TRC20" data-receive="RUB">Выбрать пару</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geographic Coverage Bar -->
+        <div class="geo-bar glass-card">
+          <div class="geo-header">
+            <i class="fas fa-globe-americas"></i>
+            <div>
+              <h4>География работы и наличных выдач:</h4>
+              <p>Офисы и курьерская доставка доступны в ключевых хабах</p>
+            </div>
+          </div>
+          <div class="geo-tags">
+            <span class="geo-tag">🇹🇷 Турция (Стамбул, Анталья)</span>
+            <span class="geo-tag">🇦🇪 ОАЭ (Дубай)</span>
+            <span class="geo-tag">🇬🇪 Грузия (Тбилиси, Батуми)</span>
+            <span class="geo-tag">🇪🇺 ЕС (Германия, Испания, Польша)</span>
+            <span class="geo-tag">🇨🇾 Кипр (Лимасол)</span>
+            <span class="geo-tag">🇷🇺 РФ (Москва, СПБ)</span>
+            <span class="geo-tag">🇰🇿 Казахстан (Алматы, Астана)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why CryptoStatte (Features) -->
+    <section class="section features-section" id="features">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Преимущества</span>
+          <h2 class="section-title">Почему выбирают CryptoStatte</h2>
+          <p class="section-subtitle">Мы создали экосистему обмена, где скорость сочетается с бескомпромиссной безопасностью</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="f-icon-wrap gold-glow">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3>Скорость 2–10 минут</h3>
+            <p>Автоматизированная маршрутизация транзакций и постоянный запас ликвидности позволяют закрывать сделки за считанные минуты.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="f-icon-wrap cyan-glow">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <h3>Полная конфиденциальность</h3>
+            <p>Никаких избыточных данных, регистраций и сложных верификаций. Ваши личные активы остаются только вашим делом.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="f-icon-wrap emerald-glow">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Рыночный курс без переплат</h3>
+            <p>Агрегируем спотовые курсы с крупнейших мировых бирж (Binance, OKX, Bybit). Вы получаете честную цену без скрытых наценок.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="f-icon-wrap purple-glow">
+              <i class="fas fa-hand-holding-dollar"></i>
+            </div>
+            <h3>Минимальные комиссии</h3>
+            <p>Прозрачная тарифная сетка 0%. Специальные VIP-условия и персональный дисконт для крупных объемов от $10,000.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="f-icon-wrap blue-glow">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>Менеджер на связи 24/7</h3>
+            <p>Персональный менеджер в Telegram <strong>@cryptostatte_ex</strong> ответит за 30 секунд и сопроводит любую нестандартную сделку.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="f-icon-wrap red-glow">
+              <i class="fas fa-vault"></i>
+            </div>
+            <h3>Чистая ликвидность (0% AML risk)</h3>
+            <p>Все криптоактивы проходят строгий внутренний скоринг. Вы получаете исключительно белые USDT с чистой историей транзакций.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Step-by-Step -->
+    <section class="section steps-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Простой процесс</span>
+          <h2 class="section-title">Как происходит обмен</h2>
+          <p class="section-subtitle">Всего 4 простых шага от заявки до получения средств на ваш счет или кошелек</p>
+        </div>
+
+        <div class="steps-timeline">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <div class="step-icon"><i class="fas fa-calculator"></i></div>
+            <h3>Выберите направление</h3>
+            <p>Укажите валюту, которую отдаете (USD, EUR, TRY, RUB) и сумму получения в USDT.</p>
+          </div>
+
+          <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <div class="step-icon"><i class="fas fa-file-signature"></i></div>
+            <h3>Оставьте заявку</h3>
+            <p>Заполните реквизиты кошелька / карты или свяжитесь с нашим менеджером в Telegram.</p>
+          </div>
+
+          <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <div class="step-icon"><i class="fas fa-money-bill-transfer"></i></div>
+            <h3>Внесите оплату</h3>
+            <p>Переведите фиат или крипту по выданным защищенным реквизитам. Курс фиксируется.</p>
+          </div>
+
+          <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+
+          <div class="step-card">
+            <div class="step-number">04</div>
+            <div class="step-icon"><i class="fas fa-circle-check"></i></div>
+            <h3>Получите средства</h3>
+            <p>В течение 2–10 минут средства поступают на ваш кошелек или выдаются наличными.</p>
+          </div>
+        </div>
+
+        <div class="steps-cta-center">
+          <a href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg pulse-btn">
+            <i class="fab fa-telegram-plane"></i>
+            <span>Написать менеджеру: @cryptostatte_ex</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews / Social Proof -->
+    <section class="section reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Репутация и отзывы</span>
+          <h2 class="section-title">Тысячи клиентов уже с нами</h2>
+          <p class="section-subtitle">Присоединяйся к тем, кто ценит время и активы. Реальные отзывы о работе с CryptoStatte.</p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-header">
+              <div class="user-avatar">
+                <span>АМ</span>
+              </div>
+              <div class="user-info">
+                <h4>Артем М.</h4>
+                <div class="stars">★★★★★</div>
+              </div>
+              <span class="review-time">Вчера</span>
+            </div>
+            <div class="review-badge">Обмен 5,000 USD → USDT TRC20</div>
+            <p class="review-text">«Менял 5к долларов на USDT в Стамбуле. Менеджер ответил мгновенно, договорились за 5 минут. Курьер приехал вовремя, крипту перевели сразу же после проверки купюр. Рекомендую!»</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div class="user-avatar alt-1">
+                <span>ДВ</span>
+              </div>
+              <div class="user-info">
+                <h4>Денис В.</h4>
+                <div class="stars">★★★★★</div>
+              </div>
+              <span class="review-time">3 дня назад</span>
+            </div>
+            <div class="review-badge">Обмен 2,200 EUR (SEPA) → USDT</div>
+            <p class="review-text">«Регулярно вывожу с европейских счетов в крипту. У CryptoStatte самый адекватный курс по евро без дурацких задержек. Сделка заняла 4 минуты. Спасибо за сервис!»</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div class="user-avatar alt-2">
+                <span>ЕВ</span>
+              </div>
+              <div class="user-info">
+                <h4>Елена В.</h4>
+                <div class="stars">★★★★★</div>
+              </div>
+              <span class="review-time">5 дней назад</span>
+            </div>
+            <div class="review-badge">Обмен 45,000 TRY → USDT</div>
+            <p class="review-text">«Переводила через Garanti FAST на турецкие реквизиты, через 3 минуты USDT уже были на Trust Wallet. Скорость невероятная, менеджер @cryptostatte_ex всегда на связи.»</p>
+          </div>
+
+          <div class="review-card">
+            <div class="review-header">
+              <div class="user-avatar alt-3">
+                <span>МК</span>
+              </div>
+              <div class="user-info">
+                <h4>Михаил К.</h4>
+                <div class="stars">★★★★★</div>
+              </div>
+              <span class="review-time">1 неделю назад</span>
+            </div>
+            <div class="review-badge">Обмен 12,000 USDT → USD Cash (Дубай)</div>
+            <p class="review-text">«Потребовались наличные доллары в Дубае. Списался в телеграме, подъехал в офис в Downtown. Перевел USDT — забрал новенькие банкноты. Профессионалы своего дела.»</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Вопрос — Ответ</span>
+          <h2 class="section-title">Часто задаваемые вопросы</h2>
+          <p class="section-subtitle">Все детали и тонкости работы сервиса CryptoStatte</p>
+        </div>
+
+        <div class="faq-accordion" id="faq-accordion">
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>Какое среднее время проведения обмена?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>В среднем операция занимает от <strong>2 до 10 минут</strong> после поступления и подтверждения оплаты в сети. В редких случаях высокой нагрузки сети блокчейн время может быть незначительно увеличено.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Какие фиатные валюты и способы оплаты вы поддерживаете?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Мы работаем с <strong>USD, EUR, TRY, RUB, KZT, AED</strong> и другими валютами. Доступны банковские переводы (SEPA, SWIFT, FAST, СБП, P2P), а также выдача и прием <strong>наличных средств</strong> в более чем 20 странах мира через сеть офисов и курьеров.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>В каких сетях отправляется USDT?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Основными сетями являются <strong>TRC20 (Tron)</strong> за счет минимальных комиссий и высокой скорости, а также <strong>ERC20 (Ethereum)</strong>, <strong>BEP20 (BNB Chain)</strong>, <strong>Polygon</strong> и <strong>Solana</strong> по запросу.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Требуется ли прохождение верификации (KYC)?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Для стандартных онлайн-обменов в разумных лимитах верификация не требуется — мы соблюдаем политику максимальной приватности и защиты личных данных клиентов. Все транзакции анонимны и конфиденциальны.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Как фиксируется обменный курс?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Курс фиксируется в момент создания заявки на <strong>15 минут</strong>, что дает достаточно времени для совершения перевода без риска изменения цены на волатильном рынке.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Какова минимальная и максимальная сумма одной сделки?</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Минимальный порог — от <strong>$50 / 50 USDT</strong>. Максимальный лимит для одной онлайн-сделки — <strong>$100,000</strong>. При сделках на крупные суммы от $10,000 мы предоставляем персональные дисконтные условия через менеджера.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-box glass-card glow-card">
+          <div class="cta-content">
+            <span class="cta-subtitle">🖤 CryptoStatte. Технология доверия.</span>
+            <h2 class="cta-title">Готовы обменять валюту прямо сейчас?</h2>
+            <p class="cta-desc">Напишите нашему менеджеру или подпишитесь на официальный канал с актуальными курсами и новостями ликвидности.</p>
+            
+            <div class="cta-contacts-grid">
+              <a href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer" class="contact-card highlight">
+                <div class="contact-icon"><i class="fab fa-telegram"></i></div>
+                <div class="contact-text">
+                  <span class="role">👤 Персональный менеджер</span>
+                  <span class="handle">@cryptostatte_ex</span>
+                  <span class="status"><span class="live-dot"></span> В сети 24/7 (ответ за 1 мин)</span>
+                </div>
+                <div class="contact-arrow"><i class="fas fa-external-link-alt"></i></div>
+              </a>
+
+              <a href="https://t.me/CryptoStatte" target="_blank" rel="noopener noreferrer" class="contact-card">
+                <div class="contact-icon"><i class="fas fa-bullhorn"></i></div>
+                <div class="contact-text">
+                  <span class="role">🤩 Официальный канал</span>
+                  <span class="handle">t.me/CryptoStatte</span>
+                  <span class="status">Аналитика, курсы, резервы</span>
+                </div>
+                <div class="contact-arrow"><i class="fas fa-external-link-alt"></i></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Exchange Modal / Order Form -->
+  <div class="modal-overlay" id="order-modal" aria-hidden="true">
+    <div class="modal-container glass-card">
+      <button class="modal-close" id="modal-close" aria-label="Закрыть">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-icon">🚀</div>
+        <h3>Оформление заявки</h3>
+        <p>CryptoStatte • Сделка защищена</p>
+      </div>
+
+      <div class="modal-order-summary">
+        <div class="m-summary-item">
+          <span>Отдаете:</span>
+          <strong id="m-send-val">1000 USD</strong>
+        </div>
+        <div class="m-summary-item">
+          <span>Получаете:</span>
+          <strong id="m-receive-val" class="text-emerald">998.00 USDT</strong>
+        </div>
+        <div class="m-summary-item">
+          <span>Курс сделки:</span>
+          <span id="m-rate-val">1 USD = 0.998 USDT</span>
+        </div>
+      </div>
+
+      <form id="order-form" class="order-form">
+        <div class="form-group">
+          <label for="order-wallet">Реквизиты получения (Кошелек USDT или Банковская карта / Счет):</label>
+          <input type="text" id="order-wallet" required placeholder="Например: TXYZ... (TRC20) или номер карты / IBAN">
+        </div>
+
+        <div class="form-group">
+          <label for="order-telegram">Ваш Telegram для связи и подтверждения:</label>
+          <div class="input-with-prefix">
+            <span class="prefix">@</span>
+            <input type="text" id="order-telegram" required placeholder="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="order-city">Город (если требуется выдача наличных / курьер):</label>
+          <input type="text" id="order-city" placeholder="Например: Стамбул, Дубай, Москва (необязательно для онлайн)">
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-order-btn">
+            <i class="fab fa-telegram-plane"></i>
+            <span>Отправить заявку менеджеру</span>
+          </button>
+        </div>
+        
+        <p class="modal-disclaimer">
+          Нажимая кнопку, вы перейдете в диалог с менеджером <strong>@cryptostatte_ex</strong> с готовыми параметрами вашей сделки.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Notification Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo">
+            <span class="logo-icon">🚀</span>
+            <span class="logo-text">Crypto<span class="gradient-text">Statte</span></span>
+          </a>
+          <p class="footer-tagline">
+            Вход в ликвидность без границ. Мгновенный обмен фиата и криптовалют по всему миру 24/7.
+          </p>
+          <p class="footer-slogan">🖤 CryptoStatte. Технология доверия.</p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="#calculator">Калькулятор обмена</a></li>
+            <li><a href="#directions">Направления</a></li>
+            <li><a href="#features">Преимущества</a></li>
+            <li><a href="#how-it-works">Регламент работы</a></li>
+            <li><a href="#faq">Вопросы и ответы</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-col">
+          <h4>Направления</h4>
+          <ul>
+            <li><a href="#calculator">USD ⇄ USDT</a></li>
+            <li><a href="#calculator">EUR ⇄ USDT</a></li>
+            <li><a href="#calculator">TRY ⇄ USDT</a></li>
+            <li><a href="#calculator">RUB ⇄ USDT</a></li>
+            <li><a href="#calculator">AED ⇄ USDT</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contacts-col">
+          <h4>Контакты</h4>
+          <ul class="contacts-list">
+            <li>
+              <i class="fab fa-telegram"></i>
+              <div>
+                <span>Менеджер:</span>
+                <a href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer">@cryptostatte_ex</a>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-bullhorn"></i>
+              <div>
+                <span>Канал:</span>
+                <a href="https://t.me/CryptoStatte" target="_blank" rel="noopener noreferrer">t.me/CryptoStatte</a>
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <div>
+                <span>Режим работы:</span>
+                <strong>24/7 / 365 без выходных</strong>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copyright">
+          © 2026 CryptoStatte. Все права защищены. Безопасный обмен цифровых активов.
+        </div>
+        <div class="footer-badges">
+          <span class="f-badge"><i class="fas fa-shield-halved"></i> SSL Encrypted 256-bit</span>
+          <span class="f-badge"><i class="fas fa-check-double"></i> 0% AML Risk</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Telegram Contact Widget -->
+  <a href="https://t.me/cryptostatte_ex" target="_blank" rel="noopener noreferrer" class="floating-tg-widget" title="Связаться с менеджером в Telegram" aria-label="Связаться с менеджером">
+    <div class="tg-pulse-ring"></div>
+    <i class="fab fa-telegram-plane"></i>
+    <span class="tg-tooltip">Менеджер онлайн • Ответим за 1 мин</span>
+  </a>
+
+  <!-- Custom Scripts -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
