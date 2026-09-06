@@ -124,6 +124,19 @@
     header.classList.toggle("is-scrolled", window.scrollY > 8);
   }, { passive: true });
 
+  const dock = document.querySelector(".dock");
+  const desk = document.getElementById("exchange");
+  if (dock && desk && "IntersectionObserver" in window) {
+    const syncDock = ([entry]) => {
+      dock.classList.toggle("is-hidden", entry.isIntersecting);
+    };
+    const observer = new IntersectionObserver(syncDock, {
+      threshold: 0.12,
+      rootMargin: "-72px 0px 0px 0px",
+    });
+    observer.observe(desk);
+  }
+
   const canvas = document.getElementById("orbit");
   const ctx = canvas?.getContext("2d");
   const isPhone = window.matchMedia("(max-width: 640px)").matches;
