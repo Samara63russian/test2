@@ -251,9 +251,11 @@ h1, h2, h3, .manifesto__brand {
 }
 
 h1 {
-  font-size: clamp(2.05rem, 8vw, 5.2rem);
+  font-size: clamp(1.8rem, 5vw, 3.6rem);
   font-weight: 800;
   margin-bottom: 18px;
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 
 h1 em,
@@ -496,7 +498,8 @@ h2 em {
 }
 
 .quote dd {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  text-align: right;
 }
 
 .quote div { min-width: 0; }
@@ -786,7 +789,7 @@ body.is-locked .dock { display: none !important; }
   .container { width: min(1180px, calc(100% - 24px)); }
 
   .hero {
-    padding: 16px 0 8px;
+    padding: 16px 0 20px;
   }
 
   .hero__grid,
@@ -853,7 +856,18 @@ body.is-locked .dock { display: none !important; }
   .tabs__btn { min-height: 44px; font-size: 0.88rem; }
   .nets { flex-direction: column; }
   .net { padding: 10px; }
-  .quote { flex-wrap: wrap; }
+  .quote {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .quote div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    gap: 12px;
+  }
+  .quote dd { text-align: right; }
 
   .section { padding: 48px 0; }
   .section__head { margin-bottom: 22px; }
