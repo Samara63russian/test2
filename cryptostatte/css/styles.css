@@ -529,7 +529,7 @@ h2 em {
 
 .section h2 {
   font-size: clamp(2rem, 4vw, 3.3rem);
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .cards,
