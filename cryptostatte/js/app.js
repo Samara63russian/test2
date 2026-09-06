@@ -1,7 +1,22 @@
 (() => {
-  const FIAT = ["USD", "EUR", "TRY"];
+  const FIAT = [
+    "RUB", "USD", "EUR", "GBP", "CHF", "CNY", "TRY", "AED", "JPY",
+    "KZT", "UAH", "BYN", "UZS", "GEL", "AMD", "AZN", "PLN", "CZK",
+    "SEK", "NOK", "DKK", "CAD", "AUD", "NZD", "HKD", "SGD", "KRW",
+    "INR", "THB", "IDR", "MYR", "PHP", "VND", "BRL", "MXN", "ARS",
+    "ZAR", "ILS", "SAR", "QAR", "EGP", "NGN",
+  ];
   const CRYPTO = ["USDT"];
-  const FALLBACK = { USD: 1, EUR: 1.085, TRY: 0.0294 };
+  const FALLBACK = {
+    RUB: 0.0112, USD: 1, EUR: 1.085, GBP: 1.27, CHF: 1.12, CNY: 0.138,
+    TRY: 0.0294, AED: 0.272, JPY: 0.0067, KZT: 0.0019, UAH: 0.024,
+    BYN: 0.305, UZS: 0.000079, GEL: 0.37, AMD: 0.0026, AZN: 0.59,
+    PLN: 0.255, CZK: 0.043, SEK: 0.095, NOK: 0.092, DKK: 0.145,
+    CAD: 0.73, AUD: 0.65, NZD: 0.59, HKD: 0.128, SGD: 0.74, KRW: 0.00072,
+    INR: 0.012, THB: 0.028, IDR: 0.000061, MYR: 0.215, PHP: 0.0175,
+    VND: 0.000038, BRL: 0.185, MXN: 0.055, ARS: 0.00095, ZAR: 0.056,
+    ILS: 0.27, SAR: 0.267, QAR: 0.275, EGP: 0.021, NGN: 0.00065,
+  };
   const FEE = 0.003;
 
   const header = document.getElementById("header");
@@ -32,11 +47,11 @@
 
   const syncSelects = () => {
     if (state.dir === "buy") {
-      fillSelect(giveAsset, FIAT, giveAsset.value && FIAT.includes(giveAsset.value) ? giveAsset.value : "USD");
+      fillSelect(giveAsset, FIAT, giveAsset.value && FIAT.includes(giveAsset.value) ? giveAsset.value : "RUB");
       fillSelect(getAsset, CRYPTO, "USDT");
     } else {
       fillSelect(giveAsset, CRYPTO, "USDT");
-      fillSelect(getAsset, FIAT, getAsset.value && FIAT.includes(getAsset.value) ? getAsset.value : "USD");
+      fillSelect(getAsset, FIAT, getAsset.value && FIAT.includes(getAsset.value) ? getAsset.value : "RUB");
     }
   };
 
@@ -57,7 +72,7 @@
     const to = getAsset.value;
     const amount = parseAmount(giveAmount.value);
     const mid = usdPer(from) / usdPer(to);
-    const effective = state.dir === "buy" ? mid * (1 - FEE) : mid * (1 - FEE);
+    const effective = mid * (1 - FEE);
     const out = amount * effective;
     getAmount.value = formatAmount(out);
     quoteRate.textContent = `1 ${from} = ${effective.toLocaleString("ru-RU", {
@@ -81,9 +96,7 @@
   swap.addEventListener("click", () => setDir(state.dir === "buy" ? "sell" : "buy"));
   giveAmount.addEventListener("input", quote);
   giveAsset.addEventListener("change", quote);
-  getAsset.addEventListener("change", () => {
-    if (state.dir === "sell") quote();
-  });
+  getAsset.addEventListener("change", quote);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -171,15 +184,26 @@
     draw();
   }
 
-  fetch("https://api.frankfurter.app/latest?from=USD&to=EUR,TRY")
+  const applyUsdRates = (perUsd) => {
+    if (!perUsd) return;
+    FIAT.forEach((code) => {
+      const n = Number(perUsd[code]);
+      if (code !== "USD" && n > 0) state.usd[code] = 1 / n;
+    });
+    quote();
+  };
+
+  fetch("https://open.er-api.com/v6/latest/USD")
     .then((res) => res.json())
     .then((data) => {
-      if (!data?.rates) return;
-      if (data.rates.EUR) state.usd.EUR = 1 / data.rates.EUR;
-      if (data.rates.TRY) state.usd.TRY = 1 / data.rates.TRY;
-      quote();
+      if (data?.result === "success" && data.rates) applyUsdRates(data.rates);
     })
-    .catch(() => {});
+    .catch(() => {
+      fetch("https://api.frankfurter.app/latest?from=USD")
+        .then((res) => res.json())
+        .then((data) => applyUsdRates(data?.rates))
+        .catch(() => {});
+    });
 
   syncSelects();
   quote();

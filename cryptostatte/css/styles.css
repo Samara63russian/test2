@@ -298,6 +298,8 @@ h2 em {
 
 .desk {
   position: relative;
+  width: 100%;
+  max-width: 100%;
   padding: 22px;
   border-radius: 28px;
   background: var(--panel);
@@ -316,10 +318,8 @@ h2 em {
 }
 
 .desk__head,
-.quote,
 .pair,
 .nets,
-.field__row,
 .stats,
 .cards,
 .rails,
@@ -411,7 +411,13 @@ h2 em {
   letter-spacing: 0.08em;
 }
 
-.field__row { gap: 10px; }
+.field__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
 
 .field input,
 .field select {
@@ -419,18 +425,19 @@ h2 em {
   border: 0;
   outline: 0;
   min-width: 0;
+  width: 100%;
 }
 
 .field input {
-  flex: 1;
   font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 
 .field select {
-  max-width: 118px;
-  padding: 8px 10px;
+  width: 92px;
+  max-width: 92px;
+  padding: 8px 6px;
   border-radius: 10px;
   background: #16161a;
   border: 1px solid var(--line);
@@ -492,19 +499,38 @@ h2 em {
 .net small { color: var(--muted); font-size: 0.75rem; }
 
 .quote {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 4px 0 8px;
+}
+
+.quote div {
+  display: flex;
   justify-content: space-between;
-  gap: 12px;
-  padding: 8px 4px 10px;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.quote dt {
+  color: var(--muted);
+  font-size: 0.75rem;
+  flex: 0 0 auto;
 }
 
 .quote dd {
-  overflow-wrap: break-word;
+  margin: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+  font-weight: 700;
+  font-size: 0.86rem;
   text-align: right;
+  overflow-wrap: anywhere;
 }
-
-.quote div { min-width: 0; }
-.quote dt { color: var(--muted); font-size: 0.75rem; }
-.quote dd { font-weight: 700; font-size: 0.92rem; }
 
 .desk__note,
 .center-note,
@@ -847,27 +873,14 @@ body.is-locked .dock { display: none !important; }
   .desk__head { align-items: center; }
   .desk__form { gap: 12px; }
   .pair { gap: 14px; }
-  .field input { font-size: 1.2rem; }
+  .field input { font-size: 1.15rem; }
   .field select {
     min-height: 44px;
-    max-width: 104px;
     font-size: 16px;
   }
   .tabs__btn { min-height: 44px; font-size: 0.88rem; }
   .nets { flex-direction: column; }
   .net { padding: 10px; }
-  .quote {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .quote div {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    gap: 12px;
-  }
-  .quote dd { text-align: right; }
 
   .section { padding: 48px 0; }
   .section__head { margin-bottom: 22px; }
@@ -904,17 +917,6 @@ body.is-locked .dock { display: none !important; }
   .desk__head { flex-wrap: wrap; }
   .live { font-size: 0.68rem; }
   .field { padding: 12px; }
-  .field__row { align-items: center; }
-  .quote {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .quote div {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    align-items: baseline;
-  }
   .only-desk { display: none; }
   .steps li { padding: 18px; }
   .card { padding: 18px; border-radius: 18px; }
