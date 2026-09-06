@@ -78,8 +78,7 @@ h1, h2, p, li, dd {
   z-index: 20;
   height: calc(var(--header) + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
-  backdrop-filter: blur(18px);
-  background: rgba(7, 7, 8, 0.62);
+  background: rgba(7, 7, 8, 0.94);
   border-bottom: 1px solid transparent;
   transition: border-color 0.25s ease, background 0.25s ease;
 }
@@ -118,7 +117,15 @@ h1, h2, p, li, dd {
 
 .nav {
   display: flex;
+  align-items: center;
   gap: 26px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(var(--header) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  z-index: 21;
 }
 
 .nav__manager { display: none; }
@@ -203,7 +210,7 @@ h1, h2, p, li, dd {
 
 .hero__grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 48px;
   align-items: center;
 }
@@ -290,7 +297,8 @@ h2 em {
   background: var(--panel);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(16px);
+  overflow: hidden;
+  min-width: 0;
 }
 
 .desk__glow {
@@ -522,6 +530,8 @@ h2 em {
 
 .strip {
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
   border-block: 1px solid var(--line);
   padding: 14px 0;
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -774,20 +784,31 @@ body.is-locked .dock { display: none; }
   .hero__grid,
   .faq-wrap,
   .steps,
-  .cards { grid-template-columns: 1fr; }
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
+  }
+
+  .hero__copy,
+  .desk,
+  .container { min-width: 0; max-width: 100%; }
 
   .hero__grid { gap: 22px; }
   .lede { max-width: none; font-size: 1.05rem; }
 
   .nav {
     position: fixed;
-    inset: calc(var(--header) + env(safe-area-inset-top)) 0 0;
-    z-index: 21;
-    background: rgba(7, 7, 8, 0.97);
+    top: calc(var(--header) + env(safe-area-inset-top));
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    width: 100%;
+    background: #070708;
     flex-direction: column;
     gap: 6px;
     padding: 18px 22px max(32px, env(safe-area-inset-bottom));
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
     transition: transform 0.25s ease;
     overflow-y: auto;
   }

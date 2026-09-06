@@ -136,7 +136,8 @@
 
   const draw = () => {
     if (!ctx) return;
-    const { innerWidth: w, innerHeight: h } = window;
+    const w = document.documentElement.clientWidth;
+    const h = document.documentElement.clientHeight;
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w;
       canvas.height = h;
