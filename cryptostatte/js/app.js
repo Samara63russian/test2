@@ -207,4 +207,26 @@
 
   syncSelects();
   quote();
+
+  const pingVisit = () => {
+    const payload = JSON.stringify({
+      lang: navigator.language || "",
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+      screen: `${window.screen.width}x${window.screen.height}`,
+      ref: document.referrer || "",
+      path: `${location.pathname}${location.search}${location.hash}`,
+    });
+    const blob = new Blob([payload], { type: "application/json" });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/visit", blob);
+      return;
+    }
+    fetch("/api/visit", {
+      method: "POST",
+      body: payload,
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+    }).catch(() => {});
+  };
+  setTimeout(pingVisit, 600);
 })();

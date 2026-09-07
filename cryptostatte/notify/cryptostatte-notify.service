@@ -1,0 +1,16 @@
+[Unit]
+Description=CryptoStatte visit notifier
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/opt/cryptostatte-notify/.env
+WorkingDirectory=/opt/cryptostatte-notify
+ExecStart=/usr/bin/python3 /opt/cryptostatte-notify/server.py
+Restart=always
+RestartSec=3
+User=www-data
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target
