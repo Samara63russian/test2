@@ -1,0 +1,15 @@
+{
+  "name": "swgoh_guild_webapp",
+  "install": ".cursor/install.sh",
+  "terminals": [
+    {
+      "name": "comlink-fetcher-api",
+      "command": "cd swgoh_comlink_fetcher && ../.venv-fetcher/bin/uvicorn swgoh_comlink_fetcher.main:app --host 0.0.0.0 --port 3201"
+    },
+    {
+      "name": "streamlit-app",
+      "command": "cd streamlit_app && ../.venv-streamlit/bin/streamlit run app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true"
+    }
+  ],
+  "ports": [3201, 8501]
+}
