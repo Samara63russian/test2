@@ -107,7 +107,7 @@
       `Сеть: ${network}`,
       quoteRate.textContent,
     ].join("\n");
-    window.open(`https://t.me/cryptostatte_ex?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    window.open(`https://t.me/paysupx?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   });
 
   const closeMenu = () => {
