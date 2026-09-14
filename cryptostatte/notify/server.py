@@ -59,14 +59,23 @@ def telegram(method: str, payload: dict) -> dict:
         return {"ok": False, "description": str(exc)}
 
 
-def send_text(chat_id, text: str) -> dict:
-    return telegram(
-        "sendMessage",
-        {
-            "chat_id": str(chat_id),
-            "text": text,
-            "disable_web_page_preview": "true",
-        },
+def send_text(chat_id, text: str, html: bool = False) -> dict:
+    payload = {
+        "chat_id": str(chat_id),
+        "text": text,
+        "disable_web_page_preview": "true",
+    }
+    if html:
+        payload["parse_mode"] = "HTML"
+    return telegram("sendMessage", payload)
+
+
+def esc(value: str) -> str:
+    return (
+        (value or "")
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
     )
 
 
@@ -180,7 +189,7 @@ def build_message(ip: str, ua: str, extra: dict) -> str:
     ])
 
 
-def notify_all(text: str) -> None:
+def notify_all(text: str, html: bool = False) -> None:
     targets = []
     if CHANNEL:
         targets.append(CHANNEL)
@@ -191,13 +200,42 @@ def notify_all(text: str) -> None:
         if key in seen:
             continue
         seen.add(key)
-        result = send_text(chat, text)
+        result = send_text(chat, text, html=html)
         if not result.get("ok"):
             print(f"telegram fail {chat}: {result.get('description')}", flush=True)
 
 
+def build_manager_message(ip: str, ua: str, extra: dict) -> str:
+    geo = lookup_geo(ip)
+    form, kind, browser = parse_device(ua)
+    place = " · ".join(x for x in (geo["city"], geo["region"]) if x) or "—"
+    now = time.strftime("%d.%m.%Y %H:%M:%S UTC", time.gmtime())
+    block = "\n".join([
+        "Клиент нажал «Менеджер»",
+        f"Страна: {geo['country']}",
+        f"Город: {place}",
+        f"Устройство: {form} · {kind} · {browser}",
+        f"Экран: {extra.get('screen') or '—'}",
+        f"Язык: {extra.get('lang') or '—'}",
+        f"IP: {ip}",
+        f"Сеть: {geo['isp'] or geo['org'] or '—'}",
+        f"Страница: {extra.get('path') or '/'}",
+        f"Время: {now}",
+        "Написать: @paysupx",
+    ])
+    return (
+        "🔥 <b>Запрос менеджера</b>\n"
+        "Нажмите на блок ниже, чтобы скопировать:\n\n"
+        f"<pre>{esc(block)}</pre>"
+    )
+
+
 def handle_visit(ip: str, ua: str, extra: dict) -> None:
     if is_bot(ua):
+        return
+    action = str(extra.get("action") or "visit")
+    if action == "manager":
+        notify_all(build_manager_message(ip, ua, extra), html=True)
         return
     now = time.time()
     with _lock:

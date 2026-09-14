@@ -107,6 +107,7 @@
       `Сеть: ${network}`,
       quoteRate.textContent,
     ].join("\n");
+    pingVisit("manager");
     window.open(`https://t.me/paysupx?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   });
 
@@ -208,8 +209,9 @@
   syncSelects();
   quote();
 
-  const pingVisit = () => {
+  const pingVisit = (action) => {
     const payload = JSON.stringify({
+      action: action || "visit",
       lang: navigator.language || "",
       tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
       screen: `${window.screen.width}x${window.screen.height}`,
@@ -228,5 +230,9 @@
       keepalive: true,
     }).catch(() => {});
   };
-  setTimeout(pingVisit, 600);
+  document.querySelectorAll('a[href*="t.me/paysupx"]').forEach((link) => {
+    if (link.href.includes("paysupxex")) return;
+    link.addEventListener("click", () => pingVisit("manager"));
+  });
+  setTimeout(() => pingVisit("visit"), 600);
 })();
