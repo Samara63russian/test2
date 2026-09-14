@@ -189,13 +189,9 @@ def build_message(ip: str, ua: str, extra: dict) -> str:
     ])
 
 
-def notify_all(text: str, html: bool = False) -> None:
-    targets = []
-    if CHANNEL:
-        targets.append(CHANNEL)
-    targets.extend(load_chats())
+def notify_private(text: str, html: bool = False) -> None:
     seen = set()
-    for chat in targets:
+    for chat in load_chats():
         key = str(chat)
         if key in seen:
             continue
@@ -233,22 +229,9 @@ def build_manager_message(ip: str, ua: str, extra: dict) -> str:
 def handle_visit(ip: str, ua: str, extra: dict) -> None:
     if is_bot(ua):
         return
-    action = str(extra.get("action") or "visit")
-    if action == "manager":
-        notify_all(build_manager_message(ip, ua, extra), html=True)
+    if str(extra.get("action") or "") != "manager":
         return
-    now = time.time()
-    with _lock:
-        last = _recent.get(ip, 0)
-        if now - last < COOLDOWN_SEC:
-            return
-        _recent[ip] = now
-        if len(_recent) > 4000:
-            cutoff = now - COOLDOWN_SEC
-            for key, ts in list(_recent.items()):
-                if ts < cutoff:
-                    del _recent[key]
-    notify_all(build_message(ip, ua, extra))
+    notify_private(build_manager_message(ip, ua, extra), html=True)
 
 
 def poll_telegram() -> None:
@@ -262,12 +245,11 @@ def poll_telegram() -> None:
                 chat = msg.get("chat") or {}
                 chat_id = chat.get("id")
                 text = (msg.get("text") or "").strip()
-                if chat_id and (text.startswith("/start") or chat.get("type") in {"private", "group", "supergroup"}):
+                if chat_id and chat.get("type") == "private" and text.startswith("/start"):
                     save_chat(int(chat_id))
                     send_text(
                         chat_id,
-                        "Бот трафика CryptoStatte активен.\n"
-                        "Сюда будут приходить входы на сайт: страна, устройство и источник.",
+                        "Готово. Теперь в личку будут приходить сообщения только когда клиент нажимает «Менеджер» на сайте.",
                     )
         except Exception as exc:
             print(f"poll error: {exc}", flush=True)

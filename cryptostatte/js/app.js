@@ -234,5 +234,4 @@
     if (link.href.includes("paysupxex")) return;
     link.addEventListener("click", () => pingVisit("manager"));
   });
-  setTimeout(() => pingVisit("visit"), 600);
 })();
