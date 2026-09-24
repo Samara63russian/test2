@@ -337,6 +337,10 @@ def inject_styles() -> None:
     )
 
 
+def set_language(code: str) -> None:
+    st.session_state.lang = code
+
+
 def language_switcher() -> str:
     if "lang" not in st.session_state:
         st.session_state.lang = "de"
@@ -345,9 +349,13 @@ def language_switcher() -> str:
         st.markdown('<div class="brand"><span class="brand-mark">+</span>auszahlung</div>', unsafe_allow_html=True)
     for code, column in zip(["de", "fr", "it"], columns[1:]):
         with column:
-            if st.button(code.upper(), key=f"lang_{code}", use_container_width=True):
-                st.session_state.lang = code
-                st.rerun()
+            st.button(
+                code.upper(),
+                key=f"lang_{code}",
+                use_container_width=True,
+                on_click=set_language,
+                args=(code,),
+            )
     return st.session_state.lang
 
 
