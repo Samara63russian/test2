@@ -92,8 +92,9 @@ button, input, select { font: inherit; }
 .nav {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
 }
+.nav .btn { padding: 10px 14px; }
 .nav a {
   color: var(--navy);
   text-decoration: none;
@@ -236,6 +237,12 @@ input:focus, select:focus {
   margin-bottom: 14px;
 }
 .success.is-on { display: block; }
+.success a {
+  display: inline-flex;
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--green);
+}
 
 .section { padding: 72px 0; }
 .section h2 {

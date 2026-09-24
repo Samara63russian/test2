@@ -189,8 +189,13 @@
       sessionStorage.setItem("guidech-unlocked", "1");
       window.dispatchEvent(new CustomEvent("guidech:lead", { detail: lead }));
 
-      const success = form.querySelector(".success");
-      if (success) success.classList.add("is-on");
+      const card = form.closest(".form-card") || form.parentElement;
+      const success = card?.querySelector(".success");
+      if (success) {
+        success.classList.add("is-on");
+        success.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+      form.setAttribute("hidden", "");
       downloadGuide(document.documentElement.dataset.lang);
     });
   }
