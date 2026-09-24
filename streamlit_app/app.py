@@ -25,6 +25,9 @@ COPY = {
         "floating_label": "DEIN ANSPRUCH",
         "floating_value": "CHF 3'216",
         "floating_sub": "pro Kind / Jahr",
+        "visual_label": "PRÄMIENVERBILLIGUNG",
+        "visual_sub": "pro Monat möglich",
+        "trust_source": "AUS ÖFFENTLICHEN QUELLEN",
         "trust": "Aktuelle Orientierung für die Schweiz · 2026",
         "section_kicker": "NICHTS ZU VERSCHENKEN",
         "section_title": "Das Geld liegt nicht auf der Straße.",
@@ -95,6 +98,9 @@ COPY = {
         "floating_label": "TON DROIT",
         "floating_value": "CHF 3'216",
         "floating_sub": "par enfant / an",
+        "visual_label": "RÉDUCTION DE PRIMES",
+        "visual_sub": "possible par mois",
+        "trust_source": "À PARTIR DE SOURCES PUBLIQUES",
         "trust": "Un aperçu actuel de la Suisse · 2026",
         "section_kicker": "NE LAISSE RIEN SUR LA TABLE",
         "section_title": "L’argent n’est pas dans la rue.",
@@ -165,6 +171,9 @@ COPY = {
         "floating_label": "IL TUO DIRITTO",
         "floating_value": "CHF 3'216",
         "floating_sub": "per figlio / anno",
+        "visual_label": "RIDUZIONE DEI PREMI",
+        "visual_sub": "possibili al mese",
+        "trust_source": "DA FONTI PUBBLICHE",
         "trust": "Una panoramica aggiornata per la Svizzera · 2026",
         "section_kicker": "NON LASCIARE SOLDI SUL TAVOLO",
         "section_title": "I soldi non sono per strada.",
@@ -406,13 +415,13 @@ def render_page(copy: dict) -> None:
               <div class="sub">{copy["floating_sub"]}</div>
             </div>
             <div class="visual-card small">
-              <div class="label">PRÄMIENVERBILLIGUNG</div>
+              <div class="label">{copy["visual_label"]}</div>
               <div class="amount">+ CHF 384</div>
-              <div class="sub">pro Monat möglich</div>
+              <div class="sub">{copy["visual_sub"]}</div>
             </div>
           </div>
         </section>
-        <div class="trust-row">✦ &nbsp; {copy["trust"]} &nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp; AUS ÖFFENTLICHEN QUELLEN</div>
+        <div class="trust-row">✦ &nbsp; {copy["trust"]} &nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp; {copy["trust_source"]}</div>
         <section class="section">
           <div class="section-head">
             <div><div class="section-kicker">{copy["section_kicker"]}</div><h2>{copy["section_title"]}<br>{copy["section_title_2"]}</h2></div>
