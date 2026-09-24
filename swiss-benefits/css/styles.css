@@ -354,7 +354,8 @@ a:hover {
 }
 
 .lead-form.is-sent,
-.form-panel.is-sent .lead-form {
+.form-panel.is-sent .lead-form,
+.hero__form-wrap.is-sent .lead-form {
   display: none;
 }
 
