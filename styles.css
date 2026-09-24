@@ -1119,7 +1119,7 @@ svg {
 }
 
 .deadline-banner .micro-label {
-  color: var(--yellow);
+  color: #fff;
 }
 
 .deadline-banner h2 {
