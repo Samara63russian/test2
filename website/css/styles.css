@@ -243,6 +243,11 @@ input:focus, select:focus {
   font-weight: 700;
   color: var(--green);
 }
+.form-card:has(.success.is-on) form,
+.form-card:has(.success.is-on) > h2,
+.form-card:has(.success.is-on) > p {
+  display: none;
+}
 
 .section { padding: 72px 0; }
 .section h2 {
