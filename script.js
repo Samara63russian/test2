@@ -537,7 +537,7 @@ const legalContent = {
         <h3>Prestazioni complementari</h3>
         <p><a href="https://www.ahv-iv.ch/p/5.01.i" target="_blank" rel="noreferrer">Centro d'informazione AVS/AI, opuscolo 5.01 ↗</a><br>Soglie patrimoniali, fabbisogno vitale e massimali di affitto.</p>
         <h3>Riduzione dei premi</h3>
-        <p><a href="https://www.gdk-cds.ch/it/assicurazione-malattia/riduzione-dei-premi/sistemi-cantonali-di-riduzione-dei-premi" target="_blank" rel="noreferrer">CDS: sistemi cantonali ↗</a><br><a href="https://www.svasg.ch/fragen_und_antworten/ipv/fragen-und-antworten03.php" target="_blank" rel="noreferrer">SVA San Gallo: termine e domanda tardiva ↗</a></p>
+        <p><a href="https://www.gdk-cds.ch/fr/assurance-maladie/reduction-des-primes/systemes-cantonaux-de-reduction-des-primes" target="_blank" rel="noreferrer">CDS: sistemi cantonali (FR) ↗</a><br><a href="https://www.svasg.ch/fragen_und_antworten/ipv/fragen-und-antworten03.php" target="_blank" rel="noreferrer">SVA San Gallo: termine e domanda tardiva ↗</a></p>
         <h3>13a rendita di vecchiaia</h3>
         <p><a href="https://www.ahv-iv.ch/it/Assicurazioni-sociali/Assicurazione-per-la-vecchiaia-e-per-i-superstiti-AVS/13a-rendita-AVS" target="_blank" rel="noreferrer">AVS/AI: primo versamento a dicembre 2026 ↗</a></p>
         <p><small>Stato delle informazioni collegate: settembre 2026. Per una decisione vincolante rivolgersi all'autorità competente.</small></p>`,
