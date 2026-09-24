@@ -1,3 +1,5 @@
+import "@fontsource-variable/dm-sans";
+import "@fontsource-variable/manrope";
 import { jsPDF } from "jspdf";
 
 const translations = {
