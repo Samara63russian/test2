@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Impressum — Auszahlungen.ch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Sora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body class="legal-page">
+    <header class="legal-header">
+      <a href="../index.html">← Auszahlungen.ch</a>
+      <nav class="lang-switch" aria-label="Language" id="langNav">
+        <button type="button" data-show="de">DE</button>
+        <button type="button" data-show="fr">FR</button>
+        <button type="button" data-show="it">IT</button>
+      </nav>
+    </header>
+
+    <article class="legal-content">
+      <div data-lang-block="de">
+        <h1>Impressum</h1>
+        <p>Angaben gemäss schweizerischem Recht (UWG / OR).</p>
+        <h2>Anbieter</h2>
+        <p>
+          Auszahlungen Guide<br />
+          Musterstrasse 12<br />
+          8001 Zürich<br />
+          Schweiz
+        </p>
+        <h2>Kontakt</h2>
+        <p>E-Mail: <a href="mailto:hello@auszahlungen.ch">hello@auszahlungen.ch</a></p>
+        <h2>Hinweis</h2>
+        <p>
+          Dieser Guide ist ein Navigationshilfsmittel zu öffentlichen Verfahren. Er ersetzt keine
+          individuelle Rechts- oder Steuerberatung. Ersetzen Sie die Platzhalter-Adresse durch Ihre
+          tatsächlichen Impressum-Angaben vor dem Live-Gang.
+        </p>
+      </div>
+
+      <div data-lang-block="fr" hidden>
+        <h1>Mentions légales</h1>
+        <p>Informations selon le droit suisse (LCD / CO).</p>
+        <h2>Éditeur</h2>
+        <p>
+          Guide Prestations<br />
+          Musterstrasse 12<br />
+          8001 Zurich<br />
+          Suisse
+        </p>
+        <h2>Contact</h2>
+        <p>E-mail : <a href="mailto:hello@auszahlungen.ch">hello@auszahlungen.ch</a></p>
+        <h2>Avertissement</h2>
+        <p>
+          Ce guide est un outil de navigation vers les procédures publiques. Il ne remplace pas un
+          conseil juridique ou fiscal individuel. Remplacez l'adresse fictive par vos mentions
+          légales réelles avant la mise en ligne.
+        </p>
+      </div>
+
+      <div data-lang-block="it" hidden>
+        <h1>Impressum</h1>
+        <p>Indicazioni secondo il diritto svizzero (LCSI / CO).</p>
+        <h2>Editore</h2>
+        <p>
+          Guida Prestazioni<br />
+          Musterstrasse 12<br />
+          8001 Zurigo<br />
+          Svizzera
+        </p>
+        <h2>Contatto</h2>
+        <p>E-mail: <a href="mailto:hello@auszahlungen.ch">hello@auszahlungen.ch</a></p>
+        <h2>Avvertenza</h2>
+        <p>
+          Questa guida è uno strumento di navigazione delle procedure pubbliche. Non sostituisce una
+          consulenza legale o fiscale individuale. Sostituite l'indirizzo segnaposto con i dati
+          Impressum reali prima della messa online.
+        </p>
+      </div>
+    </article>
+
+    <script>
+      (function () {
+        const blocks = document.querySelectorAll("[data-lang-block]");
+        const buttons = document.querySelectorAll("#langNav button");
+        const stored = localStorage.getItem("ausz_lang") || "de";
+        function show(lang) {
+          blocks.forEach((b) => {
+            b.hidden = b.getAttribute("data-lang-block") !== lang;
+          });
+          buttons.forEach((btn) => {
+            btn.setAttribute("aria-pressed", btn.dataset.show === lang ? "true" : "false");
+          });
+          document.documentElement.lang = lang;
+        }
+        buttons.forEach((btn) =>
+          btn.addEventListener("click", () => {
+            localStorage.setItem("ausz_lang", btn.dataset.show);
+            show(btn.dataset.show);
+          })
+        );
+        show(["de", "fr", "it"].includes(stored) ? stored : "de");
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Familienzulagen, Prämienverbilligung, Ergänzungsleistungen und mehr. Lade den kostenlosen Guide herunter."
+    />
+    <meta name="theme-color" content="#082820" />
+    <title>Auszahlungen Schweiz 2026 — staatliche Leistungen, die dir zustehen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Sora:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Zum Inhalt springen</a>
+
+    <header class="site-header">
+      <a class="brand-mark" href="#top" data-i18n-brand>Auszahlungen<span>.ch</span></a>
+      <nav class="lang-switch" aria-label="Language">
+        <button type="button" data-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <button type="button" data-lang="it" aria-pressed="false">IT</button>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero__media" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?auto=format&fit=crop&w=2000&q=80"
+            alt=""
+            width="2000"
+            height="1333"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero__scrim" aria-hidden="true"></div>
+        <div class="hero__inner">
+          <p class="hero__brand" data-i18n-brand>Auszahlungen<span>.ch</span></p>
+          <h1 class="hero__title" data-i18n="heroTitle">
+            Staatliche Auszahlungen in der Schweiz 2026: worauf hast du Anspruch?
+          </h1>
+          <p class="hero__lead" data-i18n="heroLead">
+            Die Schweiz zahlt. Dauerhaft. Doch viele wissen nicht, was ihnen zusteht.
+          </p>
+
+          <div class="hero__form-wrap" id="download">
+            <form class="lead-form" novalidate>
+              <label>
+                <span data-i18n="labelEmail">E-Mail</span>
+                <input type="email" name="email" required autocomplete="email" inputmode="email" />
+              </label>
+              <label>
+                <span data-i18n="labelBirth">Geburtsjahr</span>
+                <select name="birth" data-birth required></select>
+              </label>
+              <label class="consent">
+                <input type="checkbox" name="consent" required />
+                <span data-i18n-html="consentHtml"
+                  >Ich stimme der Verarbeitung meiner Daten gemäss
+                  <a href="legal/datenschutz.html">Datenschutzerklärung</a> zu</span
+                >
+              </label>
+              <p class="form-error" data-i18n="formError">
+                Bitte E-Mail, Geburtsjahr und Einwilligung ausfüllen.
+              </p>
+              <button type="submit" class="btn btn--primary" data-cta-primary="hero" data-i18n="ctaDownload">
+                Guide kostenlos herunterladen
+              </button>
+              <p class="form-note" data-i18n="formNote">PDF kommt sofort. Kein Spam.</p>
+            </form>
+            <div class="form-success" role="status">
+              <strong data-i18n="formSuccessTitle">Guide unterwegs</strong>
+              <p data-i18n="formSuccessText">Prüfe dein Postfach.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MYTHS -->
+      <section class="section section--mist" id="myths">
+        <div class="section__inner">
+          <p class="section__eyebrow" data-i18n="mythsEyebrow">Das Geld liegt bereit</p>
+          <h2 class="section__title" data-i18n="mythsTitle">
+            Du hast einfach noch keinen Antrag gestellt.
+          </h2>
+          <div class="myths">
+            <article class="myth">
+              <h3 class="myth__q" data-i18n="myth1Q"></h3>
+              <p class="myth__a" data-i18n-html="myth1A"></p>
+            </article>
+            <article class="myth">
+              <h3 class="myth__q" data-i18n="myth2Q"></h3>
+              <p class="myth__a" data-i18n-html="myth2A"></p>
+            </article>
+            <article class="myth">
+              <h3 class="myth__q" data-i18n="myth3Q"></h3>
+              <p class="myth__a" data-i18n-html="myth3A"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- GUIDE CONTENTS -->
+      <section class="section section--pine" id="guide">
+        <div class="section__inner">
+          <p class="section__eyebrow" data-i18n="guideEyebrow">Im Guide</p>
+          <h2 class="section__title" data-i18n="guideTitle">Was du im Guide findest</h2>
+          <ul class="guide-list" data-guide-list></ul>
+        </div>
+      </section>
+
+      <!-- MID CTA -->
+      <section class="section" id="get-guide">
+        <div class="section__inner cta-panel">
+          <div>
+            <p class="section__eyebrow" data-i18n="midCtaEyebrow">Jetzt holen</p>
+            <h2 class="section__title" data-i18n="midCtaTitle">Guide sofort erhalten</h2>
+            <p class="section__lead" data-i18n="midCtaLead">
+              E-Mail eingeben — das PDF kommt sofort.
+            </p>
+          </div>
+          <div class="form-panel">
+            <form class="lead-form lead-form--dark" novalidate>
+              <label>
+                <span data-i18n="labelEmail">E-Mail</span>
+                <input type="email" name="email" required autocomplete="email" inputmode="email" />
+              </label>
+              <label>
+                <span data-i18n="labelBirth">Geburtsjahr</span>
+                <select name="birth" data-birth required></select>
+              </label>
+              <label class="consent">
+                <input type="checkbox" name="consent" required />
+                <span data-i18n-html="consentHtml"></span>
+              </label>
+              <p class="form-error" data-i18n="formError"></p>
+              <button type="submit" class="btn btn--primary" data-cta-primary="mid" data-i18n="midCtaButton">
+                Guide kostenlos erhalten
+              </button>
+            </form>
+            <div class="form-success" role="status">
+              <strong data-i18n="formSuccessTitle"></strong>
+              <p data-i18n="formSuccessText"></p>
+            </div>
+            <p class="privacy-blurb" data-i18n="privacyBlurb"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOURCES -->
+      <section class="section section--mist" id="sources">
+        <div class="section__inner sources">
+          <p class="section__eyebrow" data-i18n="sourcesEyebrow">Herkunft</p>
+          <h2 class="section__title" data-i18n="sourcesTitle">Woher die Daten stammen</h2>
+          <p data-i18n="sourcesText"></p>
+          <ul class="source-links">
+            <li><a href="legal/impressum.html" data-i18n="linkImpressum">Impressum</a></li>
+            <li>
+              <a href="legal/datenschutz.html" data-i18n="linkPrivacy">Datenschutzerklärung</a>
+            </li>
+            <li>
+              <a href="https://www.ahv-iv.ch" target="_blank" rel="noopener noreferrer"
+                >ahv-iv.ch</a
+              >
+              /
+              <a href="https://www.gdk-cds.ch" target="_blank" rel="noopener noreferrer"
+                >gdk-cds.ch</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="section__inner">
+          <p class="section__eyebrow" data-i18n="faqEyebrow">FAQ</p>
+          <h2 class="section__title" data-i18n="faqTitle">Einwände klären</h2>
+          <div class="faq" data-faq></div>
+        </div>
+      </section>
+
+      <!-- URGENCY -->
+      <section class="urgency" id="deadlines">
+        <div class="urgency__bg" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80"
+            alt=""
+            width="2000"
+            height="1333"
+            loading="lazy"
+          />
+        </div>
+        <div class="urgency__scrim" aria-hidden="true"></div>
+        <div class="section__inner">
+          <h2 class="section__title" data-i18n="urgencyTitle">
+            Geld wartet nicht. Fristen auch nicht.
+          </h2>
+          <p class="section__lead" data-i18n="urgencyLead"></p>
+          <a class="btn btn--primary" href="#download" data-i18n="ctaDownload"
+            >Guide kostenlos herunterladen</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="section__inner footer-grid">
+        <div>
+          <h3 data-i18n-brand>Auszahlungen<span>.ch</span></h3>
+          <p data-i18n="footerAbout"></p>
+        </div>
+        <div>
+          <h3 data-i18n="footerLegal">Rechtliches</h3>
+          <ul>
+            <li>
+              <a href="legal/impressum.html" data-i18n="linkImpressum">Impressum</a>
+            </li>
+            <li>
+              <a href="legal/datenschutz.html" data-i18n="linkPrivacy">Datenschutzerklärung</a>
+            </li>
+            <li>
+              <a href="https://www.ahv-iv.ch" target="_blank" rel="noopener noreferrer"
+                >ahv-iv.ch</a
+              >
+            </li>
+            <li>
+              <a href="https://www.gdk-cds.ch" target="_blank" rel="noopener noreferrer"
+                >gdk-cds.ch</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="footerContact">Kontakt</h3>
+          <p data-footer-address></p>
+        </div>
+      </div>
+      <div class="section__inner footer-bottom">
+        <span data-i18n="footerCopy">© 2026 Auszahlungen.</span>
+        <span>HTTPS · FADP / DSGVO</span>
+      </div>
+    </footer>
+
+    <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies">
+      <p data-i18n="cookieText"></p>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn--primary" data-cookie-accept data-i18n="cookieAccept">
+          Akzeptieren
+        </button>
+        <button type="button" class="btn btn--ghost" data-cookie-decline data-i18n="cookieDecline">
+          Ablehnen
+        </button>
+        <a href="legal/datenschutz.html" data-i18n="cookieLink">Datenschutz</a>
+      </div>
+    </div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
