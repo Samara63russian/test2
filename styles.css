@@ -576,13 +576,22 @@ svg {
 }
 
 .consent {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 1fr;
   align-items: flex-start;
   gap: 10px;
   color: var(--ink-soft);
   font-size: 11px;
   line-height: 1.45;
+}
+
+.consent-control,
+.consent-copy label {
   cursor: pointer;
+}
+
+.consent-control {
+  display: block;
 }
 
 .consent input {
