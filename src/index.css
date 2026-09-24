@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom Swiss styling helpers */
+.swiss-gradient-red {
+  background: linear-gradient(135deg, #D52B1E 0%, #B31F14 100%);
+}
+
+.swiss-gradient-dark {
+  background: linear-gradient(135deg, #0F172A 0%, #020617 100%);
+}
