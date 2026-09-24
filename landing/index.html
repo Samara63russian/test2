@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Familienzulagen, Prämienverbilligung, Ergänzungsleistungen und mehr – kostenloser Leitfaden für die Schweiz 2026.">
+  <title>Auszahlungen – Staatliche Leistungen in der Schweiz 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__logo">
+        <span class="header__logo-flag">🇨🇭</span>
+        <span data-i18n="header.logo">Schweiz zahlt</span>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-switch__btn lang-switch__btn--active" data-lang="de">DE</button>
+        <button class="lang-switch__btn" data-lang="fr">FR</button>
+        <button class="lang-switch__btn" data-lang="it">IT</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero__badge" data-i18n="hero.badge">Auszahlungen</span>
+      <h1 class="hero__title" data-i18n="hero.title">Staatliche Leistungen in der Schweiz 2026: Was steht dir zu?</h1>
+      <p class="hero__subtitle" data-i18n="hero.subtitle">Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht.</p>
+
+      <div class="form-card" id="form-hero">
+        <div class="form-card__title" data-i18n="hero.formTitle">📄 Leitfaden kostenlos herunterladen</div>
+        <form class="lead-form" data-form="hero" novalidate>
+          <div class="form-group">
+            <label for="email-hero" data-i18n="hero.email">E-Mail</label>
+            <input type="email" id="email-hero" name="email" required placeholder="deine@email.ch" data-i18n-placeholder="hero.emailPlaceholder">
+          </div>
+          <div class="form-group">
+            <label for="birthyear-hero" data-i18n="hero.birthYear">Geburtsjahr</label>
+            <select id="birthyear-hero" name="birthYear" required>
+              <option value="" data-i18n="hero.birthYearPlaceholder">Bitte wählen</option>
+              <option value="2007" data-i18n="hero.birthYears.2007">2007</option>
+              <option value="2008" data-i18n="hero.birthYears.2008">2008</option>
+              <option value="2009" data-i18n="hero.birthYears.2009">2009</option>
+              <option value="earlier" data-i18n="hero.birthYears.earlier">Früher</option>
+              <option value="later" data-i18n="hero.birthYears.later">Später</option>
+            </select>
+          </div>
+          <div class="form-group form-group--checkbox">
+            <input type="checkbox" id="consent-hero" name="consent" required>
+            <label for="consent-hero" data-i18n-html="hero.consent">Ich stimme der Datenverarbeitung gemäss der Datenschutzerklärung zu.</label>
+          </div>
+          <button type="submit" class="btn btn--primary" data-i18n="hero.submit">Leitfaden kostenlos herunterladen</button>
+          <p class="form-card__note" data-i18n="hero.formNote">Daten werden nur zum Versand des PDF verwendet.</p>
+        </form>
+        <div class="form-success" id="success-hero">
+          <div class="form-success__icon">✅</div>
+          <div class="form-success__title" data-i18n="hero.successTitle">Leitfaden ist unterwegs!</div>
+          <p class="form-success__text" data-i18n="hero.successText">Prüfe dein Postfach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain Points -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="section__title" data-i18n="pain.title">Geld liegt auf Konten. Du hast nur keinen Antrag gestellt.</h2>
+      <div class="pain-points" id="pain-points"></div>
+    </div>
+  </section>
+
+  <!-- Guide Features -->
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2 class="section__title" data-i18n="guide.title">Was du im Leitfaden findest</h2>
+      <div class="features" id="guide-features"></div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="section__title" data-i18n="cta.title">Hol dir den Leitfaden jetzt</h2>
+      <p class="section__subtitle" data-i18n="cta.subtitle">Gib deine E-Mail ein – das PDF kommt sofort.</p>
+
+      <div class="form-card" id="form-cta">
+        <form class="lead-form" data-form="cta" novalidate>
+          <div class="form-group">
+            <label for="email-cta" data-i18n="hero.email">E-Mail</label>
+            <input type="email" id="email-cta" name="email" required placeholder="deine@email.ch" data-i18n-placeholder="hero.emailPlaceholder">
+          </div>
+          <div class="form-group">
+            <label for="birthyear-cta" data-i18n="hero.birthYear">Geburtsjahr</label>
+            <select id="birthyear-cta" name="birthYear" required>
+              <option value="" data-i18n="hero.birthYearPlaceholder">Bitte wählen</option>
+              <option value="2007" data-i18n="hero.birthYears.2007">2007</option>
+              <option value="2008" data-i18n="hero.birthYears.2008">2008</option>
+              <option value="2009" data-i18n="hero.birthYears.2009">2009</option>
+              <option value="earlier" data-i18n="hero.birthYears.earlier">Früher</option>
+              <option value="later" data-i18n="hero.birthYears.later">Später</option>
+            </select>
+          </div>
+          <div class="form-group form-group--checkbox">
+            <input type="checkbox" id="consent-cta" name="consent" required>
+            <label for="consent-cta" data-i18n-html="hero.consent">Ich stimme der Datenverarbeitung zu.</label>
+          </div>
+          <button type="submit" class="btn btn--primary" data-i18n="cta.submit">🟩 Leitfaden kostenlos erhalten</button>
+          <p class="form-card__note" data-i18n="cta.note">Daten werden nur zum Versand des PDF verwendet.</p>
+        </form>
+        <div class="form-success" id="success-cta">
+          <div class="form-success__icon">✅</div>
+          <div class="form-success__title" data-i18n="hero.successTitle">Leitfaden ist unterwegs!</div>
+          <p class="form-success__text" data-i18n="hero.successText">Prüfe dein Postfach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section class="sources">
+    <div class="container container--narrow">
+      <h2 class="section__title" data-i18n="sources.title">Woher stammen die Daten</h2>
+      <p class="sources__text" data-i18n="sources.text">Der Leitfaden basiert auf offenen Quellen.</p>
+      <div class="sources__links">
+        <a href="#" data-modal="impressum" data-i18n="sources.impressum">Impressum</a>
+        <a href="#" data-modal="privacy" data-i18n="sources.privacy">Datenschutzerklärung</a>
+        <span data-i18n="sources.officialSources">Offizielle Quellen:</span>
+        <a href="https://ahv-iv.ch" target="_blank" rel="noopener">ahv-iv.ch</a>
+        <a href="https://gdk-cds.ch" target="_blank" rel="noopener">gdk-cds.ch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <h2 class="section__title" data-i18n="faq.title">FAQ – Einwände ausräumen</h2>
+      <div class="faq" id="faq-list"></div>
+    </div>
+  </section>
+
+  <!-- Urgency -->
+  <section class="urgency">
+    <div class="container container--narrow">
+      <h2 class="section__title" data-i18n="urgency.title">Geld wartet nicht. Fristen auch nicht.</h2>
+      <p class="urgency__text" data-i18n="urgency.text">Prämienverbilligung – bis 31. Mai.</p>
+      <a href="#form-hero" class="btn btn--primary" data-i18n="urgency.cta">📄 Leitfaden kostenlos herunterladen</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__heading" data-i18n="footer.impressumTitle">Impressum</div>
+          <p data-i18n-html="footer.impressumText">Schweiz zahlt GmbH</p>
+        </div>
+        <div>
+          <div class="footer__heading" data-i18n="footer.privacyTitle">Datenschutzerklärung</div>
+          <ul class="footer__links">
+            <li><a href="#" data-modal="privacy" data-i18n="sources.privacy">Datenschutzerklärung</a></li>
+            <li><a href="#" data-modal="impressum" data-i18n="sources.impressum">Impressum</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__heading" data-i18n="footer.sourcesTitle">Quellen</div>
+          <ul class="footer__links">
+            <li><a href="https://ahv-iv.ch" target="_blank" rel="noopener">ahv-iv.ch</a></li>
+            <li><a href="https://gdk-cds.ch" target="_blank" rel="noopener">gdk-cds.ch</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom" data-i18n="footer.copyright">© 2026 Schweiz zahlt. Alle Rechte vorbehalten.</div>
+    </div>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div class="cookie-banner" id="cookie-banner">
+    <div class="cookie-banner__inner">
+      <p class="cookie-banner__text" data-i18n="cookie.text">Wir verwenden Cookies für die Analyse.</p>
+      <div class="cookie-banner__actions">
+        <button class="btn btn--outline" id="cookie-decline" data-i18n="cookie.decline">Ablehnen</button>
+        <button class="btn btn--primary" id="cookie-accept" data-i18n="cookie.accept">Akzeptieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal__close" id="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal__title" id="modal-title"></h2>
+      <div class="modal__content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="js/translations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
