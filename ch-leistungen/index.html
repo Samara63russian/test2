@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Staatliche Leistungen in der Schweiz 2026: Familienzulagen, Prämienverbilligung, EL, Mietzinsbeiträge. Kostenloser Guide als PDF."
+    />
+    <meta name="theme-color" content="#0b2e28" />
+    <title>CHLeistungen — Staatliche Auszahlungen Schweiz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="cookie-banner" id="cookie-banner" hidden>
+      <div class="cookie-inner shell">
+        <p data-i18n="cookieText">
+          Wir verwenden optionale Analytics nur mit Ihrer Zustimmung (Opt-in).
+          Essenzielle Cookies für die Formularfunktion sind immer aktiv.
+        </p>
+        <div class="cookie-actions">
+          <button type="button" class="button button-ghost" id="cookie-decline" data-i18n="cookieDecline">
+            Ablehnen
+          </button>
+          <button type="button" class="button button-primary" id="cookie-accept" data-i18n="cookieAccept">
+            Zustimmen
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header" id="top">
+      <nav class="nav shell" aria-label="Navigation">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <rect width="36" height="36" rx="6" fill="currentColor" />
+              <path d="M16 8h4v20h-4V8zm-8 8h20v4H8v-4z" fill="#fff" />
+            </svg>
+          </span>
+          <span class="brand-name">CHLeistungen</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#myths" data-i18n="navMyths">Mythen</a>
+          <a href="#guide" data-i18n="navGuide">Im Guide</a>
+          <a href="#faq" data-i18n="navFaq">FAQ</a>
+          <a href="#quellen" data-i18n="navSources">Quellen</a>
+        </div>
+
+        <div class="nav-end">
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-btn is-active" data-lang="de" aria-pressed="true">DE</button>
+            <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+            <button type="button" class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+          </div>
+          <a class="button button-small button-primary nav-cta" href="#download">
+            <span data-i18n="navCta">Guide laden</span>
+          </a>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span>
+          <span class="sr-only">Menu</span>
+        </button>
+      </nav>
+
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <a href="#myths" data-i18n="navMyths">Mythen</a>
+        <a href="#guide" data-i18n="navGuide">Im Guide</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+        <a href="#quellen" data-i18n="navSources">Quellen</a>
+        <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" data-lang="de">DE</button>
+          <button type="button" class="lang-btn" data-lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="it">IT</button>
+        </div>
+        <a class="button button-primary" href="#download" data-i18n="navCta">Guide laden</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="download">
+        <div class="hero-media" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?auto=format&fit=crop&w=2400&q=80"
+            alt=""
+            width="2400"
+            height="1600"
+            fetchpriority="high"
+          />
+          <div class="hero-veil"></div>
+        </div>
+
+        <div class="hero-content shell">
+          <p class="brand-hero reveal">CHLeistungen</p>
+          <h1 class="reveal reveal-delay-1" data-i18n="heroTitle">
+            Staatliche Auszahlungen in der Schweiz 2026: worauf hast du Anspruch?
+          </h1>
+          <p class="hero-lead reveal reveal-delay-2" data-i18n="heroLead">
+            Die Schweiz zahlt. Ständig. Doch viele wissen nicht, was ihnen zusteht.
+            Familienzulagen, Prämienrückerstattung, Ergänzungsleistungen, Wohnbeiträge —
+            der Staat gibt Geld zurück, wenn man weiß, wohin man schauen muss. Lade den
+            kostenlosen Guide und verschaffe dir in 2 Minuten Klarheit.
+          </p>
+
+          <form class="lead-form reveal reveal-delay-3" id="form-hero" novalidate>
+            <div class="form-row">
+              <label>
+                <span data-i18n="labelEmail">E-Mail</span>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  placeholder="name@beispiel.ch"
+                  data-i18n-placeholder="emailPlaceholder"
+                />
+              </label>
+              <label>
+                <span data-i18n="labelBirthYear">Geburtsjahr</span>
+                <select name="birthYear" required>
+                  <option value="" data-i18n="birthSelect">Bitte wählen</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="earlier" data-i18n="birthEarlier">früher</option>
+                  <option value="later" data-i18n="birthLater">später</option>
+                </select>
+              </label>
+            </div>
+            <label class="checkbox-label">
+              <input type="checkbox" name="consent" required />
+              <span data-i18n-html="consentText">
+                Ich stimme der Verarbeitung meiner Daten gemäss
+                <a href="#datenschutz">Datenschutzerklärung</a> zu.
+              </span>
+            </label>
+            <button type="submit" class="button button-primary button-wide">
+              <span aria-hidden="true">📄</span>
+              <span data-i18n="ctaDownload">Guide kostenlos herunterladen</span>
+            </button>
+            <p class="form-success" hidden data-i18n="formSuccess">
+              Danke! Der Guide wird an deine E-Mail gesendet.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section myths" id="myths">
+        <div class="shell">
+          <p class="section-kicker reveal" data-i18n="mythsKicker">
+            Das Geld liegt auf den Konten. Du hast einfach keinen Antrag gestellt.
+          </p>
+          <h2 class="section-title reveal" data-i18n="mythsTitle">
+            Typische Irrtümer — und die Fakten
+          </h2>
+
+          <div class="myth-list">
+            <article class="myth-item reveal">
+              <p class="myth-q" data-i18n="myth1q">
+                «Ich zahle jeden Monat 300+ CHF für die Versicherung. Ist das überhaupt normal?»
+              </p>
+              <p class="myth-a" data-i18n-html="myth1a">
+                Nein. Liegt dein Einkommen unter einer bestimmten Schwelle, erstattet der Kanton
+                einen Teil. In Basel-Landschaft beträgt die Richtprämie für Erwachsene
+                <strong>CHF 4'596 pro Jahr</strong>. Die Differenz wird zurückerstattet.
+              </p>
+            </article>
+            <article class="myth-item reveal">
+              <p class="myth-q" data-i18n="myth2q">
+                «Ich habe zwei Kinder. Zahlt der Staat etwas?»
+              </p>
+              <p class="myth-a" data-i18n-html="myth2a">
+                Ja. <strong>Kinderzulage</strong> — mindestens CHF 215–245 pro Monat und Kind bis 16,
+                <strong>Ausbildungszulage</strong> — CHF 268–298 danach. In Zürich —
+                <strong>CHF 3'216 pro Jahr und Kind</strong>.
+              </p>
+            </article>
+            <article class="myth-item reveal">
+              <p class="myth-q" data-i18n="myth3q">
+                «Ich bin Rentner. Die Rente reicht nicht zum Leben.»
+              </p>
+              <p class="myth-a" data-i18n-html="myth3a">
+                <strong>Ergänzungsleistungen (EL)</strong> — Aufstockung bis zum Existenzminimum.
+                CHF 20'670/Jahr für Alleinstehende, CHF 31'005 für Paare. Plus separater
+                Mietzuschuss — bis CHF 18'300 für Alleinstehende.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section guide" id="guide">
+        <div class="shell">
+          <h2 class="section-title reveal" data-i18n="guideTitle">Was du im Guide findest</h2>
+          <ul class="guide-list">
+            <li class="reveal" data-i18n-html="guide1">
+              <strong>Familienzulagen:</strong> wie viel in deinem Kanton, ab welchem Alter, bis wann,
+              wie beantragen
+            </li>
+            <li class="reveal" data-i18n-html="guide2">
+              <strong>Prämienverbilligung:</strong> wie du einen Teil der Versicherung zurückholst (im
+              Kanton SG Antrag bis 31. Mai 2026)
+            </li>
+            <li class="reveal" data-i18n-html="guide3">
+              <strong>Ergänzungsleistungen:</strong> Zuschlag zur AHV/IV, wer Anspruch hat, Maximum,
+              Vermögensgrenze
+            </li>
+            <li class="reveal" data-i18n-html="guide4">
+              <strong>AHV-Rente:</strong> genaue Auszahlungstermine 2026 (erste Werktage des Monats)
+            </li>
+            <li class="reveal" data-i18n-html="guide5">
+              <strong>Mietzinsbeiträge:</strong> Mietbeihilfe für Familien und Rentner — in welchen
+              Kantonen und wie viel
+            </li>
+            <li class="reveal" data-i18n-html="guide6">
+              <strong>Steuerabzüge:</strong> welche Abzüge die Steuer senken (Kinder, Versicherung,
+              Vorsorgebeiträge)
+            </li>
+            <li class="reveal" data-i18n-html="guide7">
+              <strong>FAQ:</strong> Was tun bei verpasster Frist? Was gilt für Ausländer? Doppelte
+              Staatsbürgerschaft?
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section cta-mid" id="cta-mid">
+        <div class="shell cta-mid-grid">
+          <div class="cta-mid-copy reveal">
+            <h2 data-i18n="ctaMidTitle">Hole dir den Guide jetzt</h2>
+            <p data-i18n="ctaMidLead">
+              E-Mail eingeben — das PDF kommt sofort. Kein Spam. Abmeldung mit einem Klick.
+            </p>
+          </div>
+          <form class="lead-form lead-form-solid reveal" id="form-mid" novalidate>
+            <label>
+              <span data-i18n="labelEmailReq">E-Mail (Pflicht)</span>
+              <input
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="name@beispiel.ch"
+                data-i18n-placeholder="emailPlaceholder"
+              />
+            </label>
+            <label>
+              <span data-i18n="labelBirthYearReq">Geburtsjahr (Pflicht)</span>
+              <select name="birthYear" required>
+                <option value="" data-i18n="birthSelect">Bitte wählen</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="earlier" data-i18n="birthEarlier">früher</option>
+                <option value="later" data-i18n="birthLater">später</option>
+              </select>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="consent" required />
+              <span data-i18n-html="consentText">
+                Ich stimme der Verarbeitung meiner Daten gemäss
+                <a href="#datenschutz">Datenschutzerklärung</a> zu.
+              </span>
+            </label>
+            <button type="submit" class="button button-primary button-wide">
+              <span data-i18n="ctaGet">Guide kostenlos erhalten</span>
+            </button>
+            <p class="form-success" hidden data-i18n="formSuccess">
+              Danke! Der Guide wird an deine E-Mail gesendet.
+            </p>
+            <p class="form-note" data-i18n="privacyNote">
+              Daten nur für PDF-Versand und Updates zu Sozialleistungen. Keine Weitergabe an Dritte.
+              Löschung auf Anfrage (DSGVO / schweizerisches FADP).
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section sources" id="quellen">
+        <div class="shell">
+          <h2 class="section-title reveal" data-i18n="sourcesTitle">Woher die Daten stammen</h2>
+          <p class="sources-lead reveal" data-i18n="sourcesLead">
+            Der Guide basiert auf offenen Quellen: Bundesamt für Sozialversicherungen (BSV),
+            kantonale Ausgleichskassen, Konferenz der kantonalen Gesundheitsdirektorinnen und
+            -direktoren (GDK), offizielle Publikationen von PwC und OECD. Wir sind keine
+            Anwaltskanzlei — der Guide ist ein Navigator durch offizielle Verfahren.
+          </p>
+          <div class="sources-links reveal">
+            <a href="#impressum" data-i18n="linkImpressum">Impressum</a>
+            <a href="#datenschutz" data-i18n="linkPrivacy">Datenschutzerklärung</a>
+            <a href="https://www.ahv-iv.ch" target="_blank" rel="noopener noreferrer">ahv-iv.ch</a>
+            <a href="https://www.gdk-cds.ch" target="_blank" rel="noopener noreferrer">gdk-cds.ch</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq" id="faq">
+        <div class="shell">
+          <h2 class="section-title reveal" data-i18n="faqTitle">FAQ — Einwände klären</h2>
+          <div class="faq-list">
+            <details class="faq-item reveal">
+              <summary data-i18n="faq1q">Steht mir wirklich etwas zu?</summary>
+              <p data-i18n="faq1a">
+                Wenn du mehr als 7–12 % deines Einkommens für die Versicherung zahlst — ja, oft
+                Prämienverbilligung. Mit Kindern zahlen Familienzulagen fast allen Erwerbstätigen.
+                Als Rentner mit niedriger Rente: EL.
+              </p>
+            </details>
+            <details class="faq-item reveal">
+              <summary data-i18n="faq2q">Ich bin Ausländer. Gilt das auch für mich?</summary>
+              <p data-i18n="faq2a">
+                Ja — mit Niederlassungsbewilligung (C-Bewilligung) dieselben Rechte wie Schweizerinnen
+                und Schweizer. Mit B-Bewilligung gelten Fristenbeschränkungen.
+              </p>
+            </details>
+            <details class="faq-item reveal">
+              <summary data-i18n="faq3q">Wie viel gibt es pro Kind?</summary>
+              <p data-i18n="faq3a">
+                Gesetzliches Minimum: CHF 215–245/Monat bis 16 Jahre, CHF 268–298/Monat in Ausbildung
+                16–25. Manche Kantone zahlen mehr — Zürich, Solothurn, St. Gallen.
+              </p>
+            </details>
+            <details class="faq-item reveal">
+              <summary data-i18n="faq4q">Was ist EL und wer braucht es?</summary>
+              <p data-i18n="faq4a">
+                Ergänzungsleistungen — Zuschlag, wenn AHV/IV-Renten die Mindestkosten nicht decken.
+                Vermögensgrenze: CHF 100'000 Alleinstehende, CHF 200'000 Paare. Deckt Existenzminimum
+                + Miete + Versicherung.
+              </p>
+            </details>
+            <details class="faq-item reveal">
+              <summary data-i18n="faq5q">Wann kommen AHV-Zahlungen?</summary>
+              <p data-i18n="faq5a">
+                Renten werden zu Monatsbeginn für den laufenden Monat (im Voraus) ausgezahlt.
+                Termine 2026: 5. Januar, 2. Februar, 2. März usw. 13. Rente zusammen mit der
+                Dezemberzahlung.
+              </p>
+            </details>
+            <details class="faq-item reveal">
+              <summary data-i18n="faq6q">
+                Ich habe die Frist für die Prämienverbilligung verpasst. Alles vorbei?
+              </summary>
+              <p data-i18n="faq6a">
+                In den meisten Kantonen ja für das laufende Jahr. Den Antrag fürs nächste Jahr kannst
+                du rechtzeitig stellen. Im Kanton St. Gallen kommt das Formular automatisch bis
+                10. Januar.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section urgency" id="urgency">
+        <div class="shell urgency-inner reveal">
+          <h2 data-i18n="urgencyTitle">Geld wartet nicht. Fristen auch nicht.</h2>
+          <p data-i18n="urgencyLead">
+            Prämienverbilligung — bis 31. Mai. Familienzulagen — ab Geburt des Kindes. EL — sobald
+            die Rente die Kosten nicht mehr deckt. Lade den Guide — prüfe, was du verpasst.
+          </p>
+          <a class="button button-primary" href="#download">
+            <span aria-hidden="true">📄</span>
+            <span data-i18n="ctaDownload">Guide kostenlos herunterladen</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section legal-pages" id="impressum">
+        <div class="shell legal-grid">
+          <article>
+            <h2 data-i18n="impressumTitle">Impressum</h2>
+            <p data-i18n-html="impressumBody">
+              <strong>Roman Dariyn</strong><br />
+              CHLeistungen — Informationsangebot zu Sozialleistungen<br />
+              Schweiz<br />
+              E-Mail:
+              <a href="mailto:samara63russian@gmail.com">samara63russian@gmail.com</a>
+            </p>
+          </article>
+          <article id="datenschutz">
+            <h2 data-i18n="privacyTitle">Datenschutzerklärung</h2>
+            <p data-i18n="privacyBody">
+              Über das Formular erheben wir E-Mail-Adresse und Geburtsjahr, um den PDF-Guide zu
+              senden und relevante Updates zu Sozialleistungen zuzustellen. Rechtsgrundlage:
+              Einwilligung (Art. 6 Abs. 1 lit. a DSGVO / schweizerisches FADP). Keine Weitergabe an
+              Dritte zu Werbezwecken. Speicherung nur so lange wie nötig. Löschung und Auskunft auf
+              Anfrage an die Impressum-Adresse. Analytics nur nach Opt-in-Zustimmung im Cookie-Banner.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <rect width="36" height="36" rx="6" fill="currentColor" />
+              <path d="M16 8h4v20h-4V8zm-8 8h20v4H8v-4z" fill="#fff" />
+            </svg>
+          </span>
+          <div>
+            <strong>CHLeistungen</strong>
+            <p data-i18n="footerTag">Navigator zu staatlichen Leistungen CH · 2026</p>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="#impressum" data-i18n="linkImpressum">Impressum</a>
+          <a href="#datenschutz" data-i18n="linkPrivacy">Datenschutzerklärung</a>
+          <a href="https://www.ahv-iv.ch" target="_blank" rel="noopener noreferrer">ahv-iv.ch</a>
+          <a href="https://www.gdk-cds.ch" target="_blank" rel="noopener noreferrer">gdk-cds.ch</a>
+        </div>
+        <p class="footer-copy">© <span id="year"></span> CHLeistungen · HTTPS · FADP / DSGVO</p>
+      </div>
+    </footer>
+
+    <script src="./i18n.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
