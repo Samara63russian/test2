@@ -239,6 +239,8 @@ def inject_styles() -> None:
         .brand-mark { width:30px; height:30px; display:grid; place-items:center; background:var(--ink); color:var(--lime); border-radius:50%; font-size:15px; font-weight:700; }
         .nav-copy { display:flex; gap:25px; align-items:center; font-size:13px; color:var(--muted); }
         .nav-copy a { color:inherit; text-decoration:none; }
+        .lang-chip { display:block; text-align:center; border:1px solid #cbd4d0; border-radius:999px; padding:7px 4px; color:var(--muted) !important; text-decoration:none; font-family:'DM Mono'; font-size:10px; }
+        .lang-chip.active, .lang-chip:hover { background:var(--ink); border-color:var(--ink); color:#fff !important; }
         .hero { display:grid; grid-template-columns:1.08fr .92fr; gap:72px; align-items:center; padding:20px 0 78px; }
         .eyebrow, .section-kicker { font-family:'DM Mono', monospace; font-size:11px; letter-spacing:1.6px; color:#73864a; font-weight:500; }
         .hero h1 { font-family:'Space Grotesk'; font-size:clamp(48px, 6vw, 82px); line-height:.98; letter-spacing:-5px; margin:17px 0 25px; max-width:620px; }
@@ -337,24 +339,21 @@ def inject_styles() -> None:
     )
 
 
-def set_language(code: str) -> None:
-    st.session_state.lang = code
-
-
 def language_switcher() -> str:
-    if "lang" not in st.session_state:
+    query_language = st.experimental_get_query_params().get("lang", [None])[0]
+    if query_language in COPY:
+        st.session_state.lang = query_language
+    elif "lang" not in st.session_state:
         st.session_state.lang = "de"
     columns = st.columns([0.6, 0.14, 0.14, 0.14])
     with columns[0]:
         st.markdown('<div class="brand"><span class="brand-mark">+</span>auszahlung</div>', unsafe_allow_html=True)
     for code, column in zip(["de", "fr", "it"], columns[1:]):
         with column:
-            st.button(
-                code.upper(),
-                key=f"lang_{code}",
-                use_container_width=True,
-                on_click=set_language,
-                args=(code,),
+            active = " active" if st.session_state.lang == code else ""
+            st.markdown(
+                f'<a class="lang-chip{active}" href="?lang={code}#top">{code.upper()}</a>',
+                unsafe_allow_html=True,
             )
     return st.session_state.lang
 
@@ -377,7 +376,7 @@ def render_form(copy: dict) -> None:
 def render_page(copy: dict) -> None:
     st.markdown(
         f"""
-        <div class="topbar">
+        <div id="top" class="topbar">
           <div></div>
           <div class="nav-copy">
             <a href="#guide">{copy["nav_guide"]}</a>
