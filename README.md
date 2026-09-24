@@ -1,6 +1,38 @@
-# swgoh_guild_webapp
-Demo hosted at: https://ir940-swgoh.streamlit.app/
+# Anspruch Schweiz
 
-A Streamlit webapp for the mobile game Star Wars: Galaxy of Heroes to monitor guild performance and activity. WIP
+A responsive, multilingual lead-generation landing page for a 2026 guide to
+Swiss social benefits. The interface is available in German, French, and
+Italian.
 
-![Flowchart displaying the layout of the data backend processes](/docs/flowchart.jpg)
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+Create an optimized production build with:
+
+```bash
+npm run build
+```
+
+## Lead delivery
+
+The page runs in preview mode until a lead endpoint is configured. Set the
+`content` value of the `lead-endpoint` meta tag in `index.html` to an HTTPS
+endpoint that accepts JSON:
+
+```json
+{
+  "email": "name@example.ch",
+  "birthYear": "earlier",
+  "language": "de",
+  "consent": true,
+  "consentedAt": "2026-09-24T20:00:00.000Z"
+}
+```
+
+Before publishing, replace the bracketed operator details in the imprint and
+privacy policy, connect a double-opt-in mail provider, and review the legal
+copy with the actual data-processing setup.
