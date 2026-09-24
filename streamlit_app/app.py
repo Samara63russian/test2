@@ -340,7 +340,10 @@ def inject_styles() -> None:
 
 
 def language_switcher() -> str:
-    query_language = st.experimental_get_query_params().get("lang", [None])[0]
+    if hasattr(st, "query_params"):
+        query_language = st.query_params.get("lang")
+    else:
+        query_language = st.experimental_get_query_params().get("lang", [None])[0]
     if query_language in COPY:
         st.session_state.lang = query_language
     elif "lang" not in st.session_state:
