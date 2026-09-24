@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Kostenloser Guide zu staatlichen Leistungen in der Schweiz 2026: Familienzulagen, Prämienverbilligung, Ergänzungsleistungen und mehr."
+    />
+    <meta name="theme-color" content="#f4f0e8" />
+    <title>Anspruch 26 — Staatliche Leistungen in der Schweiz</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="a11y.skip">Zum Inhalt springen</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Anspruch 26">
+        <span class="brand-mark" aria-hidden="true">+</span>
+        <span>anspruch<span class="brand-dot">.</span>26</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Hauptnavigation">
+        <a href="#guide" data-i18n="nav.guide">Im Guide</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
+
+      <div class="language-switcher" aria-label="Sprache">
+        <button type="button" data-language="de" aria-pressed="true">DE</button>
+        <button type="button" data-language="fr" aria-pressed="false">FR</button>
+        <button type="button" data-language="it" aria-pressed="false">IT</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow reveal">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              <span data-i18n="hero.eyebrow">Aktualisiert für 2026 · Schweizweit</span>
+            </div>
+            <h1 class="reveal reveal-delay-1">
+              <span data-i18n="hero.titleLine1">Die Schweiz zahlt.</span>
+              <span class="accent-underline" data-i18n="hero.titleLine2">Weisst du, was dir zusteht?</span>
+            </h1>
+            <p class="hero-lead reveal reveal-delay-2" data-i18n="hero.lead">
+              Familienzulagen, Prämienverbilligung, Ergänzungsleistungen und Mietzinsbeiträge:
+              Der kostenlose Guide zeigt dir in 2 Minuten, wo du Geld zurückholen kannst.
+            </p>
+
+            <div class="hero-proof reveal reveal-delay-3">
+              <div class="proof-item">
+                <span class="proof-icon" aria-hidden="true">✓</span>
+                <span data-i18n="hero.proof1">Offizielle Quellen</span>
+              </div>
+              <div class="proof-item">
+                <span class="proof-icon" aria-hidden="true">✓</span>
+                <span data-i18n="hero.proof2">Nach Kanton erklärt</span>
+              </div>
+              <div class="proof-item">
+                <span class="proof-icon" aria-hidden="true">✓</span>
+                <span data-i18n="hero.proof3">100% kostenlos</span>
+              </div>
+            </div>
+
+            <div class="deadline-note reveal reveal-delay-3">
+              <span class="calendar-tile" aria-hidden="true">
+                <b>31</b>
+                <small>MAR</small>
+              </span>
+              <p>
+                <strong data-i18n="hero.deadlineTitle">Fristen sind kantonal.</strong>
+                <span data-i18n="hero.deadlineText">
+                  In St. Gallen gilt der 31. März 2026 für den vollen Jahresanspruch auf
+                  Prämienverbilligung.
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <aside class="lead-card reveal reveal-delay-2" aria-labelledby="lead-card-title">
+            <div class="guide-preview" aria-hidden="true">
+              <div class="guide-cover">
+                <span class="guide-year">2026</span>
+                <span class="guide-cross">+</span>
+                <p>DE · FR · IT</p>
+                <strong data-i18n="form.coverTitle">Dein Geld.<br />Dein Anspruch.</strong>
+                <span class="guide-cover-line"></span>
+                <small data-i18n="form.coverLabel">Schweizer Leistungs-Guide</small>
+              </div>
+              <span class="pdf-badge">PDF</span>
+            </div>
+
+            <div class="lead-card-copy">
+              <p class="micro-label" data-i18n="form.micro">Kostenloser PDF-Guide</p>
+              <h2 id="lead-card-title" data-i18n="form.title">Guide direkt ins Postfach</h2>
+              <p data-i18n="form.subtitle">Klar, kompakt und ohne Amtsdeutsch.</p>
+            </div>
+
+            <form class="lead-form" data-lead-form novalidate>
+              <div class="field">
+                <label for="hero-email" data-i18n="form.emailLabel">E-Mail</label>
+                <input
+                  id="hero-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  data-i18n-placeholder="form.emailPlaceholder"
+                  placeholder="name@beispiel.ch"
+                  required
+                />
+                <span class="field-error" data-error-for="email"></span>
+              </div>
+
+              <div class="field">
+                <label for="hero-year" data-i18n="form.yearLabel">Geburtsjahr</label>
+                <select id="hero-year" name="birthYear" required>
+                  <option value="" data-i18n="form.yearPlaceholder">Bitte wählen</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="earlier" data-i18n="form.earlier">Früher</option>
+                  <option value="later" data-i18n="form.later">Später</option>
+                </select>
+                <span class="field-error" data-error-for="birthYear"></span>
+              </div>
+
+              <label class="consent">
+                <input type="checkbox" name="consent" required />
+                <span class="custom-check" aria-hidden="true">✓</span>
+                <span>
+                  <span data-i18n="form.consentPrefix">Ich stimme der Verarbeitung gemäss</span>
+                  <button class="text-button" type="button" data-modal-open="privacy" data-i18n="legal.privacy">
+                    Datenschutzerklärung
+                  </button>
+                  <span data-i18n="form.consentSuffix">zu.</span>
+                </span>
+              </label>
+              <span class="field-error checkbox-error" data-error-for="consent"></span>
+
+              <button class="primary-button" type="submit">
+                <span data-i18n="form.submit">Guide kostenlos erhalten</span>
+                <span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+              <p class="form-note">
+                <span aria-hidden="true">↳</span>
+                <span data-i18n="form.note">Kein Spam. Abmeldung mit einem Klick.</span>
+              </p>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </aside>
+        </div>
+
+        <div class="stat-strip" aria-label="Kennzahlen">
+          <article>
+            <strong>CHF 215</strong>
+            <span data-i18n="stats.child">mind. Kinderzulage / Monat</span>
+          </article>
+          <article>
+            <strong>CHF 20'670</strong>
+            <span data-i18n="stats.el">anerkannter Lebensbedarf / Jahr*</span>
+          </article>
+          <article>
+            <strong>26</strong>
+            <span data-i18n="stats.cantons">Kantone, 26 verschiedene Regeln</span>
+          </article>
+          <p class="stat-caption" data-i18n="stats.caption">
+            *Beispiel für Alleinstehende bei Ergänzungsleistungen; Anspruch individuell.
+          </p>
+        </div>
+      </section>
+
+      <section class="reality section-pad" aria-labelledby="reality-title">
+        <div class="section-heading">
+          <p class="section-index">01 — <span data-i18n="reality.index">Warum prüfen?</span></p>
+          <h2 id="reality-title" data-i18n="reality.title">
+            Das Geld ist da.<br />Oft fehlt nur der Antrag.
+          </h2>
+          <p data-i18n="reality.intro">
+            Drei typische Situationen, in denen Schweizer Haushalte Ansprüche übersehen.
+          </p>
+        </div>
+
+        <div class="question-grid">
+          <article class="question-card">
+            <span class="card-number">01</span>
+            <div class="card-icon insurance-icon" aria-hidden="true">
+              <span>+</span>
+            </div>
+            <blockquote data-i18n="reality.q1">«Ich zahle jeden Monat über CHF 300 für die Krankenkasse. Ist das normal?»</blockquote>
+            <div class="answer">
+              <span data-i18n="reality.answerLabel">Die kurze Antwort</span>
+              <p data-i18n="reality.a1">
+                Prüfen lohnt sich. Jeder Kanton berechnet die Prämienverbilligung anders — anhand von
+                Einkommen, Vermögen und Haushalt. Ein fixer Prozentwert gilt nicht schweizweit.
+              </p>
+            </div>
+          </article>
+
+          <article class="question-card featured">
+            <span class="card-number">02</span>
+            <div class="card-icon family-icon" aria-hidden="true">
+              <span>●</span><span>●</span><span>●</span>
+            </div>
+            <blockquote data-i18n="reality.q2">«Ich habe zwei Kinder. Zahlt der Staat etwas?»</blockquote>
+            <div class="answer">
+              <span data-i18n="reality.answerLabel">Die kurze Antwort</span>
+              <p data-i18n="reality.a2">
+                Ja. Die Kinderzulage beträgt mindestens CHF 215 pro Monat, die Ausbildungszulage
+                mindestens CHF 268. Einige Kantone zahlen mehr.
+              </p>
+            </div>
+          </article>
+
+          <article class="question-card">
+            <span class="card-number">03</span>
+            <div class="card-icon pension-icon" aria-hidden="true">13</div>
+            <blockquote data-i18n="reality.q3">«Meine Rente reicht nicht für den Alltag.»</blockquote>
+            <div class="answer">
+              <span data-i18n="reality.answerLabel">Die kurze Antwort</span>
+              <p data-i18n="reality.a3">
+                Ergänzungsleistungen können die Lücke schliessen. 2026 liegt der anerkannte
+                Lebensbedarf bei CHF 20'670 für Alleinstehende und CHF 31'005 für Ehepaare.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="guide-section section-pad" id="guide" aria-labelledby="guide-title">
+        <div class="guide-heading">
+          <div>
+            <p class="section-index light">02 — <span data-i18n="guide.index">Der Inhalt</span></p>
+            <h2 id="guide-title" data-i18n="guide.title">Ein Guide.<br />Sechs Geldspuren.</h2>
+          </div>
+          <p data-i18n="guide.intro">
+            Keine Paragrafen-Sammlung. Sondern ein klarer Weg von «Vielleicht» zu «Hier stelle ich
+            den Antrag».
+          </p>
+        </div>
+
+        <div class="guide-grid">
+          <article class="guide-item">
+            <span class="guide-item-icon" aria-hidden="true">↗</span>
+            <span class="guide-item-number">01</span>
+            <h3 data-i18n="guide.item1Title">Familienzulagen</h3>
+            <p data-i18n="guide.item1Text">Beträge, Altersgrenzen und Antrag nach Kanton.</p>
+          </article>
+          <article class="guide-item">
+            <span class="guide-item-icon" aria-hidden="true">−</span>
+            <span class="guide-item-number">02</span>
+            <h3 data-i18n="guide.item2Title">Prämienverbilligung</h3>
+            <p data-i18n="guide.item2Text">Wie du die Krankenkassenprämie senkst — inklusive Fristen.</p>
+          </article>
+          <article class="guide-item">
+            <span class="guide-item-icon" aria-hidden="true">+</span>
+            <span class="guide-item-number">03</span>
+            <h3 data-i18n="guide.item3Title">Ergänzungsleistungen</h3>
+            <p data-i18n="guide.item3Text">Anspruch, Vermögensgrenzen und anerkannte Ausgaben.</p>
+          </article>
+          <article class="guide-item">
+            <span class="guide-item-icon" aria-hidden="true">13</span>
+            <span class="guide-item-number">04</span>
+            <h3 data-i18n="guide.item4Title">AHV-Rente</h3>
+            <p data-i18n="guide.item4Text">Was 2026 neu ist — inklusive der 13. Altersrente im Dezember.</p>
+          </article>
+          <article class="guide-item">
+            <span class="guide-item-icon" aria-hidden="true">⌂</span>
+            <span class="guide-item-number">05</span>
+            <h3 data-i18n="guide.item5Title">Mietzinsbeiträge</h3>
+            <p data-i18n="guide.item5Text">Wo Familien und Pensionierte Unterstützung erhalten.</p>
+          </article>
+          <article class="guide-item">
+            <span class="guide-item-icon" aria-hidden="true">%</span>
+            <span class="guide-item-number">06</span>
+            <h3 data-i18n="guide.item6Title">Steuerabzüge</h3>
+            <p data-i18n="guide.item6Text">Kinder, Versicherung und Vorsorge richtig abziehen.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="steps-section section-pad" aria-labelledby="steps-title">
+        <div class="section-heading compact">
+          <p class="section-index">03 — <span data-i18n="steps.index">So funktioniert's</span></p>
+          <h2 id="steps-title" data-i18n="steps.title">Vom PDF zum Antrag.</h2>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="step-number">1</span>
+            <div>
+              <h3 data-i18n="steps.oneTitle">Guide laden</h3>
+              <p data-i18n="steps.oneText">E-Mail und Geburtsjahr eintragen. Das dauert 20 Sekunden.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">2</span>
+            <div>
+              <h3 data-i18n="steps.twoTitle">Anspruch eingrenzen</h3>
+              <p data-i18n="steps.twoText">Kanton und Lebenssituation wählen. Relevante Kapitel markieren.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-number">3</span>
+            <div>
+              <h3 data-i18n="steps.threeTitle">Antrag stellen</h3>
+              <p data-i18n="steps.threeText">Mit Links, Fristen und Unterlagen direkt zur zuständigen Stelle.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="deadline-banner">
+          <div class="deadline-visual" aria-hidden="true">
+            <span class="deadline-month">03</span>
+            <span class="deadline-day">31</span>
+          </div>
+          <div>
+            <p class="micro-label" data-i18n="deadline.micro">Nicht auf später verschieben</p>
+            <h2 data-i18n="deadline.title">Geld wartet nicht.<br />Fristen auch nicht.</h2>
+            <p data-i18n="deadline.text">
+              Familienzulagen ab Geburt, EL ab Anmeldung, Prämienverbilligung nach kantonaler Frist:
+              Der Guide zeigt, was jetzt dran ist.
+            </p>
+          </div>
+          <a class="secondary-button" href="#download">
+            <span data-i18n="deadline.cta">Guide sichern</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="faq-section section-pad" id="faq" aria-labelledby="faq-title">
+        <div class="faq-intro">
+          <p class="section-index">04 — FAQ</p>
+          <h2 id="faq-title" data-i18n="faq.title">Kurz gefragt.<br />Klar geantwortet.</h2>
+          <p data-i18n="faq.intro">
+            Die wichtigsten Fragen vor dem ersten Antrag. Im Guide findest du die Details und
+            kantonalen Links.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>
+              <span data-i18n="faq.q1">Steht mir wirklich etwas zu?</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n="faq.a1">
+              Das hängt von Kanton, Einkommen, Vermögen und Haushalt ab. Familienzulagen erhalten
+              viele Erwerbstätige; Prämienverbilligung und EL werden individuell berechnet. Der
+              schnellste Weg ist eine Prüfung bei der zuständigen kantonalen Stelle.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span data-i18n="faq.q2">Ich bin Ausländer:in. Gilt das auch für mich?</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n="faq.a2">
+              Oft ja, aber nicht pauschal. Bewilligung, Herkunft, Erwerbstätigkeit und Aufenthaltsdauer
+              spielen je nach Leistung eine Rolle. Bei EL gelten für manche Personen Wartefristen; für
+              EU/EFTA-Staatsangehörige bestehen Sonderregeln.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span data-i18n="faq.q3">Wie viel gibt es pro Kind?</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n="faq.a3">
+              Der gesetzliche Mindestbetrag beträgt 2026 CHF 215 pro Monat für die Kinderzulage und
+              CHF 268 für die Ausbildungszulage. Kantone können höhere Ansätze vorsehen.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span data-i18n="faq.q4">Was sind Ergänzungsleistungen?</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n="faq.a4">
+              EL ergänzen AHV- oder IV-Leistungen, wenn anerkannte Ausgaben höher als anrechenbare
+              Einnahmen sind. Die Eintrittsschwelle beim Vermögen liegt grundsätzlich bei CHF 100'000
+              für Alleinstehende und CHF 200'000 für Ehepaare.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span data-i18n="faq.q5">Wann kommt die 13. AHV-Rente?</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n="faq.a5">
+              Die erste 13. Altersrente wird im Dezember 2026 automatisch zusammen mit der
+              Dezemberrente ausbezahlt. Sie gilt für Altersrenten, nicht für IV-, Hinterlassenen- oder
+              Kinderrenten.
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span data-i18n="faq.q6">Was, wenn ich die Frist verpasst habe?</span>
+              <span class="faq-plus" aria-hidden="true"></span>
+            </summary>
+            <p data-i18n="faq.a6">
+              Das ist kantonal verschieden. In St. Gallen führt eine Anmeldung nach dem 31. März
+              beispielsweise nicht zum kompletten Verlust: Eine mögliche Verbilligung läuft ab dem
+              Anmeldemonat. Prüfe die Regel deines Kantons sofort.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="source-section" aria-labelledby="source-title">
+        <div>
+          <p class="micro-label" data-i18n="sources.micro">Darauf basiert der Guide</p>
+          <h2 id="source-title" data-i18n="sources.title">Offiziell. Nachprüfbar. Verständlich.</h2>
+          <p data-i18n="sources.text">
+            Zusammengestellt aus Informationen von BSV, AHV/IV, kantonalen Ausgleichskassen und GDK.
+            Der Guide ist ein Navigator und keine Rechtsberatung.
+          </p>
+        </div>
+        <div class="source-logos" aria-label="Quellen">
+          <a href="https://www.bsv.admin.ch/" target="_blank" rel="noreferrer">BSV <span>↗</span></a>
+          <a href="https://www.ahv-iv.ch/" target="_blank" rel="noreferrer">AHV · IV <span>↗</span></a>
+          <a href="https://www.gdk-cds.ch/" target="_blank" rel="noreferrer">GDK · CDS <span>↗</span></a>
+        </div>
+      </section>
+
+      <section class="final-cta section-pad" id="download" aria-labelledby="final-title">
+        <div class="final-cta-copy">
+          <span class="big-cross" aria-hidden="true">+</span>
+          <p class="section-index light">05 — <span data-i18n="final.index">Jetzt prüfen</span></p>
+          <h2 id="final-title" data-i18n="final.title">Dein Anspruch beginnt<br />mit zwei Minuten.</h2>
+          <p data-i18n="final.text">
+            E-Mail eintragen, Guide öffnen, nichts mehr liegen lassen.
+          </p>
+        </div>
+
+        <form class="lead-form final-form" data-lead-form novalidate>
+          <div class="final-fields">
+            <div class="field">
+              <label for="footer-email" data-i18n="form.emailLabel">E-Mail</label>
+              <input
+                id="footer-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                data-i18n-placeholder="form.emailPlaceholder"
+                placeholder="name@beispiel.ch"
+                required
+              />
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+            <div class="field">
+              <label for="footer-year" data-i18n="form.yearLabel">Geburtsjahr</label>
+              <select id="footer-year" name="birthYear" required>
+                <option value="" data-i18n="form.yearPlaceholder">Bitte wählen</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="earlier" data-i18n="form.earlier">Früher</option>
+                <option value="later" data-i18n="form.later">Später</option>
+              </select>
+              <span class="field-error" data-error-for="birthYear"></span>
+            </div>
+          </div>
+          <label class="consent dark-consent">
+            <input type="checkbox" name="consent" required />
+            <span class="custom-check" aria-hidden="true">✓</span>
+            <span>
+              <span data-i18n="form.consentPrefix">Ich stimme der Verarbeitung gemäss</span>
+              <button class="text-button" type="button" data-modal-open="privacy" data-i18n="legal.privacy">
+                Datenschutzerklärung
+              </button>
+              <span data-i18n="form.consentSuffix">zu.</span>
+            </span>
+          </label>
+          <span class="field-error checkbox-error" data-error-for="consent"></span>
+          <button class="primary-button light-button" type="submit">
+            <span data-i18n="form.submit">Guide kostenlos erhalten</span>
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </button>
+          <p class="form-note">
+            <span aria-hidden="true">↳</span>
+            <span data-i18n="form.privacyNote">Nur für Guide und Updates. Keine Weitergabe.</span>
+          </p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <a class="brand footer-brand" href="#top">
+          <span class="brand-mark" aria-hidden="true">+</span>
+          <span>anspruch<span class="brand-dot">.</span>26</span>
+        </a>
+        <p data-i18n="footer.claim">Dein Navigator für Schweizer Leistungen.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 anspruch.26</p>
+        <div class="footer-links">
+          <button type="button" data-modal-open="imprint" data-i18n="legal.imprint">Impressum</button>
+          <button type="button" data-modal-open="privacy" data-i18n="legal.privacy">Datenschutz</button>
+          <button type="button" data-modal-open="sources" data-i18n="legal.sources">Offizielle Quellen</button>
+        </div>
+        <p class="footer-meta">Made in Switzerland <span aria-hidden="true">+</span></p>
+      </div>
+    </footer>
+
+    <dialog class="legal-modal" id="legal-modal" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <h2 id="modal-title"></h2>
+        <button type="button" class="modal-close" aria-label="Schliessen">×</button>
+      </div>
+      <div class="modal-body" id="modal-content"></div>
+    </dialog>
+
+    <noscript>
+      <div class="noscript-message">
+        Für Sprachwechsel und Formularvalidierung muss JavaScript aktiviert sein.
+      </div>
+    </noscript>
+  </body>
+</html>
