@@ -5,8 +5,8 @@
   --ink: #121715;
   --ink-soft: #59605c;
   --line: rgba(18, 23, 21, 0.16);
-  --red: #e5392d;
-  --red-dark: #b9231a;
+  --red: #c62b22;
+  --red-dark: #a81f18;
   --green: #173e31;
   --lime: #d8f56a;
   --yellow: #ffd458;
@@ -994,7 +994,7 @@ svg {
   position: absolute;
   top: 36px;
   right: 34px;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 11px;
   font-weight: 800;
 }
@@ -1132,7 +1132,7 @@ svg {
 .deadline-banner p:last-child {
   max-width: 660px;
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.92);
   font-size: 13px;
 }
 
