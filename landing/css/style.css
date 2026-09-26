@@ -174,7 +174,8 @@ a:hover {
   max-width: 560px;
 }
 
-/* Form Card */
+/* Download Card */
+.download-card,
 .form-card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -182,6 +183,30 @@ a:hover {
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--color-border);
   max-width: 480px;
+}
+
+.download-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.download-card__text {
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.download-card__note {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 14px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.btn--download {
+  text-decoration: none;
 }
 
 .form-card__title {

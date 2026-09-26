@@ -21,7 +21,8 @@ Open http://localhost:8080
 ## Features
 
 - Language switcher (DE / FR / IT) with browser detection
-- Two lead capture forms (hero + CTA)
+- Direct PDF download (no email required) in DE / FR / IT
+- Download buttons in hero and CTA sections
 - FAQ accordion
 - Cookie consent banner (opt-in)
 - Impressum & Datenschutzerklärung modals

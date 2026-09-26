@@ -18,6 +18,13 @@
     return val;
   }
 
+  function updateDownloadLinks() {
+    const pdf = t("hero.pdfFile");
+    document.querySelectorAll(".btn--download").forEach((btn) => {
+      btn.href = pdf;
+    });
+  }
+
   function setLanguage(lang) {
     if (!translations[lang]) return;
     currentLang = lang;
@@ -40,16 +47,11 @@
       if (typeof value === "string") el.innerHTML = value;
     });
 
-    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      const value = t(key);
-      if (typeof value === "string") el.placeholder = value;
-    });
-
     document.querySelectorAll(".lang-switch__btn").forEach((btn) => {
       btn.classList.toggle("lang-switch__btn--active", btn.dataset.lang === lang);
     });
 
+    updateDownloadLinks();
     renderPainPoints();
     renderGuideFeatures();
     renderFAQ();
@@ -127,76 +129,6 @@
     });
   }
 
-  function validateForm(form) {
-    const email = form.querySelector('[name="email"]');
-    const birthYear = form.querySelector('[name="birthYear"]');
-    const consent = form.querySelector('[name="consent"]');
-    let valid = true;
-
-    clearErrors(form);
-
-    if (!email.value.trim()) {
-      showError(email, t("validation.emailRequired"));
-      valid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-      showError(email, t("validation.emailInvalid"));
-      valid = false;
-    }
-
-    if (!birthYear.value) {
-      showError(birthYear, t("validation.birthYearRequired"));
-      valid = false;
-    }
-
-    if (!consent.checked) {
-      showError(consent, t("validation.consentRequired"));
-      valid = false;
-    }
-
-    return valid;
-  }
-
-  function showError(field, message) {
-    field.style.borderColor = "#d52b1e";
-    const err = document.createElement("p");
-    err.className = "form-error";
-    err.style.cssText = "color:#d52b1e;font-size:0.8rem;margin-top:4px;";
-    err.textContent = message;
-    field.parentElement.appendChild(err);
-  }
-
-  function clearErrors(form) {
-    form.querySelectorAll(".form-error").forEach((el) => el.remove());
-    form.querySelectorAll("input, select").forEach((el) => {
-      el.style.borderColor = "";
-    });
-  }
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    if (!validateForm(form)) return;
-
-    const formId = form.closest(".form-card").id;
-    form.style.display = "none";
-    const success = document.getElementById("success-" + formId.replace("form-", ""));
-    if (success) success.classList.add("form-success--visible");
-
-    const data = {
-      email: form.querySelector('[name="email"]').value,
-      birthYear: form.querySelector('[name="birthYear"]').value,
-      lang: currentLang,
-      timestamp: new Date().toISOString(),
-    };
-    console.log("Lead submitted:", data);
-  }
-
-  function initForms() {
-    document.querySelectorAll(".lead-form").forEach((form) => {
-      form.addEventListener("submit", handleFormSubmit);
-    });
-  }
-
   function initLanguageSwitch() {
     document.querySelectorAll(".lang-switch__btn").forEach((btn) => {
       btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
@@ -265,7 +197,6 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     setLanguage(currentLang);
-    initForms();
     initLanguageSwitch();
     initModal();
     initCookieBanner();

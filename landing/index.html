@@ -34,36 +34,11 @@
       <h1 class="hero__title" data-i18n="hero.title">Staatliche Leistungen in der Schweiz 2026: Was steht dir zu?</h1>
       <p class="hero__subtitle" data-i18n="hero.subtitle">Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht.</p>
 
-      <div class="form-card" id="form-hero">
-        <div class="form-card__title" data-i18n="hero.formTitle">📄 Leitfaden kostenlos herunterladen</div>
-        <form class="lead-form" data-form="hero" novalidate>
-          <div class="form-group">
-            <label for="email-hero" data-i18n="hero.email">E-Mail</label>
-            <input type="email" id="email-hero" name="email" required placeholder="deine@email.ch" data-i18n-placeholder="hero.emailPlaceholder">
-          </div>
-          <div class="form-group">
-            <label for="birthyear-hero" data-i18n="hero.birthYear">Geburtsjahr</label>
-            <select id="birthyear-hero" name="birthYear" required>
-              <option value="" data-i18n="hero.birthYearPlaceholder">Bitte wählen</option>
-              <option value="2007" data-i18n="hero.birthYears.2007">2007</option>
-              <option value="2008" data-i18n="hero.birthYears.2008">2008</option>
-              <option value="2009" data-i18n="hero.birthYears.2009">2009</option>
-              <option value="earlier" data-i18n="hero.birthYears.earlier">Früher</option>
-              <option value="later" data-i18n="hero.birthYears.later">Später</option>
-            </select>
-          </div>
-          <div class="form-group form-group--checkbox">
-            <input type="checkbox" id="consent-hero" name="consent" required>
-            <label for="consent-hero" data-i18n-html="hero.consent">Ich stimme der Datenverarbeitung gemäss der Datenschutzerklärung zu.</label>
-          </div>
-          <button type="submit" class="btn btn--primary" data-i18n="hero.submit">Leitfaden kostenlos herunterladen</button>
-          <p class="form-card__note" data-i18n="hero.formNote">Daten werden nur zum Versand des PDF verwendet.</p>
-        </form>
-        <div class="form-success" id="success-hero">
-          <div class="form-success__icon">✅</div>
-          <div class="form-success__title" data-i18n="hero.successTitle">Leitfaden ist unterwegs!</div>
-          <p class="form-success__text" data-i18n="hero.successText">Prüfe dein Postfach.</p>
-        </div>
+      <div class="download-card" id="download-hero">
+        <div class="download-card__title" data-i18n="hero.downloadTitle">📄 Leitfaden kostenlos herunterladen</div>
+        <p class="download-card__text" data-i18n="hero.downloadText">PDF sofort verfügbar. Keine Registrierung, kein E-Mail nötig.</p>
+        <a href="downloads/leitfaden-de.pdf" class="btn btn--primary btn--download" id="download-btn-hero" download data-i18n="hero.downloadBtn">Leitfaden kostenlos herunterladen</a>
+        <p class="download-card__note" data-i18n="hero.downloadNote">PDF wird direkt auf dein Gerät heruntergeladen.</p>
       </div>
     </div>
   </section>
@@ -88,37 +63,11 @@
   <section class="cta-section">
     <div class="container">
       <h2 class="section__title" data-i18n="cta.title">Hol dir den Leitfaden jetzt</h2>
-      <p class="section__subtitle" data-i18n="cta.subtitle">Gib deine E-Mail ein – das PDF kommt sofort.</p>
+      <p class="section__subtitle" data-i18n="cta.subtitle">Kostenlos als PDF – sofort herunterladen.</p>
 
-      <div class="form-card" id="form-cta">
-        <form class="lead-form" data-form="cta" novalidate>
-          <div class="form-group">
-            <label for="email-cta" data-i18n="hero.email">E-Mail</label>
-            <input type="email" id="email-cta" name="email" required placeholder="deine@email.ch" data-i18n-placeholder="hero.emailPlaceholder">
-          </div>
-          <div class="form-group">
-            <label for="birthyear-cta" data-i18n="hero.birthYear">Geburtsjahr</label>
-            <select id="birthyear-cta" name="birthYear" required>
-              <option value="" data-i18n="hero.birthYearPlaceholder">Bitte wählen</option>
-              <option value="2007" data-i18n="hero.birthYears.2007">2007</option>
-              <option value="2008" data-i18n="hero.birthYears.2008">2008</option>
-              <option value="2009" data-i18n="hero.birthYears.2009">2009</option>
-              <option value="earlier" data-i18n="hero.birthYears.earlier">Früher</option>
-              <option value="later" data-i18n="hero.birthYears.later">Später</option>
-            </select>
-          </div>
-          <div class="form-group form-group--checkbox">
-            <input type="checkbox" id="consent-cta" name="consent" required>
-            <label for="consent-cta" data-i18n-html="hero.consent">Ich stimme der Datenverarbeitung zu.</label>
-          </div>
-          <button type="submit" class="btn btn--primary" data-i18n="cta.submit">🟩 Leitfaden kostenlos erhalten</button>
-          <p class="form-card__note" data-i18n="cta.note">Daten werden nur zum Versand des PDF verwendet.</p>
-        </form>
-        <div class="form-success" id="success-cta">
-          <div class="form-success__icon">✅</div>
-          <div class="form-success__title" data-i18n="hero.successTitle">Leitfaden ist unterwegs!</div>
-          <p class="form-success__text" data-i18n="hero.successText">Prüfe dein Postfach.</p>
-        </div>
+      <div class="download-card" id="download-cta">
+        <a href="downloads/leitfaden-de.pdf" class="btn btn--primary btn--download" id="download-btn-cta" download data-i18n="cta.downloadBtn">🟩 Leitfaden kostenlos herunterladen</a>
+        <p class="download-card__note" data-i18n="cta.note">Keine Registrierung erforderlich.</p>
       </div>
     </div>
   </section>
@@ -151,7 +100,7 @@
     <div class="container container--narrow">
       <h2 class="section__title" data-i18n="urgency.title">Geld wartet nicht. Fristen auch nicht.</h2>
       <p class="urgency__text" data-i18n="urgency.text">Prämienverbilligung – bis 31. Mai.</p>
-      <a href="#form-hero" class="btn btn--primary" data-i18n="urgency.cta">📄 Leitfaden kostenlos herunterladen</a>
+      <a href="#download-hero" class="btn btn--primary" data-i18n="urgency.cta">📄 Leitfaden kostenlos herunterladen</a>
     </div>
   </section>
 
