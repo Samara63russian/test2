@@ -22,8 +22,17 @@ Open http://localhost:8080
 
 - Language switcher (DE / FR / IT) with browser detection
 - Direct PDF download (no email required) in DE / FR / IT
-- Download buttons in hero and CTA sections
-- FAQ accordion
-- Cookie consent banner (opt-in)
-- Impressum & Datenschutzerklärung modals
-- Mobile responsive
+- Admin panel at `/admin` — visitor analytics + PDF upload
+- FAQ accordion, cookie banner, legal pages
+
+## Admin panel
+
+```bash
+cd landing/backend
+python3 -m venv venv && ./venv/bin/pip install -r requirements.txt
+ADMIN_PASSWORD=yourpassword ./venv/bin/python app.py
+```
+
+Open http://localhost:5050/admin
+
+**Production:** credentials in `/etc/schweiz-zahlt.env` on the server.

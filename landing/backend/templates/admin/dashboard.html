@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – Schweiz zahlt Admin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <div class="admin-header__inner">
+      <h1>🇨🇭 Admin Dashboard</h1>
+      <div class="admin-header__actions">
+        <a href="/" target="_blank" class="admin-link">Открыть сайт</a>
+        <a href="{{ url_for('admin_logout') }}" class="admin-link admin-link--muted">Выйти</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="admin-flash admin-flash--{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <section class="admin-stats">
+      <div class="admin-stat">
+        <div class="admin-stat__value">{{ stats.total }}</div>
+        <div class="admin-stat__label">Всего событий</div>
+      </div>
+      <div class="admin-stat">
+        <div class="admin-stat__value">{{ stats.pageviews }}</div>
+        <div class="admin-stat__label">Просмотры</div>
+      </div>
+      <div class="admin-stat">
+        <div class="admin-stat__value">{{ stats.downloads }}</div>
+        <div class="admin-stat__label">Скачивания</div>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <h2>Загрузка PDF-гидов</h2>
+      <div class="admin-upload-grid">
+        {% for lang, info in pdf_info.items() %}
+        <div class="admin-upload-card">
+          <div class="admin-upload-card__header">
+            <strong>{{ lang.upper() }}</strong>
+            <span class="admin-badge">{{ info.filename }}</span>
+          </div>
+          <div class="admin-upload-card__meta">
+            {% if info.exists %}
+              {{ info.size_kb }} KB · обновлён {{ info.modified }}
+            {% else %}
+              <span class="admin-text-muted">Файл отсутствует</span>
+            {% endif %}
+          </div>
+          <form method="post" action="{{ url_for('admin_upload') }}" enctype="multipart/form-data" class="admin-upload-form">
+            <input type="hidden" name="lang" value="{{ lang }}">
+            <input type="file" name="pdf" accept=".pdf,application/pdf" required>
+            <button type="submit" class="admin-btn admin-btn--sm">Загрузить PDF</button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <h2>Посетители <span class="admin-text-muted">({{ total }})</span></h2>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Время (UTC)</th>
+              <th>IP</th>
+              <th>Событие</th>
+              <th>Язык</th>
+              <th>Referrer</th>
+              <th>User-Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for v in visits %}
+            <tr>
+              <td>{{ v.id }}</td>
+              <td class="admin-nowrap">{{ v.created_at[:19].replace('T', ' ') }}</td>
+              <td><code>{{ v.ip or '—' }}</code></td>
+              <td>
+                {% if v.event_type == 'download' %}
+                  <span class="admin-tag admin-tag--green">скачивание</span>
+                {% else %}
+                  <span class="admin-tag">визит</span>
+                {% endif %}
+              </td>
+              <td>{{ (v.lang or '—')|upper }}</td>
+              <td class="admin-truncate" title="{{ v.referrer or '' }}">{{ v.referrer or '—' }}</td>
+              <td class="admin-truncate" title="{{ v.user_agent or '' }}">{{ v.user_agent or '—' }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="admin-empty">Пока нет данных</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if pages > 1 %}
+      <div class="admin-pagination">
+        {% if page > 1 %}
+          <a href="?page={{ page - 1 }}" class="admin-btn admin-btn--sm admin-btn--outline">← Назад</a>
+        {% endif %}
+        <span class="admin-text-muted">Страница {{ page }} из {{ pages }}</span>
+        {% if page < pages %}
+          <a href="?page={{ page + 1 }}" class="admin-btn admin-btn--sm admin-btn--outline">Далее →</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

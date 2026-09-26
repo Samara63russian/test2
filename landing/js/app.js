@@ -22,6 +22,12 @@
     const pdf = t("hero.pdfFile");
     document.querySelectorAll(".btn--download").forEach((btn) => {
       btn.href = pdf;
+      if (!btn.dataset.trackBound) {
+        btn.dataset.trackBound = "1";
+        btn.addEventListener("click", () => {
+          trackEvent("download", { path: btn.getAttribute("href") });
+        });
+      }
     });
   }
 
@@ -176,6 +182,19 @@
     });
   }
 
+  function trackEvent(event, extra) {
+    if (sessionStorage.getItem("tracked-" + event) && event === "pageview") return;
+    fetch("/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        Object.assign({ event: event, lang: currentLang, path: window.location.pathname }, extra || {})
+      ),
+      keepalive: true,
+    }).catch(function () {});
+    if (event === "pageview") sessionStorage.setItem("tracked-pageview", "1");
+  }
+
   function initCookieBanner() {
     const banner = document.getElementById("cookie-banner");
     const consent = localStorage.getItem("cookie-consent");
@@ -197,6 +216,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     setLanguage(currentLang);
+    trackEvent("pageview");
     initLanguageSwitch();
     initModal();
     initCookieBanner();
