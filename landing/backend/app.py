@@ -35,22 +35,8 @@ app.secret_key = os.environ.get("ADMIN_SECRET_KEY", secrets.token_hex(32))
 app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024
 
 
-def get_db():
-    if "db" not in g:
-        DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-        g.db = sqlite3.connect(DB_PATH)
-        g.db.row_factory = sqlite3.Row
-    return g.db
-
-
-@app.teardown_appcontext
-def close_db(_exc):
-    db = g.pop("db", None)
-    if db is not None:
-        db.close()
-
-
-def init_db():
+def ensure_db():
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(DB_PATH)
     db.executescript(
         """
@@ -68,6 +54,21 @@ def init_db():
     )
     db.commit()
     db.close()
+
+
+def get_db():
+    ensure_db()
+    if "db" not in g:
+        g.db = sqlite3.connect(DB_PATH)
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+
+@app.teardown_appcontext
+def close_db(_exc):
+    db = g.pop("db", None)
+    if db is not None:
+        db.close()
 
 
 _cached_password_hash = None
@@ -232,8 +233,6 @@ def admin_upload():
     flash(f"PDF для {lang.upper()} загружен: {PDF_FILES[lang]}", "success")
     return redirect(url_for("admin_dashboard"))
 
-
-init_db()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))

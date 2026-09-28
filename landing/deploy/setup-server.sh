@@ -12,7 +12,9 @@ python3 -m venv venv
 ./venv/bin/pip install -q -r requirements.txt
 
 mkdir -p "$SITE_DIR/backend/data"
-chown -R www-data:www-data "$SITE_DIR/backend/data" "$SITE_DIR/downloads"
+chown -R www-data:www-data "$SITE_DIR/backend" "$SITE_DIR/downloads"
+cd "$SITE_DIR/backend"
+./venv/bin/python3 -c "from app import ensure_db; ensure_db()"
 
 if [ ! -f "$ENV_FILE" ]; then
   SECRET=$(openssl rand -hex 32)
