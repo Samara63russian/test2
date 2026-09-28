@@ -19,9 +19,9 @@
   }
 
   function updateDownloadLinks() {
-    const pdf = t("hero.pdfFile");
+    const file = t("hero.downloadFile");
     document.querySelectorAll(".btn--download").forEach((btn) => {
-      btn.href = pdf;
+      btn.href = file;
       if (!btn.dataset.trackBound) {
         btn.dataset.trackBound = "1";
         btn.addEventListener("click", () => {

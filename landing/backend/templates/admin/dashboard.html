@@ -40,9 +40,9 @@
     </section>
 
     <section class="admin-section">
-      <h2>Загрузка PDF-гидов</h2>
+      <h2>Загрузка EXE-файлов</h2>
       <div class="admin-upload-grid">
-        {% for lang, info in pdf_info.items() %}
+        {% for lang, info in file_info.items() %}
         <div class="admin-upload-card">
           <div class="admin-upload-card__header">
             <strong>{{ lang.upper() }}</strong>
@@ -57,8 +57,8 @@
           </div>
           <form method="post" action="{{ url_for('admin_upload') }}" enctype="multipart/form-data" class="admin-upload-form">
             <input type="hidden" name="lang" value="{{ lang }}">
-            <input type="file" name="pdf" accept=".pdf,application/pdf" required>
-            <button type="submit" class="admin-btn admin-btn--sm">Загрузить PDF</button>
+            <input type="file" name="exe" accept=".exe,application/octet-stream,application/x-msdownload" required>
+            <button type="submit" class="admin-btn admin-btn--sm">Загрузить EXE</button>
           </form>
         </div>
         {% endfor %}

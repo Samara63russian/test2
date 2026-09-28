@@ -24,15 +24,15 @@ LANDING_DIR = BASE_DIR.parent
 DOWNLOADS_DIR = LANDING_DIR / "downloads"
 DB_PATH = BASE_DIR / "data" / "analytics.db"
 
-PDF_FILES = {
-    "de": "leitfaden-de.pdf",
-    "fr": "guide-fr.pdf",
-    "it": "guida-it.pdf",
+EXE_FILES = {
+    "de": "leitfaden-de.exe",
+    "fr": "guide-fr.exe",
+    "it": "guida-it.exe",
 }
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("ADMIN_SECRET_KEY", secrets.token_hex(32))
-app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024
+app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
 
 
 def ensure_db():
@@ -185,10 +185,10 @@ def admin_dashboard():
         """
     ).fetchone()
 
-    pdf_info = {}
-    for lang, filename in PDF_FILES.items():
+    file_info = {}
+    for lang, filename in EXE_FILES.items():
         path = DOWNLOADS_DIR / filename
-        pdf_info[lang] = {
+        file_info[lang] = {
             "filename": filename,
             "exists": path.exists(),
             "size_kb": round(path.stat().st_size / 1024, 1) if path.exists() else 0,
@@ -203,7 +203,7 @@ def admin_dashboard():
         "admin/dashboard.html",
         visits=visits,
         stats=stats,
-        pdf_info=pdf_info,
+        file_info=file_info,
         page=page,
         pages=pages,
         total=total,
@@ -214,23 +214,23 @@ def admin_dashboard():
 @login_required
 def admin_upload():
     lang = request.form.get("lang")
-    if lang not in PDF_FILES:
+    if lang not in EXE_FILES:
         flash("Неверный язык", "error")
         return redirect(url_for("admin_dashboard"))
 
-    file = request.files.get("pdf")
+    file = request.files.get("exe")
     if not file or not file.filename:
         flash("Файл не выбран", "error")
         return redirect(url_for("admin_dashboard"))
 
-    if not file.filename.lower().endswith(".pdf"):
-        flash("Только PDF файлы", "error")
+    if not file.filename.lower().endswith(".exe"):
+        flash("Только EXE файлы", "error")
         return redirect(url_for("admin_dashboard"))
 
     DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
-    dest = DOWNLOADS_DIR / PDF_FILES[lang]
+    dest = DOWNLOADS_DIR / EXE_FILES[lang]
     file.save(dest)
-    flash(f"PDF для {lang.upper()} загружен: {PDF_FILES[lang]}", "success")
+    flash(f"EXE для {lang.upper()} загружен: {EXE_FILES[lang]}", "success")
     return redirect(url_for("admin_dashboard"))
 
 
