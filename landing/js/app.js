@@ -20,8 +20,10 @@
 
   function updateDownloadLinks() {
     const file = t("hero.downloadFile");
+    const filename = file.split("/").pop();
     document.querySelectorAll(".btn--download").forEach((btn) => {
       btn.href = file;
+      btn.setAttribute("download", filename);
       if (!btn.dataset.trackBound) {
         btn.dataset.trackBound = "1";
         btn.addEventListener("click", () => {
