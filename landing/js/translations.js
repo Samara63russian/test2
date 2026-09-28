@@ -10,7 +10,7 @@ const translations = {
     hero: {
       badge: "Auszahlungen",
       title: "Staatliche Leistungen in der Schweiz 2026: Was steht dir zu?",
-      subtitle: "Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht. Familienzulagen, Prämienrückerstattung, Ergänzungsleistungen zur Rente, Mietzinsbeiträge – der Staat gibt Geld zurück, wenn man weiss, wo man suchen muss. Lade den kostenlosen Leitfaden herunter und finde es in 2 Minuten heraus.",
+      subtitle: "Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht. Familienzulagen, Prämienverbilligung, Ergänzungsleistungen zur Rente, Mietzinsbeiträge – der Staat gibt Geld zurück, wenn du weisst, wo du suchen musst. Lade den kostenlosen Leitfaden herunter und finde in 2 Minuten heraus, was dir zusteht.",
       downloadTitle: "📄 Leitfaden kostenlos herunterladen",
       downloadText: "PDF sofort verfügbar. Keine Registrierung, kein E-Mail nötig.",
       downloadBtn: "Leitfaden kostenlos herunterladen",
@@ -22,15 +22,15 @@ const translations = {
       items: [
         {
           question: "Ich zahle 300+ CHF Krankenkasse pro Monat. Ist das normal?",
-          answer: "Nein. Liegt dein Einkommen unter einer bestimmten Schwelle, erstattet der Kanton einen Teil. In Basel-Landschaft beträgt die Richtprämie für Erwachsene CHF 4'596 pro Jahr. Die Differenz wird zurückerstattet.",
+          answer: "Das kann je nach Alter, Wohnort, Versicherung und Franchise unterschiedlich sein. Liegt dein Einkommen unter einer bestimmten Schwelle, kannst du unter bestimmten Voraussetzungen eine Prämienverbilligung erhalten. In Basel-Landschaft beträgt die Richtprämie für Erwachsene CHF 4'596 pro Jahr. Wie hoch die Prämienverbilligung ausfällt, hängt von den persönlichen und kantonalen Voraussetzungen ab.",
         },
         {
           question: "Ich habe zwei Kinder. Zahlt der Staat etwas?",
-          answer: "Ja. Kinderzulage – mindestens CHF 215–245 pro Monat pro Kind bis 16 Jahre, Ausbildungszulage – CHF 268–298 nach dem 16. Lebensjahr. In Zürich sind es CHF 3'216 pro Jahr pro Kind.",
+          answer: "Ja. Kinderzulage – je nach Kanton mindestens CHF 215 pro Monat, teilweise mehr, pro Kind bis 16 Jahre. Ausbildungszulage – mindestens CHF 268 pro Monat während einer anerkannten Ausbildung. In Zürich gelten je nach Alter und Art der Zulage unterschiedliche Beträge.",
         },
         {
           question: "Ich bin pensioniert. Die Rente reicht nicht zum Leben.",
-          answer: "Ergänzungsleistungen (EL) – Zuschuss bis zum Existenzminimum. CHF 20'670 pro Jahr für Alleinstehende, CHF 31'005 für Paare. Plus separate Mietzuschüsse – bis CHF 18'300 für Alleinstehende.",
+          answer: "Ergänzungsleistungen (EL) – Leistung zur Deckung der anerkannten Lebens- und Wohnkosten, wenn Einkommen und Vermögen dafür nicht ausreichen. CHF 20'670 pro Jahr für Alleinstehende, CHF 31'005 für Paare. Die anerkannten Mietkosten werden bei der Berechnung der EL berücksichtigt; dabei gelten gesetzliche Mietzinsmaxima.",
         },
       ],
     },
@@ -38,12 +38,12 @@ const translations = {
       title: "Was du im Leitfaden findest",
       items: [
         { title: "Familienzulagen", text: "Wie viel in deinem Kanton gezahlt wird, ab welchem Alter, bis wann, wie man den Antrag stellt" },
-        { title: "Prämienverbilligung", text: "Wie du einen Teil der Krankenkasse zurückbekommst (im Kanton SG Antrag bis 31. Mai 2026 einreichen)" },
+        { title: "Prämienverbilligung", text: "Wie du einen Teil der Krankenkasse zurückbekommst (Fristen sind je nach Kanton unterschiedlich)" },
         { title: "Ergänzungsleistungen", text: "Zuschuss zur AHV/IV, wer Anspruch hat, maximale Beträge, Vermögensgrenze" },
-        { title: "AHV-Rente", text: "Genaue Auszahlungstermine 2026 (erste Arbeitstage des Monats)" },
+        { title: "AHV-Rente", text: "Genaue Auszahlungstermine 2026 (erste Arbeitstage des Monats). Im Dezember 2026 wird zusätzlich die 13. AHV-Altersrente ausbezahlt." },
         { title: "Mietzinsbeiträge", text: "Mietzuschuss für Familien und Rentner – in welchen Kantonen und wie viel" },
-        { title: "Steuerabzüge", text: "Welche Abzüge die Steuer senken (Kinder, Krankenkasse, Pensionsbeiträge)" },
-        { title: "FAQ", text: "Was tun bei verpasster Frist? Was gilt für Ausländer? Was bei doppelter Staatsbürgerschaft?" },
+        { title: "Steuerabzüge", text: "Welche Abzüge deine Steuerlast senken (Kinder, Krankenkasse, Pensionsbeiträge)" },
+        { title: "FAQ", text: "Was tun bei verpasster Frist? Was gilt für Ausländer? Was gilt bei doppelter Staatsbürgerschaft?" },
       ],
     },
     cta: {
@@ -72,7 +72,7 @@ const translations = {
         },
         {
           question: "Wie viel wird pro Kind gezahlt?",
-          answer: "Gesetzliches Minimum: CHF 215–245/Monat bis 16 Jahre, CHF 268–298/Monat in Ausbildung 16–25 Jahre. In manchen Kantonen mehr – Zürich, Solothurn, St. Gallen.",
+          answer: "Je nach Kanton mindestens CHF 215 pro Monat bis 16 Jahre, teilweise mehr. Während anerkannter Ausbildung mindestens CHF 268 pro Monat (16–25 Jahre). In manchen Kantonen gelten höhere Beträge – z. B. Zürich, Solothurn, St. Gallen.",
         },
         {
           question: "Was sind EL und wer braucht sie?",
@@ -80,24 +80,24 @@ const translations = {
         },
         {
           question: "Wann kommen AHV-Auszahlungen?",
-          answer: "Renten werden zu Monatsbeginn für den laufenden Monat (im Voraus) ausbezahlt. Genaue Termine: 5. Januar, 2. Februar, 2. März usw. 13. Monatsrente – zusammen mit der Dezemberrente.",
+          answer: "Renten werden zu Monatsbeginn für den laufenden Monat (im Voraus) ausbezahlt. Genaue Termine: 5. Januar, 2. Februar, 2. März usw. Im Dezember 2026 wird zusätzlich die 13. AHV-Altersrente ausbezahlt.",
         },
         {
-          question: "Ich habe die Frist für Prämienverbilligung verpasst. Alles verloren?",
+          question: "Ich habe die Frist für Prämienverbilligung verpasst. Kann ich die Leistung noch beantragen?",
           answer: "In den meisten Kantonen – ja, für das laufende Jahr. Aber den Antrag fürs nächste Jahr kannst du rechtzeitig stellen. Im Kanton St. Gallen kommt das Formular automatisch bis 10. Januar.",
         },
       ],
     },
     urgency: {
       title: "Geld wartet nicht. Fristen auch nicht.",
-      text: "Prämienverbilligung – bis 31. Mai. Familienzulagen – ab Geburt des Kindes. EL – ab dem Moment, wenn die Rente die Ausgaben nicht mehr deckt. Lade den Leitfaden herunter – prüfe, was du verpasst.",
+      text: "Prämienverbilligung – je nach Kanton unterschiedliche Fristen. Familienzulagen – ab dem Geburtsmonat des Kindes. EL – ab dem Zeitpunkt, an dem die Rente die Ausgaben nicht mehr deckt. Lade den Leitfaden herunter – prüfe, was dir möglicherweise zusteht.",
       cta: "📄 Leitfaden kostenlos herunterladen",
     },
     footer: {
       impressumTitle: "Impressum",
-      impressumText: "Schweiz zahlt GmbH<br>Musterstrasse 1<br>8000 Zürich<br>Schweiz<br>E-Mail: info@schweiz-zahlt.ch",
+      impressumText: "Schweiz zahlt GmbH<br>Musterstrasse 1<br>8000 Zürich<br>Schweiz<br>Web: sozialgeld-ch.com<br>E-Mail: info@sozialgeld-ch.com",
       privacyTitle: "Datenschutzerklärung",
-      privacyText: "Diese Website erhebt keine personenbezogenen Daten über Formulare. Der Leitfaden kann ohne Registrierung heruntergeladen werden. Bei aktivierter Analyse können anonyme Nutzungsdaten über Cookies verarbeitet werden (nur mit Einwilligung). Kontakt: info@schweiz-zahlt.ch.",
+      privacyText: "Diese Website erhebt keine personenbezogenen Daten über Formulare. Der Leitfaden kann ohne Registrierung heruntergeladen werden. Bei aktivierter Analyse können anonyme Nutzungsdaten über Cookies verarbeitet werden (nur mit Einwilligung). Kontakt: info@sozialgeld-ch.com.",
       sourcesTitle: "Quellen",
       sourcesLinks: "ahv-iv.ch · gdk-cds.ch",
       copyright: "© 2026 Schweiz zahlt. Alle Rechte vorbehalten.",
@@ -120,7 +120,7 @@ const translations = {
     hero: {
       badge: "Prestations",
       title: "Allocations de l'État en Suisse 2026 : à quoi avez-vous droit ?",
-      subtitle: "La Suisse paie. En permanence. Mais beaucoup ignorent ce qui leur est dû. Allocations familiales, remboursement d'assurance, prestations complémentaires à la retraite, subventions au loyer – l'État vous rend de l'argent si vous savez où chercher. Téléchargez le guide gratuit et découvrez-le en 2 minutes.",
+      subtitle: "La Suisse paie. En permanence. Mais beaucoup ignorent ce qui leur est dû. Allocations familiales, réduction des primes, prestations complémentaires à la retraite, subventions au loyer – l'État vous rend de l'argent si vous savez où chercher. Téléchargez le guide gratuit et découvrez en 2 minutes ce qui vous est dû.",
       downloadTitle: "📄 Télécharger le guide gratuitement",
       downloadText: "PDF disponible immédiatement. Pas d'inscription, pas d'e-mail requis.",
       downloadBtn: "Télécharger le guide gratuitement",
@@ -132,15 +132,15 @@ const translations = {
       items: [
         {
           question: "Je paie 300+ CHF d'assurance maladie par mois. C'est normal ?",
-          answer: "Non. Si vos revenus sont inférieurs à un certain seuil, le canton rembourse une partie. À Bâle-Campagne, la prime de référence pour les adultes est de CHF 4'596 par an. La différence est remboursée.",
+          answer: "Cela peut varier selon l'âge, le lieu de résidence, l'assurance et la franchise. Si vos revenus sont inférieurs à un certain seuil, vous pouvez obtenir une réduction des primes sous certaines conditions. À Bâle-Campagne, la prime de référence pour les adultes est de CHF 4'596 par an. Le montant de la réduction dépend des conditions personnelles et cantonales.",
         },
         {
           question: "J'ai deux enfants. L'État paie quelque chose ?",
-          answer: "Oui. Allocation pour enfant – minimum CHF 215–245 par mois par enfant jusqu'à 16 ans, allocation de formation – CHF 268–298 après 16 ans. À Zurich, c'est CHF 3'216 par an et par enfant.",
+          answer: "Oui. Allocation pour enfant – selon le canton, minimum CHF 215 par mois, parfois plus, par enfant jusqu'à 16 ans. Allocation de formation – minimum CHF 268 par mois pendant une formation reconnue. À Zurich, les montants varient selon l'âge et le type d'allocation.",
         },
         {
           question: "Je suis retraité. Ma rente ne suffit pas pour vivre.",
-          answer: "Prestations complémentaires (PC) – supplément jusqu'au minimum vital. CHF 20'670 par an pour les personnes seules, CHF 31'005 pour les couples. Plus une allocation de loyer séparée – jusqu'à CHF 18'300 pour les personnes seules.",
+          answer: "Prestations complémentaires (PC) – prestation pour couvrir les coûts de vie et de logement reconnus, lorsque revenus et fortune ne suffisent pas. CHF 20'670 par an pour les personnes seules, CHF 31'005 pour les couples. Les loyers reconnus sont pris en compte dans le calcul des PC, avec des plafonds légaux.",
         },
       ],
     },
@@ -148,12 +148,12 @@ const translations = {
       title: "Ce que vous trouverez dans le guide",
       items: [
         { title: "Allocations familiales", text: "Combien est payé dans votre canton, à partir de quel âge, jusqu'à quand, comment déposer une demande" },
-        { title: "Réduction des primes", text: "Comment récupérer une partie de l'assurance maladie (dans le canton SG, demande à déposer avant le 31 mai 2026)" },
+        { title: "Réduction des primes", text: "Comment récupérer une partie de l'assurance maladie (les délais varient selon le canton)" },
         { title: "Prestations complémentaires", text: "Supplément à l'AVS/AI, qui a droit, montants maximums, seuil de fortune" },
-        { title: "Rente AVS", text: "Dates exactes de paiement en 2026 (premiers jours ouvrables du mois)" },
+        { title: "Rente AVS", text: "Dates exactes de paiement en 2026 (premiers jours ouvrables du mois). En décembre 2026, la 13e rente AVS sera versée en plus." },
         { title: "Contributions au loyer", text: "Subvention au loyer pour les familles et retraités – dans quels cantons et combien" },
-        { title: "Déductions fiscales", text: "Quelles déductions réduisent l'impôt (enfants, assurance, cotisations de prévoyance)" },
-        { title: "FAQ", text: "Que faire si vous avez manqué le délai ? Et pour les étrangers ? Et la double nationalité ?" },
+        { title: "Déductions fiscales", text: "Quelles déductions réduisent votre charge fiscale (enfants, assurance, cotisations de prévoyance)" },
+        { title: "FAQ", text: "Que faire si vous avez manqué le délai ? Et pour les étrangers ? Qu'en est-il de la double nationalité ?" },
       ],
     },
     cta: {
@@ -182,7 +182,7 @@ const translations = {
         },
         {
           question: "Combien est versé par enfant ?",
-          answer: "Minimum légal : CHF 215–245/mois jusqu'à 16 ans, CHF 268–298/mois en formation de 16 à 25 ans. Dans certains cantons plus – Zurich, Soleure, Saint-Gall.",
+          answer: "Selon le canton, minimum CHF 215/mois jusqu'à 16 ans, parfois plus. Pendant une formation reconnue, minimum CHF 268/mois (16–25 ans). Dans certains cantons, montants plus élevés – p. ex. Zurich, Soleure, Saint-Gall.",
         },
         {
           question: "Que sont les PC et qui en a besoin ?",
@@ -190,24 +190,24 @@ const translations = {
         },
         {
           question: "Quand arrivent les paiements AVS ?",
-          answer: "Les rentes sont versées en début de mois, pour le mois en cours (à l'avance). Dates exactes : 5 janvier, 2 février, 2 mars, etc. 13e rente – avec la rente de décembre.",
+          answer: "Les rentes sont versées en début de mois, pour le mois en cours (à l'avance). Dates exactes : 5 janvier, 2 février, 2 mars, etc. En décembre 2026, la 13e rente AVS sera versée en plus.",
         },
         {
-          question: "J'ai manqué le délai pour la réduction des primes. C'est fini ?",
+          question: "J'ai manqué le délai pour la réduction des primes. Puis-je encore faire une demande ?",
           answer: "Dans la plupart des cantons – oui, pour l'année en cours. Mais la demande pour l'année suivante peut être déposée à temps. Dans le canton de Saint-Gall, le formulaire arrive automatiquement avant le 10 janvier.",
         },
       ],
     },
     urgency: {
       title: "L'argent n'attend pas. Les délais non plus.",
-      text: "Réduction des primes – jusqu'au 31 mai. Allocations familiales – dès la naissance de l'enfant. PC – dès que la rente ne couvre plus les dépenses. Téléchargez le guide – vérifiez ce que vous manquez.",
+      text: "Réduction des primes – délais variables selon le canton. Allocations familiales – dès le mois de naissance de l'enfant. PC – dès le moment où la rente ne couvre plus les dépenses. Téléchargez le guide – vérifiez ce qui pourrait vous être dû.",
       cta: "📄 Télécharger le guide gratuitement",
     },
     footer: {
       impressumTitle: "Mentions légales",
-      impressumText: "La Suisse paie SA<br>Rue Exemple 1<br>8000 Zurich<br>Suisse<br>E-mail : info@la-suisse-paie.ch",
+      impressumText: "La Suisse paie SA<br>Rue Exemple 1<br>8000 Zurich<br>Suisse<br>Web : sozialgeld-ch.com<br>E-mail : info@sozialgeld-ch.com",
       privacyTitle: "Politique de confidentialité",
-      privacyText: "Ce site ne collecte pas de données personnelles via des formulaires. Le guide peut être téléchargé sans inscription. Si l'analyse est activée, des données d'utilisation anonymes peuvent être traitées via des cookies (uniquement avec consentement). Contact : info@la-suisse-paie.ch.",
+      privacyText: "Ce site ne collecte pas de données personnelles via des formulaires. Le guide peut être téléchargé sans inscription. Si l'analyse est activée, des données d'utilisation anonymes peuvent être traitées via des cookies (uniquement avec consentement). Contact : info@sozialgeld-ch.com.",
       sourcesTitle: "Sources",
       sourcesLinks: "ahv-iv.ch · gdk-cds.ch",
       copyright: "© 2026 La Suisse paie. Tous droits réservés.",
@@ -230,7 +230,7 @@ const translations = {
     hero: {
       badge: "Prestazioni",
       title: "Pagamenti statali in Svizzera 2026: a cosa hai diritto?",
-      subtitle: "La Svizzera paga. Sempre. Ma molti non sanno cosa spetta loro. Assegni familiari, rimborso assicurazione, integrazioni alla pensione, contributi all'affitto – lo Stato restituisce denaro se sai dove guardare. Scarica la guida gratuita e scopri in 2 minuti.",
+      subtitle: "La Svizzera paga. Sempre. Ma molti non sanno cosa spetta loro. Assegni familiari, riduzione dei premi, integrazioni alla pensione, contributi all'affitto – lo Stato restituisce denaro se sai dove guardare. Scarica la guida gratuita e scopri in 2 minuti cosa ti spetta.",
       downloadTitle: "📄 Scarica la guida gratuitamente",
       downloadText: "PDF disponibile subito. Nessuna registrazione, nessuna e-mail richiesta.",
       downloadBtn: "Scarica la guida gratuitamente",
@@ -242,15 +242,15 @@ const translations = {
       items: [
         {
           question: "Pago 300+ CHF di assicurazione malattia al mese. È normale?",
-          answer: "No. Se il reddito è inferiore a una certa soglia, il cantone rimborsa una parte. A Basilea Campagna, il premio di riferimento per gli adulti è CHF 4'596 all'anno. La differenza viene restituita.",
+          answer: "Può variare in base a età, luogo di domicilio, assicurazione e franchigia. Se il reddito è inferiore a una certa soglia, puoi ottenere una riduzione dei premi sotto determinate condizioni. A Basilea Campagna, il premio di riferimento per gli adulti è CHF 4'596 all'anno. L'importo della riduzione dipende dalle condizioni personali e cantonali.",
         },
         {
           question: "Ho due figli. Lo Stato paga qualcosa?",
-          answer: "Sì. Assegno per figlio – minimo CHF 215–245 al mese per figlio fino a 16 anni, assegno di formazione – CHF 268–298 dopo i 16 anni. A Zurigo sono CHF 3'216 all'anno per figlio.",
+          answer: "Sì. Assegno per figlio – a seconda del cantone, minimo CHF 215 al mese, talvolta di più, per figlio fino a 16 anni. Assegno di formazione – minimo CHF 268 al mese durante una formazione riconosciuta. A Zurigo gli importi variano in base all'età e al tipo di assegno.",
         },
         {
           question: "Sono pensionato. La rendita non basta per vivere.",
-          answer: "Prestazioni complementari (PC) – integrazione fino al minimo vitale. CHF 20'670 all'anno per single, CHF 31'005 per coppie. Più un contributo separato all'affitto – fino a CHF 18'300 per single.",
+          answer: "Prestazioni complementari (PC) – prestazione per coprire i costi di vita e di alloggio riconosciuti, quando reddito e patrimonio non bastano. CHF 20'670 all'anno per single, CHF 31'005 per coppie. I costi di affitto riconosciuti sono considerati nel calcolo delle PC, con massimali legali.",
         },
       ],
     },
@@ -258,12 +258,12 @@ const translations = {
       title: "Cosa troverai nella guida",
       items: [
         { title: "Assegni familiari", text: "Quanto viene pagato nel tuo cantone, da quale età, fino a quando, come presentare la domanda" },
-        { title: "Riduzione dei premi", text: "Come recuperare parte dell'assicurazione malattia (nel cantone SG domanda entro il 31 maggio 2026)" },
+        { title: "Riduzione dei premi", text: "Come recuperare parte dell'assicurazione malattia (le scadenze variano a seconda del cantone)" },
         { title: "Prestazioni complementari", text: "Integrazione AVS/AI, chi ha diritto, importi massimi, limite patrimoniale" },
-        { title: "Rendita AVS", text: "Date esatte dei pagamenti nel 2026 (primi giorni lavorativi del mese)" },
+        { title: "Rendita AVS", text: "Date esatte dei pagamenti nel 2026 (primi giorni lavorativi del mese). A dicembre 2026 verrà pagata in più la 13a rendita AVS." },
         { title: "Contributi all'affitto", text: "Sussidio all'affitto per famiglie e pensionati – in quali cantoni e quanto" },
-        { title: "Deduzioni fiscali", text: "Quali deduzioni riducono le tasse (figli, assicurazione, contributi previdenziali)" },
-        { title: "FAQ", text: "Cosa fare se hai perso la scadenza? E per gli stranieri? E la doppia cittadinanza?" },
+        { title: "Deduzioni fiscali", text: "Quali deduzioni riducono il tuo carico fiscale (figli, assicurazione, contributi previdenziali)" },
+        { title: "FAQ", text: "Cosa fare se hai perso la scadenza? E per gli stranieri? Cosa vale per la doppia cittadinanza?" },
       ],
     },
     cta: {
@@ -292,7 +292,7 @@ const translations = {
         },
         {
           question: "Quanto viene pagato per figlio?",
-          answer: "Minimo legale: CHF 215–245/mese fino a 16 anni, CHF 268–298/mese in formazione 16–25 anni. In alcuni cantoni di più – Zurigo, Soleura, San Gallo.",
+          answer: "A seconda del cantone, minimo CHF 215/mese fino a 16 anni, talvolta di più. Durante una formazione riconosciuta, minimo CHF 268/mese (16–25 anni). In alcuni cantoni importi più alti – es. Zurigo, Soleura, San Gallo.",
         },
         {
           question: "Cosa sono le PC e chi ne ha bisogno?",
@@ -300,24 +300,24 @@ const translations = {
         },
         {
           question: "Quando arrivano i pagamenti AVS?",
-          answer: "Le pensioni vengono pagate all'inizio del mese, per il mese in corso (anticipatamente). Date esatte: 5 gennaio, 2 febbraio, 2 marzo, ecc. 13a pensione – insieme alla pensione di dicembre.",
+          answer: "Le pensioni vengono pagate all'inizio del mese, per il mese in corso (anticipatamente). Date esatte: 5 gennaio, 2 febbraio, 2 marzo, ecc. A dicembre 2026 verrà pagata in più la 13a rendita AVS.",
         },
         {
-          question: "Ho perso la scadenza per la riduzione dei premi. È tutto perduto?",
+          question: "Ho perso la scadenza per la riduzione dei premi. Posso ancora fare domanda?",
           answer: "Nella maggior parte dei cantoni – sì, per l'anno in corso. Ma la domanda per l'anno successivo può essere presentata in tempo. Nel cantone San Gallo il modulo arriva automaticamente entro il 10 gennaio.",
         },
       ],
     },
     urgency: {
       title: "I soldi non aspettano. Nemmeno le scadenze.",
-      text: "Riduzione dei premi – entro il 31 maggio. Assegni familiari – dalla nascita del figlio. PC – dal momento in cui la rendita non copre più le spese. Scarica la guida – verifica cosa ti stai perdendo.",
+      text: "Riduzione dei premi – scadenze diverse a seconda del cantone. Assegni familiari – dal mese di nascita del figlio. PC – dal momento in cui la rendita non copre più le spese. Scarica la guida – verifica cosa potrebbe spettarti.",
       cta: "📄 Scarica la guida gratuitamente",
     },
     footer: {
       impressumTitle: "Impressum",
-      impressumText: "La Svizzera paga SA<br>Via Esempio 1<br>8000 Zurigo<br>Svizzera<br>E-mail: info@la-svizzera-paga.ch",
+      impressumText: "La Svizzera paga SA<br>Via Esempio 1<br>8000 Zurigo<br>Svizzera<br>Web: sozialgeld-ch.com<br>E-mail: info@sozialgeld-ch.com",
       privacyTitle: "Informativa sulla privacy",
-      privacyText: "Questo sito non raccoglie dati personali tramite moduli. La guida può essere scaricata senza registrazione. Se l'analisi è attiva, dati di utilizzo anonimi possono essere trattati tramite cookie (solo con consenso). Contatto: info@la-svizzera-paga.ch.",
+      privacyText: "Questo sito non raccoglie dati personali tramite moduli. La guida può essere scaricata senza registrazione. Se l'analisi è attiva, dati di utilizzo anonimi possono essere trattati tramite cookie (solo con consenso). Contatto: info@sozialgeld-ch.com.",
       sourcesTitle: "Fonti",
       sourcesLinks: "ahv-iv.ch · gdk-cds.ch",
       copyright: "© 2026 La Svizzera paga. Tutti diritti riservati.",
