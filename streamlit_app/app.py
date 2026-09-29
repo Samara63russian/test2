@@ -251,6 +251,25 @@ def analyze_email(sender: str, email: str, subject: str, body: str) -> dict:
     }
 
 
+def demo_incoming_email() -> dict:
+    mail = analyze_email(
+        "Олег Кузнецов",
+        "o.kuznetsov@promresurs.ru",
+        "Запрос цены и наличия на октябрь",
+        "Добрый день! Подскажите актуальную цену и наличие трубы профильной 40х20, объём 120 метров. "
+        "Если есть возможность, пришлите предложение до конца недели.",
+    )
+    mail.update(
+        {
+            "id": "mail-demo-incoming",
+            "company": "«ПромРесурс»",
+            "received": "Только что",
+            "initials": "ОК",
+        }
+    )
+    return mail
+
+
 def category_class(category: str) -> str:
     return {"КП": "green", "Перечень": "orange", "Запрос": "purple"}.get(category, "gray")
 
@@ -410,7 +429,17 @@ def render_inbox() -> None:
     if st.session_state.get("flash"):
         st.success(st.session_state.pop("flash"))
 
-    action_left, action_right = st.columns([7, 1.45])
+    action_left, check_col, action_right = st.columns([5.4, 1.55, 1.65])
+    with check_col:
+        if st.button("↻  Проверить почту", use_container_width=True):
+            if not any(mail["id"] == "mail-demo-incoming" for mail in st.session_state.emails):
+                incoming = demo_incoming_email()
+                st.session_state.emails.insert(0, incoming)
+                st.session_state.selected_id = incoming["id"]
+                st.session_state.flash = "Проверка завершена: найдено 1 новое письмо."
+                st.rerun()
+            else:
+                st.toast("Новых писем нет")
     with action_right:
         if st.button("＋  Добавить письмо", type="primary", use_container_width=True):
             st.session_state.add_open = True
