@@ -10,7 +10,8 @@ WORKDIR /app
 COPY streamlit_app/requirements.txt ./requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY streamlit_app/ ./
+COPY streamlit_app/app.py ./app.py
+COPY streamlit_app/src/email_ai.py streamlit_app/src/mailbox_client.py streamlit_app/src/request_store.py ./src/
 
 EXPOSE 8501
 

@@ -16,7 +16,15 @@ DEFAULT_DB_PATH = Path(
 
 
 def _connect(db_path: str | Path = DEFAULT_DB_PATH) -> sqlite3.Connection:
-    connection = sqlite3.connect(str(db_path))
+    path = Path(db_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    existed = path.exists()
+    connection = sqlite3.connect(str(path))
+    if not existed:
+        try:
+            path.chmod(0o600)
+        except OSError:
+            pass
     connection.row_factory = sqlite3.Row
     return connection
 
@@ -42,6 +50,15 @@ def init_store(db_path: str | Path = DEFAULT_DB_PATH) -> None:
                 confidence INTEGER NOT NULL DEFAULT 0,
                 engine TEXT NOT NULL DEFAULT 'Локальный анализ',
                 source TEXT NOT NULL DEFAULT 'email'
+            )
+            """
+        )
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS processed_messages (
+                id TEXT PRIMARY KEY,
+                outcome TEXT NOT NULL,
+                processed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )
             """
         )
@@ -155,6 +172,33 @@ def update_status(
     with closing(_connect(db_path)) as connection:
         connection.execute(
             "UPDATE requests SET status = ? WHERE id = ?", (status, request_id)
+        )
+        connection.commit()
+
+
+def list_processed_message_ids(
+    db_path: str | Path = DEFAULT_DB_PATH,
+) -> set[str]:
+    with closing(_connect(db_path)) as connection:
+        rows = connection.execute("SELECT id FROM processed_messages").fetchall()
+        return {str(row["id"]) for row in rows}
+
+
+def mark_message_processed(
+    message_id: str,
+    outcome: str,
+    db_path: str | Path = DEFAULT_DB_PATH,
+) -> None:
+    with closing(_connect(db_path)) as connection:
+        connection.execute(
+            """
+            INSERT INTO processed_messages (id, outcome)
+            VALUES (?, ?)
+            ON CONFLICT(id) DO UPDATE SET
+                outcome = excluded.outcome,
+                processed_at = CURRENT_TIMESTAMP
+            """,
+            (message_id, outcome),
         )
         connection.commit()
 

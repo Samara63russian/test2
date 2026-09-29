@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import hashlib
+import hmac
 import os
-import re
 from datetime import datetime, timedelta
 from html import escape
 from typing import Any
+from urllib.parse import quote, urlencode
 
 import streamlit as st
 
@@ -15,8 +16,11 @@ from src.email_ai import AnalysisResult, analyze_email
 from src.mailbox_client import fetch_unread, is_configured
 from src.request_store import (
     count_requests,
+    get_request,
     init_store,
+    list_processed_message_ids,
     list_requests,
+    mark_message_processed,
     save_request,
     seed_requests,
     update_status,
@@ -378,26 +382,28 @@ def make_record(
 
 def initialize_app() -> None:
     init_store()
-    demo_records = []
-    for index, message in enumerate(DEMO_EMAILS, start=1):
-        analysis = analyze_email(message["subject"], message["body"])
-        demo_records.append(
-            make_record(
-                request_id=f"demo-{index}",
-                sender_name=message["sender_name"],
-                sender_email=message["sender_email"],
-                company=message["company"],
-                subject=message["subject"],
-                body=message["body"],
-                received_at=message["received_at"],
-                analysis=analysis,
-                status=message["status"],
-                source="demo",
+    if count_requests() == 0:
+        demo_records = []
+        for index, message in enumerate(DEMO_EMAILS, start=1):
+            analysis = analyze_email(message["subject"], message["body"])
+            demo_records.append(
+                make_record(
+                    request_id=f"demo-{index}",
+                    sender_name=message["sender_name"],
+                    sender_email=message["sender_email"],
+                    company=message["company"],
+                    subject=message["subject"],
+                    body=message["body"],
+                    received_at=message["received_at"],
+                    analysis=analysis,
+                    status=message["status"],
+                    source="demo",
+                )
             )
-        )
-    seed_requests(demo_records)
+        seed_requests(demo_records)
     st.session_state.setdefault("selected_request", "demo-1")
     st.session_state.setdefault("sync_message", "")
+    st.session_state.setdefault("navigation", "▣  Входящие")
 
 
 def format_received(value: str) -> str:
@@ -419,14 +425,16 @@ def initials(name: str) -> str:
 
 
 def sync_mailbox() -> tuple[int, int]:
-    fetched = fetch_unread()
+    fetched = fetch_unread(skip_ids=list_processed_message_ids())
     created = 0
     skipped = 0
     for message in fetched:
         analysis = analyze_email(message.subject, message.body)
         if not analysis.relevant:
+            mark_message_processed(message.sync_id, "irrelevant")
             skipped += 1
             continue
+        existed = get_request(message.id) is not None
         save_request(
             make_record(
                 request_id=message.id,
@@ -439,7 +447,9 @@ def sync_mailbox() -> tuple[int, int]:
                 analysis=analysis,
             )
         )
-        created += 1
+        mark_message_processed(message.sync_id, "created" if not existed else "updated")
+        if not existed:
+            created += 1
     return created, skipped
 
 
@@ -461,6 +471,7 @@ def render_sidebar() -> str:
             "Навигация",
             ("▣  Входящие", "◫  Запросы", "⚙  Настройки"),
             label_visibility="collapsed",
+            key="navigation",
         )
         st.markdown('<div class="sidebar-spacer"></div>', unsafe_allow_html=True)
         engine = (
@@ -506,7 +517,7 @@ def render_page_header(title: str, subtitle: str, show_sync: bool = False) -> No
                     st.session_state.sync_message = (
                         f"Создано записей: {created}. Не относятся к запросам: {skipped}."
                     )
-                    st.experimental_rerun()
+                    st.rerun()
                 except Exception as error:
                     st.error(f"Не удалось проверить почту: {error}")
 
@@ -612,13 +623,14 @@ def render_request_detail(record: dict[str, Any]) -> None:
         )
         if selected != record["status"]:
             update_status(record["id"], selected)
-            st.experimental_rerun()
+            st.rerun()
     with reply_col:
         st.write("")
         st.write("")
-        mailto_subject = re.sub(r"\s+", "%20", f"Re: {record['subject']}")
+        mailto_email = quote(record["sender_email"], safe="@._+-")
+        mailto_query = urlencode({"subject": f"Re: {record['subject']}"})
         st.markdown(
-            f'<a href="mailto:{escape(record["sender_email"])}?subject={escape(mailto_subject)}" '
+            f'<a href="mailto:{escape(mailto_email)}?{escape(mailto_query)}" '
             'style="display:block;text-align:center;padding:.68rem;border-radius:9px;'
             'background:#1c6b4b;color:white;text-decoration:none;font-weight:650;">'
             "Ответить клиенту ↗</a>",
@@ -676,7 +688,7 @@ def render_manual_import() -> None:
             )
             st.session_state.selected_request = digest
             st.success("Запрос распознан, краткая сводка и карточка созданы.")
-            st.experimental_rerun()
+            st.rerun()
 
 
 def render_inbox() -> None:
@@ -739,7 +751,7 @@ def render_inbox() -> None:
                 ),
             ):
                 st.session_state.selected_request = record["id"]
-                st.experimental_rerun()
+                st.rerun()
 
     with detail_col:
         selected = next(
@@ -794,8 +806,8 @@ def render_kanban() -> None:
                     use_container_width=True,
                 ):
                     st.session_state.selected_request = record["id"]
-                    st.session_state.page_override = "▣  Входящие"
-                    st.experimental_rerun()
+                    st.session_state.navigation = "▣  Входящие"
+                    st.rerun()
 
 
 def render_settings() -> None:
@@ -842,6 +854,7 @@ IMAP_PORT=993
 IMAP_USER=sales@example.ru
 IMAP_PASSWORD=пароль-приложения
 IMAP_FOLDER=INBOX
+MAILBRIEF_PASSWORD=пароль-для-входа
 
 # Необязательно: бесплатная локальная LLM
 OLLAMA_BASE_URL=http://localhost:11434
@@ -855,12 +868,36 @@ OLLAMA_MODEL=qwen2.5:3b""",
     st.caption(f"Записей в локальной базе: {count_requests()}")
 
 
+def authenticate() -> bool:
+    expected = os.getenv("MAILBRIEF_PASSWORD", "")
+    if is_configured() and not expected:
+        st.error(
+            "Для работы с реальной почтой задайте MAILBRIEF_PASSWORD. "
+            "Без защиты содержимое писем не будет показано."
+        )
+        return False
+    if not expected or st.session_state.get("authenticated"):
+        return True
+
+    _, login_col, _ = st.columns([1, 1.2, 1])
+    with login_col:
+        st.markdown("## Вход в MailBrief")
+        st.caption("Введите пароль, заданный в MAILBRIEF_PASSWORD.")
+        password = st.text_input("Пароль", type="password")
+        if st.button("Войти", type="primary", use_container_width=True):
+            if hmac.compare_digest(password, expected):
+                st.session_state.authenticated = True
+                st.rerun()
+            st.error("Неверный пароль.")
+    return False
+
+
 def main() -> None:
     st.markdown(APP_STYLES, unsafe_allow_html=True)
+    if not authenticate():
+        return
     initialize_app()
     page = render_sidebar()
-    if st.session_state.pop("page_override", None):
-        page = "▣  Входящие"
     if "Входящие" in page:
         render_inbox()
     elif "Запросы" in page:

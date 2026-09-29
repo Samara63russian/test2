@@ -7,12 +7,13 @@ from pathlib import Path
 APP_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP_DIR))
 
-from src.email_ai import REQUEST_TYPES, analyze_locally  # noqa: E402
+from src.email_ai import REQUEST_TYPES, analyze_email, analyze_locally  # noqa: E402
 
 
 class EmailAnalysisTests(unittest.TestCase):
     def setUp(self) -> None:
         os.environ.pop("OLLAMA_BASE_URL", None)
+        os.environ.pop("ALLOW_REMOTE_OLLAMA", None)
 
     def test_extracts_quote_items_deadline_and_priority(self) -> None:
         result = analyze_locally(
@@ -47,6 +48,17 @@ class EmailAnalysisTests(unittest.TestCase):
 
         self.assertFalse(result.relevant)
         self.assertEqual(result.confidence, 35)
+
+    def test_remote_ollama_requires_explicit_secure_opt_in(self) -> None:
+        os.environ["OLLAMA_BASE_URL"] = "http://untrusted.example.com"
+
+        result = analyze_email(
+            "Запрос КП",
+            "Просим рассчитать стоимость поставки десяти кресел.",
+        )
+
+        self.assertEqual(result.engine, "Локальный анализ")
+        self.assertTrue(result.relevant)
 
 
 if __name__ == "__main__":

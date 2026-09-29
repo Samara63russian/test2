@@ -17,6 +17,7 @@ from html import unescape
 @dataclass(frozen=True)
 class IncomingEmail:
     id: str
+    sync_id: str
     sender_name: str
     sender_email: str
     subject: str
@@ -79,31 +80,69 @@ def _message_body(message: Message) -> str:
     return _html_to_text("\n".join(html_parts))
 
 
-def fetch_unread(limit: int = 30) -> list[IncomingEmail]:
+def _message_size(client: imaplib.IMAP4_SSL, uid: bytes) -> int:
+    status, data = client.uid("fetch", uid, "(RFC822.SIZE)")
+    if status != "OK":
+        return 0
+    for item in data:
+        raw = item[0] if isinstance(item, tuple) else item
+        if isinstance(raw, bytes):
+            match = re.search(rb"RFC822\.SIZE\s+(\d+)", raw)
+            if match:
+                return int(match.group(1))
+    return 0
+
+
+def _fetch_payload(
+    client: imaplib.IMAP4_SSL, uid: bytes, query: str
+) -> bytes | None:
+    status, data = client.uid("fetch", uid, query)
+    if status != "OK":
+        return None
+    for item in data:
+        if isinstance(item, tuple) and isinstance(item[1], bytes):
+            return item[1]
+    return None
+
+
+def fetch_unread(
+    limit: int = 30, *, skip_ids: set[str] | None = None
+) -> list[IncomingEmail]:
     """Fetch unread messages without changing their read status."""
 
     if not is_configured():
         raise RuntimeError("IMAP connection is not configured")
 
     host = os.environ["IMAP_HOST"]
+    user = os.environ["IMAP_USER"]
     port = int(os.getenv("IMAP_PORT", "993"))
     folder = os.getenv("IMAP_FOLDER", "INBOX")
-    client = imaplib.IMAP4_SSL(host, port)
+    timeout = int(os.getenv("IMAP_TIMEOUT_SECONDS", "20"))
+    max_bytes = int(os.getenv("IMAP_MAX_MESSAGE_BYTES", str(5 * 1024 * 1024)))
+    client = imaplib.IMAP4_SSL(host, port, timeout=timeout)
     try:
-        client.login(os.environ["IMAP_USER"], os.environ["IMAP_PASSWORD"])
+        client.login(user, os.environ["IMAP_PASSWORD"])
         status, _ = client.select(folder, readonly=True)
         if status != "OK":
             raise RuntimeError(f"Cannot open IMAP folder: {folder}")
-        status, data = client.search(None, "UNSEEN")
+        status, data = client.uid("search", None, "UNSEEN")
         if status != "OK":
             raise RuntimeError("Cannot search the IMAP inbox")
 
         messages: list[IncomingEmail] = []
-        for message_number in data[0].split()[-limit:]:
-            status, raw_data = client.fetch(message_number, "(BODY.PEEK[])")
-            if status != "OK" or not raw_data or not isinstance(raw_data[0], tuple):
+        skipped = skip_ids or set()
+        for uid in data[0].split():
+            sync_source = f"{host}|{user}|{folder}|{uid.decode('ascii', errors='ignore')}"
+            sync_id = hashlib.sha256(sync_source.encode("utf-8")).hexdigest()[:24]
+            if sync_id in skipped:
                 continue
-            message = email.message_from_bytes(raw_data[0][1])
+            size = _message_size(client, uid)
+            oversized = size > max_bytes
+            query = "(BODY.PEEK[HEADER])" if oversized else "(BODY.PEEK[])"
+            payload = _fetch_payload(client, uid, query)
+            if payload is None:
+                continue
+            message = email.message_from_bytes(payload)
             sender_name, sender_email = parseaddr(_decode(message.get("From")))
             subject = _decode(message.get("Subject")) or "Без темы"
             message_id = message.get("Message-ID", "").strip()
@@ -116,13 +155,20 @@ def fetch_unread(limit: int = 30) -> list[IncomingEmail]:
             messages.append(
                 IncomingEmail(
                     id=request_id,
+                    sync_id=sync_id,
                     sender_name=sender_name or sender_email.split("@")[0],
                     sender_email=sender_email,
                     subject=subject,
-                    body=_message_body(message),
+                    body=(
+                        f"[Тело письма не загружено: размер превышает {max_bytes} байт]"
+                        if oversized
+                        else _message_body(message)
+                    ),
                     received_at=received_at,
                 )
             )
+            if len(messages) >= limit:
+                break
         return messages
     finally:
         try:

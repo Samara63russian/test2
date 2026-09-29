@@ -8,6 +8,7 @@ import re
 from dataclasses import asdict, dataclass
 from html import unescape
 from typing import Any
+from urllib.parse import urlparse
 
 
 REQUEST_TYPES = {
@@ -187,9 +188,23 @@ def _analyze_with_ollama(subject: str, body: str) -> AnalysisResult | None:
     if not base_url:
         return None
 
+    parsed_url = urlparse(base_url)
+    local_hosts = {"localhost", "127.0.0.1", "::1"}
+    is_remote = parsed_url.hostname not in local_hosts
+    remote_allowed = os.getenv("ALLOW_REMOTE_OLLAMA", "").lower() == "true"
+    if (
+        parsed_url.scheme not in {"http", "https"}
+        or not parsed_url.hostname
+        or (is_remote and (not remote_allowed or parsed_url.scheme != "https"))
+    ):
+        return None
+
     try:
         import requests
+    except ImportError:
+        return None
 
+    try:
         prompt = f"""
 Ты помощник отдела продаж. Проанализируй письмо и верни только JSON:
 {{
@@ -218,14 +233,26 @@ def _analyze_with_ollama(subject: str, body: str) -> AnalysisResult | None:
         )
         response.raise_for_status()
         payload = json.loads(response.json()["response"])
-        if payload.get("request_type") not in REQUEST_TYPES.values():
+        if not isinstance(payload, dict):
+            return None
+        items = payload.get("items", [])
+        deadline = payload.get("deadline")
+        summary = payload.get("summary")
+        if (
+            payload.get("request_type") not in REQUEST_TYPES.values()
+            or not isinstance(payload.get("relevant", True), bool)
+            or not isinstance(summary, str)
+            or not isinstance(items, list)
+            or not all(isinstance(item, str) for item in items)
+            or (deadline is not None and not isinstance(deadline, str))
+        ):
             return None
         return AnalysisResult(
-            relevant=bool(payload.get("relevant", True)),
+            relevant=payload.get("relevant", True),
             request_type=payload["request_type"],
-            summary=str(payload.get("summary", ""))[:240],
-            items=[str(item)[:140] for item in payload.get("items", [])][:8],
-            deadline=payload.get("deadline") or None,
+            summary=summary[:240],
+            items=[item[:140] for item in items][:8],
+            deadline=deadline or None,
             priority="Высокий" if payload.get("priority") == "Высокий" else "Обычный",
             confidence=max(0, min(100, int(payload.get("confidence", 85)))),
             engine=f"Ollama · {os.getenv('OLLAMA_MODEL', 'qwen2.5:3b')}",

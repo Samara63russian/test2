@@ -11,7 +11,9 @@ from src.request_store import (  # noqa: E402
     count_requests,
     get_request,
     init_store,
+    list_processed_message_ids,
     list_requests,
+    mark_message_processed,
     save_request,
     update_status,
 )
@@ -76,6 +78,15 @@ class RequestStoreTests(unittest.TestCase):
         stored = get_request("request-1", self.db_path)
         self.assertEqual(stored["status"], "В работе")
         self.assertEqual(stored["summary"], "Обновлённая сводка.")
+
+    def test_tracks_processed_imap_messages(self) -> None:
+        mark_message_processed("mailbox-uid-42", "irrelevant", self.db_path)
+
+        self.assertEqual(
+            list_processed_message_ids(self.db_path),
+            {"mailbox-uid-42"},
+        )
+        self.assertEqual(self.db_path.stat().st_mode & 0o777, 0o600)
 
 
 if __name__ == "__main__":
