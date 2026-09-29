@@ -1,0 +1,9 @@
+**
+!Dockerfile
+!streamlit_app/
+!streamlit_app/app.py
+!streamlit_app/requirements.txt
+!streamlit_app/src/
+!streamlit_app/src/email_ai.py
+!streamlit_app/src/mailbox_client.py
+!streamlit_app/src/request_store.py
