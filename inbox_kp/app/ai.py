@@ -140,10 +140,13 @@ def _first_sentences(text: str, n: int = 3) -> str:
 
 
 def _guess_company(from_name: str, from_email: str, body: str) -> str:
-    for line in (body or "").splitlines():
-        m = re.search(r"(?:ООО|АО|ПАО|ЗАО|ИП|ТОО)\s+[«\"]?[\w\-. ]+", line)
-        if m:
-            return m.group(0).strip(" «»\"")
+    legal = r"(?:ООО|АО|ПАО|ЗАО|ОАО|ИП|ТОО)"
+    quoted = re.search(legal + r"\s*[«\"][^»\"]+[»\"]", body or "")
+    if quoted:
+        return quoted.group(0).strip()
+    plain = re.search(legal + r"\s+[А-ЯЁA-Z][\w\-. ]{1,50}", body or "")
+    if plain:
+        return plain.group(0).strip()
     domain = from_email.split("@")[-1] if from_email and "@" in from_email else ""
     if domain and domain not in {"gmail.com", "mail.ru", "yandex.ru", "ya.ru", "outlook.com", "hotmail.com"}:
         stem = domain.split(".")[0]
@@ -153,23 +156,45 @@ def _guess_company(from_name: str, from_email: str, body: str) -> str:
 
 def _guess_products(body: str) -> list[str]:
     products: list[str] = []
+    skip_start = re.compile(r"^(добрый|здравствуйте|прошу|коллеги|здравствуй)", re.I)
     for line in (body or "").splitlines():
         s = line.strip(" -•\t")
+        if not s or skip_start.match(s):
+            continue
         if re.search(r"\d+\s*(шт|комплект|т|кг|м|м2|поз)", s, re.I) and 8 < len(s) < 140:
             products.append(s)
             continue
         if re.search(r"(гост|ту\s|арт\.|модель|марки)\s", s, re.I) and 8 < len(s) < 140:
             products.append(s)
+    if not products:
+        for match in re.finditer(
+            r"[—\-–]\s*\d[\d\s]*\s*(?:шт|комплект|м|т|кг)",
+            body or "",
+            re.I,
+        ):
+            left = (body or "")[max(0, match.start() - 48) : match.start()]
+            left = re.split(r"[\n.;:]", left)[-1]
+            left = re.sub(r"^(?:на|прошу|нужно|просит)\s+", "", left.strip(), flags=re.I)
+            left = re.sub(r"^.*\bна\s+", "", left)
+            chunk = re.sub(r"\s+", " ", f"{left} {match.group(0)}").strip(" .")
+            if chunk and not skip_start.match(chunk) and 6 < len(chunk) < 140:
+                products.append(chunk)
     return products[:8]
 
 
 def _guess_deadline(text: str) -> str:
-    m = re.search(
-        r"(до\s+\d{1,2}[\./]\d{1,2}(?:[\./]\d{2,4})?|до\s+\d{1,2}\s+\w+|в течение\s+\d+\s+\w+|срок[^\n.]{0,40})",
-        text or "",
-        re.I,
+    patterns = (
+        r"до\s+\d{1,2}[\./]\d{1,2}(?:[\./]\d{2,4})?",
+        r"до\s+\d{1,2}\s+[а-яё]+(?:\s+\d{4})?",
+        r"в течение\s+\d+\s+[а-яё]+",
+        r"срок поставки\s*[—\-:]*\s*[^\n.]{0,40}",
     )
-    return m.group(0).strip() if m else ""
+    blob = text or ""
+    for pattern in patterns:
+        m = re.search(pattern, blob, re.I)
+        if m:
+            return m.group(0).strip(" .")
+    return ""
 
 
 def heuristic_analyze(parsed: dict[str, Any]) -> dict[str, Any]:

@@ -40,3 +40,21 @@ def test_heuristic_extracts_company_and_phone():
     assert "Восток" in analysis["company"]
     assert analysis["phone"].startswith("+7")
     assert analysis["summary"]
+
+
+def test_heuristic_paste_rfq_fields():
+    parsed = parse_email(
+        """От: Ольга Белова <olga@zavod-volga.ru>
+Тема: Запрос КП на подшипники 6205
+
+Добрый день. ООО «Завод Волга» просит коммерческое предложение на подшипники 6205 — 200 шт., срок до 01.11.2026. Срочно.
+Тел. +7 846 555-10-20
+"""
+    )
+    analysis = heuristic_analyze(parsed)
+    assert analysis["kind"] == "kp"
+    assert analysis["company"] == "ООО «Завод Волга»"
+    assert "01.11.2026" in analysis["deadline"]
+    assert analysis["urgency"] == "high"
+    assert any("6205" in p for p in analysis["products"])
+    assert all("Добрый день" not in p for p in analysis["products"])
