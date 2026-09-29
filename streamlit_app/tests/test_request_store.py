@@ -66,6 +66,17 @@ class RequestStoreTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             update_status("request-1", "Удалён", self.db_path)
 
+    def test_resync_does_not_reset_workflow_status(self) -> None:
+        save_request(self.record, self.db_path)
+        update_status("request-1", "В работе", self.db_path)
+
+        refreshed = {**self.record, "summary": "Обновлённая сводка."}
+        save_request(refreshed, self.db_path)
+
+        stored = get_request("request-1", self.db_path)
+        self.assertEqual(stored["status"], "В работе")
+        self.assertEqual(stored["summary"], "Обновлённая сводка.")
+
 
 if __name__ == "__main__":
     unittest.main()

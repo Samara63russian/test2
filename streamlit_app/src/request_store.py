@@ -76,8 +76,12 @@ def save_request(record: dict[str, Any], db_path: str | Path = DEFAULT_DB_PATH) 
         "source",
     )
     placeholders = ", ".join(f":{column}" for column in columns)
+    # A read-only IMAP message remains unread and can be fetched again. Refresh
+    # its extracted fields without resetting a status already changed by a user.
     updates = ", ".join(
-        f"{column} = excluded.{column}" for column in columns if column != "id"
+        f"{column} = excluded.{column}"
+        for column in columns
+        if column not in {"id", "status"}
     )
     with closing(_connect(db_path)) as connection:
         connection.execute(
