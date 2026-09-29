@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Трекер входящих запросов</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">✉</div>
+        <div>
+          <h1>Request Tracker</h1>
+          <p>AI-конспект входящих писем</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-view="dashboard">Дашборд</button>
+        <button class="nav-btn" data-view="add">Добавить письмо</button>
+        <button class="nav-btn" data-view="settings">Настройки</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div id="ai-badge" class="badge">AI: загрузка...</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="view-dashboard" class="view active">
+        <header class="page-header">
+          <div>
+            <h2>Входящие запросы</h2>
+            <p class="subtitle">Классификация и краткий конспект писем с запросами КП, перечней и обращений</p>
+          </div>
+          <div class="header-actions">
+            <button id="fetch-imap-btn" class="btn secondary">Загрузить из почты</button>
+            <button id="refresh-btn" class="btn primary">Обновить</button>
+          </div>
+        </header>
+
+        <div id="stats" class="stats-grid"></div>
+
+        <div class="filters">
+          <input id="search-input" type="search" placeholder="Поиск по теме, отправителю, конспекту...">
+          <select id="filter-status">
+            <option value="">Все статусы</option>
+            <option value="new">Новые</option>
+            <option value="in_progress">В работе</option>
+            <option value="completed">Завершённые</option>
+            <option value="archived">Архив</option>
+          </select>
+          <select id="filter-category">
+            <option value="">Все категории</option>
+            <option value="commercial_proposal">Коммерческое предложение</option>
+            <option value="catalog">Перечень / прайс</option>
+            <option value="general">Общий запрос</option>
+          </select>
+        </div>
+
+        <div id="requests-list" class="requests-list"></div>
+      </section>
+
+      <section id="view-add" class="view">
+        <header class="page-header">
+          <div>
+            <h2>Добавить письмо</h2>
+            <p class="subtitle">Вставьте текст письма — AI определит тип запроса и создаст конспект</p>
+          </div>
+        </header>
+
+        <form id="add-form" class="card form-card">
+          <label>
+            Отправитель
+            <input type="email" name="sender" placeholder="client@company.ru">
+          </label>
+          <label>
+            Тема письма
+            <input type="text" name="subject" placeholder="Запрос коммерческого предложения">
+          </label>
+          <label>
+            Текст письма *
+            <textarea name="body" rows="12" required placeholder="Вставьте содержимое письма..."></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="button" id="fill-demo-btn" class="btn secondary">Пример письма</button>
+            <button type="submit" class="btn primary">Анализировать и сохранить</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="view-settings" class="view">
+        <header class="page-header">
+          <div>
+            <h2>Настройки</h2>
+            <p class="subtitle">Подключите бесплатный Groq API для умного конспектирования</p>
+          </div>
+        </header>
+
+        <div class="settings-grid">
+          <article class="card">
+            <h3>Бесплатный AI (Groq)</h3>
+            <p>Зарегистрируйтесь на <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> и получите бесплатный API-ключ. Добавьте его в переменную окружения <code>GROQ_API_KEY</code>.</p>
+            <p id="groq-status" class="status-line">Статус: проверка...</p>
+          </article>
+
+          <article class="card">
+            <h3>IMAP-почта (опционально)</h3>
+            <p>Для автоматической загрузки непрочитанных писем задайте переменные окружения:</p>
+            <ul class="env-list">
+              <li><code>IMAP_HOST</code> — например imap.yandex.ru</li>
+              <li><code>IMAP_USERNAME</code></li>
+              <li><code>IMAP_PASSWORD</code></li>
+              <li><code>IMAP_FOLDER</code> — по умолчанию INBOX</li>
+            </ul>
+            <p id="imap-status" class="status-line">Статус: проверка...</p>
+          </article>
+
+          <article class="card">
+            <h3>Локальный режим</h3>
+            <p>Без API-ключа приложение работает в локальном режиме: определяет категорию по ключевым словам и формирует краткий конспект автоматически.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="detail-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="close-modal" aria-label="Закрыть">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
