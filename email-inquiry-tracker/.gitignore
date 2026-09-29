@@ -34,3 +34,7 @@ yarn-error.log*
 next-env.d.ts
 *.tsbuildinfo
 next-env.d.ts
+
+# next auto-generated agent docs
+AGENTS.md
+CLAUDE.md
