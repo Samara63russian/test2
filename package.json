@@ -1,0 +1,13 @@
+{
+  "name": "email-ai-request-tracker",
+  "version": "1.0.0",
+  "description": "Smart Web Application for tracking incoming RFQ & inquiry emails with free AI summarization and CRM record creation",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server/src/index.js",
+    "build": "cd client && npm run build",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev"
+  }
+}
