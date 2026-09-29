@@ -1,7 +1,19 @@
-FROM python:3.11-slim
-WORKDIR /src
-COPY ./requirements.txt /src/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /src/requirements.txt
-COPY ./swgoh_comlink_fetcher/ /src/swgoh_comlink_fetcher
-EXPOSE 3201
-CMD ["uvicorn", "swgoh_comlink_fetcher.main:app", "--host", "localhost", "--port", "3201"]
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY index.html vite.config.js ./
+COPY src ./src
+RUN npm run build
+
+FROM node:22-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY --from=build /app/dist ./dist
+COPY server.mjs ./
+COPY server ./server
+RUN mkdir -p data
+EXPOSE 3000
+CMD ["npm", "start"]

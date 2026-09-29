@@ -1,0 +1,43 @@
+{
+  "name": "kp-radar",
+  "version": "1.0.0",
+  "description": "AI inbox for commercial requests and RFQs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "server": "node server.mjs",
+    "start": "node server.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samara63russian/test2.git"
+  },
+  "keywords": [
+    "email",
+    "rfq",
+    "ai",
+    "crm"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samara63russian/test2/issues"
+  },
+  "homepage": "https://github.com/Samara63russian/test2#readme",
+  "dependencies": {
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "imapflow": "^2.1.2",
+    "lucide-react": "^1.48.0",
+    "mailparser": "^3.9.31",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.1"
+  }
+}
