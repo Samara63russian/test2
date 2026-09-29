@@ -1,6 +1,42 @@
-# swgoh_guild_webapp
-Demo hosted at: https://ir940-swgoh.streamlit.app/
+# Инбокс.АИ
 
-A Streamlit webapp for the mobile game Star Wars: Galaxy of Heroes to monitor guild performance and activity. WIP
+Веб-приложение для автоматической обработки входящих запросов отдела
+продаж. Оно забирает непрочитанные письма по IMAP, определяет тип запроса,
+выделяет срок, бюджет и позиции, готовит краткое резюме и создаёт запись в
+журнале.
 
-![Flowchart displaying the layout of the data backend processes](/docs/flowchart.jpg)
+## Возможности
+
+- классификация писем: запрос КП, запрос перечня или общий запрос;
+- краткое резюме, приоритет и рекомендуемый следующий шаг;
+- подключение любого IMAP-ящика без сохранения пароля на диск;
+- бесплатный локальный анализ без API-ключа;
+- опциональная интеграция с локальной моделью через Ollama;
+- создание заявки, черновик ответа и экспорт журнала в CSV;
+- демонстрационные письма для знакомства с интерфейсом.
+
+## Запуск
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r streamlit_app/requirements.txt
+streamlit run streamlit_app/app.py
+```
+
+Откройте `http://localhost:8501`.
+
+Для более свободных ИИ-резюме установите
+[Ollama](https://ollama.com/), запустите локальную модель, например
+`ollama run llama3.2:3b`, и выберите Ollama в настройках приложения.
+
+## Проверка
+
+```bash
+cd streamlit_app
+python -m unittest discover -s tests -v
+```
+
+Почтовые пароли и содержимое писем хранятся только в памяти текущей
+Streamlit-сессии. Автоматическая отправка ответов отключена: черновик всегда
+проверяет сотрудник.
