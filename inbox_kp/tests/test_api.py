@@ -55,6 +55,13 @@ def test_stats_and_filters():
     assert all(item["kind"] == "catalog" for item in catalog["items"])
 
 
+def test_upload_eml():
+    raw = DEMO_EMAILS[1].encode("utf-8")
+    res = client.post("/api/requests/upload", files={"file": ("mail.eml", raw, "message/rfc822")})
+    assert res.status_code == 200
+    assert res.json()["item"]["kind"] == "catalog"
+
+
 def test_ui_served():
     res = client.get("/")
     assert res.status_code == 200
