@@ -111,20 +111,25 @@ def list_requests(
     if status and status != "Все":
         clauses.append("status = ?")
         parameters.append(status)
-    if search.strip():
-        clauses.append(
-            "(LOWER(subject) LIKE ? OR LOWER(sender_name) LIKE ? "
-            "OR LOWER(company) LIKE ? OR LOWER(summary) LIKE ?)"
-        )
-        query = f"%{search.strip().lower()}%"
-        parameters.extend([query] * 4)
     where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
 
     with closing(_connect(db_path)) as connection:
         rows = connection.execute(
             f"SELECT * FROM requests {where} ORDER BY received_at DESC", parameters
         ).fetchall()
-        return [_deserialize(row) for row in rows]
+        records = [_deserialize(row) for row in rows]
+
+    # SQLite's built-in LOWER/NOCASE only handles ASCII. Python casefold keeps
+    # search predictable for Russian company names and email subjects.
+    query = search.strip().casefold()
+    if not query:
+        return records
+    searchable_fields = ("subject", "sender_name", "company", "summary")
+    return [
+        record
+        for record in records
+        if any(query in str(record[field]).casefold() for field in searchable_fields)
+    ]
 
 
 def get_request(
