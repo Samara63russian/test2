@@ -6,8 +6,7 @@ Demo hosted at: https://ir940-swgoh.streamlit.app/
 Новое веб-приложение в каталоге [`inbox_kp`](inbox_kp/README.md): разбор входящих писем, бесплатный ИИ-конспект и карточки запросов (КП / перечень / простой запрос).
 
 ```bash
-cd inbox_kp && python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt && python run.py
+cd inbox_kp && python3 -m pip install -r requirements.txt && python3 run.py
 ```
 
 Откройте http://127.0.0.1:8765

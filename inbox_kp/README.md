@@ -33,10 +33,8 @@
 
 ```bash
 cd inbox_kp
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python run.py
+python3 -m pip install -r requirements.txt
+python3 run.py
 ```
 
 Откройте http://127.0.0.1:8765
@@ -45,8 +43,7 @@ python run.py
 
 ```bash
 cd inbox_kp
-source .venv/bin/activate
-pytest -q
+python3 -m pytest -q
 ```
 
 Данные хранятся локально в `inbox_kp/data/inbox.db`.

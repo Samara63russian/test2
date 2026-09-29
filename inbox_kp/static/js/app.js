@@ -51,7 +51,11 @@ async function api(path, options = {}) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error(data.detail || data.message || res.statusText);
+    const detail = data.detail;
+    const message = Array.isArray(detail)
+      ? detail.map((d) => d.msg || JSON.stringify(d)).join("; ")
+      : detail || data.message || res.statusText;
+    throw new Error(message);
   }
   return data;
 }
