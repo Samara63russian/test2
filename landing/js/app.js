@@ -1,16 +1,26 @@
 (function () {
   "use strict";
 
-  let currentLang = localStorage.getItem("lang") || detectLanguage();
+  let currentGeo = "ch";
+  let currentLang = "de";
 
-  function detectLanguage() {
+  function getTranslations() {
+    return (GEO_CONTENT[currentGeo] || GEO_CONTENT.ch || {})[currentLang] || {};
+  }
+
+  function detectLanguage(geo) {
+    const meta = GEO_META[geo] || GEO_META.ch;
+    const stored = localStorage.getItem("lang");
+    if (stored && meta.languages.includes(stored)) return stored;
+
     const browserLang = (navigator.language || "de").slice(0, 2).toLowerCase();
-    return ["de", "fr", "it"].includes(browserLang) ? browserLang : "de";
+    if (meta.languages.includes(browserLang)) return browserLang;
+    return meta.defaultLang || "de";
   }
 
   function t(key) {
     const keys = key.split(".");
-    let val = translations[currentLang];
+    let val = getTranslations();
     for (const k of keys) {
       if (val == null) return key;
       val = val[k];
@@ -20,6 +30,7 @@
 
   function updateDownloadLinks() {
     const file = t("hero.downloadFile");
+    if (!file) return;
     const filename = file.split("/").pop();
     document.querySelectorAll(".btn--download").forEach((btn) => {
       btn.href = file;
@@ -33,8 +44,52 @@
     });
   }
 
+  function updateSourceLinks() {
+    const meta = GEO_META[currentGeo] || GEO_META.ch;
+    const links = meta.sourceLinks || [];
+
+    const sourcesContainer = document.getElementById("sources-official-links");
+    if (sourcesContainer) {
+      sourcesContainer.innerHTML = links
+        .map(
+          (link) =>
+            `<a href="${link.href}" target="_blank" rel="noopener">${link.label}</a>`
+        )
+        .join("");
+    }
+
+    const footerContainer = document.getElementById("footer-sources-links");
+    if (footerContainer) {
+      footerContainer.innerHTML = links
+        .map(
+          (link) =>
+            `<li><a href="${link.href}" target="_blank" rel="noopener">${link.label}</a></li>`
+        )
+        .join("");
+    }
+  }
+
+  function updateLanguageSwitch() {
+    const meta = GEO_META[currentGeo] || GEO_META.ch;
+    document.querySelectorAll(".lang-switch__btn").forEach((btn) => {
+      const lang = btn.dataset.lang;
+      const visible = meta.languages.includes(lang);
+      btn.hidden = !visible;
+      btn.classList.toggle("lang-switch__btn--active", lang === currentLang);
+    });
+  }
+
+  function updateHeaderFlag() {
+    const meta = GEO_META[currentGeo] || GEO_META.ch;
+    const flagEl = document.querySelector(".header__logo-flag");
+    if (flagEl) flagEl.textContent = meta.flag;
+  }
+
   function setLanguage(lang) {
-    if (!translations[lang]) return;
+    const meta = GEO_META[currentGeo] || GEO_META.ch;
+    if (!meta.languages.includes(lang)) return;
+    if (!GEO_CONTENT[currentGeo] || !GEO_CONTENT[currentGeo][lang]) return;
+
     currentLang = lang;
     localStorage.setItem("lang", lang);
     document.documentElement.lang = lang;
@@ -55,10 +110,7 @@
       if (typeof value === "string") el.innerHTML = value;
     });
 
-    document.querySelectorAll(".lang-switch__btn").forEach((btn) => {
-      btn.classList.toggle("lang-switch__btn--active", btn.dataset.lang === lang);
-    });
-
+    updateLanguageSwitch();
     updateDownloadLinks();
     renderPainPoints();
     renderGuideFeatures();
@@ -66,10 +118,23 @@
     bindModalLinks();
   }
 
+  function setGeo(geo, lang) {
+    if (!GEO_CONTENT[geo]) geo = "ch";
+    currentGeo = geo;
+    localStorage.setItem("geo", geo);
+
+    updateHeaderFlag();
+    updateSourceLinks();
+
+    const nextLang = lang || detectLanguage(geo);
+    setLanguage(nextLang);
+  }
+
   function renderPainPoints() {
     const container = document.getElementById("pain-points");
     if (!container) return;
     const items = t("pain.items");
+    if (!Array.isArray(items)) return;
     container.innerHTML = items
       .map(
         (item) => `
@@ -88,6 +153,7 @@
     const container = document.getElementById("guide-features");
     if (!container) return;
     const items = t("guide.items");
+    if (!Array.isArray(items)) return;
     container.innerHTML = items
       .map(
         (item) => `
@@ -106,6 +172,7 @@
     const container = document.getElementById("faq-list");
     if (!container) return;
     const items = t("faq.items");
+    if (!Array.isArray(items)) return;
     container.innerHTML = items
       .map(
         (item, i) => `
@@ -190,7 +257,15 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(
-        Object.assign({ event: event, lang: currentLang, path: window.location.pathname }, extra || {})
+        Object.assign(
+          {
+            event: event,
+            lang: currentLang,
+            geo: currentGeo,
+            path: window.location.pathname,
+          },
+          extra || {}
+        )
       ),
       keepalive: true,
     }).catch(function () {});
@@ -216,11 +291,39 @@
     });
   }
 
+  function resolveGeoFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    const geoParam = params.get("geo");
+    if (geoParam && GEO_CONTENT[geoParam]) return geoParam;
+    return null;
+  }
+
+  function detectGeo() {
+    const fromQuery = resolveGeoFromQuery();
+    if (fromQuery) return Promise.resolve(fromQuery);
+
+    return fetch("/api/geo")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && data.geo && GEO_CONTENT[data.geo]) return data.geo;
+        const stored = localStorage.getItem("geo");
+        if (stored && GEO_CONTENT[stored]) return stored;
+        return "ch";
+      })
+      .catch(() => {
+        const stored = localStorage.getItem("geo");
+        if (stored && GEO_CONTENT[stored]) return stored;
+        return "ch";
+      });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    setLanguage(currentLang);
-    trackEvent("pageview");
-    initLanguageSwitch();
-    initModal();
-    initCookieBanner();
+    detectGeo().then((geo) => {
+      setGeo(geo);
+      trackEvent("pageview");
+      initLanguageSwitch();
+      initModal();
+      initCookieBanner();
+    });
   });
 })();

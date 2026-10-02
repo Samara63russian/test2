@@ -24,10 +24,23 @@ LANDING_DIR = BASE_DIR.parent
 DOWNLOADS_DIR = LANDING_DIR / "downloads"
 DB_PATH = BASE_DIR / "data" / "analytics.db"
 
+COUNTRY_TO_GEO = {
+    "CH": "ch",
+    "LI": "ch",
+    "DE": "de",
+    "AT": "de",
+}
+
 EXE_FILES = {
-    "de": "leitfaden-de.exe",
-    "fr": "guide-fr.exe",
-    "it": "guida-it.exe",
+    ("ch", "de"): "leitfaden-de.exe",
+    ("ch", "fr"): "guide-fr.exe",
+    ("ch", "it"): "guida-it.exe",
+    ("de", "de"): "leitfaden-de-de.exe",
+}
+
+GEO_LABELS = {
+    "ch": "🇨🇭 Schweiz",
+    "de": "🇩🇪 Deutschland",
 }
 
 app = Flask(__name__)
@@ -46,12 +59,17 @@ def ensure_db():
             ip TEXT,
             user_agent TEXT,
             lang TEXT,
+            geo TEXT,
             referrer TEXT,
             event_type TEXT NOT NULL DEFAULT 'pageview',
             path TEXT
         );
         """
     )
+    try:
+        db.execute("ALTER TABLE visits ADD COLUMN geo TEXT")
+    except sqlite3.OperationalError:
+        pass
     db.commit()
     db.close()
 
@@ -102,24 +120,32 @@ def client_ip():
     return request.remote_addr or ""
 
 
-def log_visit(event_type="pageview", lang=None, path=None):
+def log_visit(event_type="pageview", lang=None, geo=None, path=None):
     db = get_db()
     db.execute(
         """
-        INSERT INTO visits (created_at, ip, user_agent, lang, referrer, event_type, path)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO visits (created_at, ip, user_agent, lang, geo, referrer, event_type, path)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             datetime.now(timezone.utc).isoformat(),
             client_ip(),
             request.headers.get("User-Agent", "")[:500],
             lang,
+            geo,
             request.headers.get("Referer", "")[:500],
             event_type,
             path,
         ),
     )
     db.commit()
+
+
+@app.route("/api/geo")
+def geo_api():
+    country = (request.headers.get("CF-IPCountry") or "").upper()
+    geo = COUNTRY_TO_GEO.get(country, "ch")
+    return jsonify({"country": country or None, "geo": geo})
 
 
 @app.route("/api/track", methods=["POST"])
@@ -129,8 +155,9 @@ def track():
     if event_type not in {"pageview", "download"}:
         event_type = "pageview"
     lang = data.get("lang")
+    geo = data.get("geo")
     path = data.get("path")
-    log_visit(event_type=event_type, lang=lang, path=path)
+    log_visit(event_type=event_type, lang=lang, geo=geo, path=path)
     return jsonify({"ok": True})
 
 
@@ -167,7 +194,7 @@ def admin_dashboard():
     total = db.execute("SELECT COUNT(*) AS c FROM visits").fetchone()["c"]
     visits = db.execute(
         """
-        SELECT id, created_at, ip, user_agent, lang, referrer, event_type, path
+        SELECT id, created_at, ip, user_agent, lang, geo, referrer, event_type, path
         FROM visits
         ORDER BY id DESC
         LIMIT ? OFFSET ?
@@ -186,9 +213,13 @@ def admin_dashboard():
     ).fetchone()
 
     file_info = {}
-    for lang, filename in EXE_FILES.items():
+    for key, filename in EXE_FILES.items():
+        geo, lang = key
         path = DOWNLOADS_DIR / filename
-        file_info[lang] = {
+        file_info[key] = {
+            "geo": geo,
+            "lang": lang,
+            "label": GEO_LABELS.get(geo, geo),
             "filename": filename,
             "exists": path.exists(),
             "size_kb": round(path.stat().st_size / 1024, 1) if path.exists() else 0,
@@ -213,9 +244,11 @@ def admin_dashboard():
 @app.route("/admin/upload", methods=["POST"])
 @login_required
 def admin_upload():
-    lang = request.form.get("lang")
-    if lang not in EXE_FILES:
-        flash("Неверный язык", "error")
+    geo = request.form.get("geo", "ch")
+    lang = request.form.get("lang", "de")
+    key = (geo, lang)
+    if key not in EXE_FILES:
+        flash("Неверная страна или язык", "error")
         return redirect(url_for("admin_dashboard"))
 
     file = request.files.get("exe")
@@ -228,9 +261,12 @@ def admin_upload():
         return redirect(url_for("admin_dashboard"))
 
     DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
-    dest = DOWNLOADS_DIR / EXE_FILES[lang]
+    dest = DOWNLOADS_DIR / EXE_FILES[key]
     file.save(dest)
-    flash(f"EXE для {lang.upper()} загружен: {EXE_FILES[lang]}", "success")
+    flash(
+        f"EXE для {GEO_LABELS.get(geo, geo)} / {lang.upper()} загружен: {EXE_FILES[key]}",
+        "success",
+    )
     return redirect(url_for("admin_dashboard"))
 
 
