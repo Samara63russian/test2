@@ -27,20 +27,23 @@ DB_PATH = BASE_DIR / "data" / "analytics.db"
 COUNTRY_TO_GEO = {
     "CH": "ch",
     "LI": "ch",
-    "DE": "de",
-    "AT": "de",
+    "NL": "nl",
+    "BE": "be",
 }
 
 EXE_FILES = {
     ("ch", "de"): "leitfaden-de.exe",
     ("ch", "fr"): "guide-fr.exe",
     ("ch", "it"): "guida-it.exe",
-    ("de", "de"): "leitfaden-de-de.exe",
+    ("nl", "nl"): "gids-nl.exe",
+    ("be", "nl"): "gids-be-nl.exe",
+    ("be", "fr"): "guide-be-fr.exe",
 }
 
 GEO_LABELS = {
     "ch": "🇨🇭 Schweiz",
-    "de": "🇩🇪 Deutschland",
+    "nl": "🇳🇱 Nederland",
+    "be": "🇧🇪 België",
 }
 
 app = Flask(__name__)

@@ -1,6 +1,7 @@
 const GEO_CONTENT = {
   ch: typeof CH_TRANSLATIONS !== "undefined" ? CH_TRANSLATIONS : {},
-  de: typeof DE_TRANSLATIONS !== "undefined" ? DE_TRANSLATIONS : {},
+  nl: typeof NL_TRANSLATIONS !== "undefined" ? NL_TRANSLATIONS : {},
+  be: typeof BE_TRANSLATIONS !== "undefined" ? BE_TRANSLATIONS : {},
 };
 
 const GEO_META = {
@@ -14,22 +15,32 @@ const GEO_META = {
       { href: "https://gdk-cds.ch", label: "gdk-cds.ch" },
     ],
   },
-  de: {
-    flag: "🇩🇪",
-    label: "Deutschland",
-    languages: ["de"],
-    defaultLang: "de",
+  nl: {
+    flag: "🇳🇱",
+    label: "Nederland",
+    languages: ["nl"],
+    defaultLang: "nl",
     sourceLinks: [
-      { href: "https://www.arbeitsagentur.de", label: "arbeitsagentur.de" },
-      { href: "https://www.bundesregierung.de", label: "bundesregierung.de" },
+      { href: "https://www.belastingdienst.nl", label: "belastingdienst.nl" },
+      { href: "https://www.rijksoverheid.nl", label: "rijksoverheid.nl" },
+    ],
+  },
+  be: {
+    flag: "🇧🇪",
+    label: "België / Belgique",
+    languages: ["nl", "fr"],
+    defaultLang: "nl",
+    sourceLinks: [
+      { href: "https://www.socialsecurity.be", label: "socialsecurity.be" },
+      { href: "https://www.belgium.be", label: "belgium.be" },
     ],
   },
 };
 
-// Map ISO country codes to geo profile
+// Map ISO country codes to geo profile (default: ch)
 const COUNTRY_TO_GEO = {
   CH: "ch",
   LI: "ch",
-  DE: "de",
-  AT: "de",
+  NL: "nl",
+  BE: "be",
 };
