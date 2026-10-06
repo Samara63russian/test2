@@ -39,15 +39,15 @@ systemctl restart schweiz-zahlt
 nginx -t
 systemctl reload nginx
 
-if [ ! -d /etc/letsencrypt/live/sozialgeld-ch.com ]; then
-  certbot --nginx -d sozialgeld-ch.com -d www.sozialgeld-ch.com --non-interactive --agree-tos --register-unsafely-without-email --redirect || true
+if [ ! -d /etc/letsencrypt/live/benefitseurope.com ]; then
+  certbot --nginx -d benefitseurope.com -d www.benefitseurope.com --non-interactive --agree-tos --register-unsafely-without-email --redirect || true
 fi
 
-if [ -d /etc/letsencrypt/live/sozialgeld-ch.com ]; then
+if [ -d /etc/letsencrypt/live/benefitseurope.com ]; then
   cp "$SITE_DIR/deploy/nginx-schweiz-zahlt.conf" /etc/nginx/sites-available/schweiz-zahlt
   nginx -t
   systemctl reload nginx
-  echo "SSL enabled for sozialgeld-ch.com"
+  echo "SSL enabled for benefitseurope.com"
 else
   echo "SSL cert not issued yet (DNS may still point elsewhere). Site works on HTTP."
 fi

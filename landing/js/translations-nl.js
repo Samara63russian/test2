@@ -95,9 +95,9 @@ const NL_TRANSLATIONS = {
     },
     footer: {
       impressumTitle: "Colofon",
-      impressumText: "Nederland betaalt B.V.<br>Voorbeeldstraat 1<br>1012 AB Amsterdam<br>Nederland<br>Web: sozialgeld-ch.com<br>E-mail: info@sozialgeld-ch.com",
+      impressumText: "Nederland betaalt B.V.<br>Voorbeeldstraat 1<br>1012 AB Amsterdam<br>Nederland<br>Web: benefitseurope.com<br>E-mail: info@benefitseurope.com",
       privacyTitle: "Privacyverklaring",
-      privacyText: "Deze website verzamelt geen persoonsgegevens via formulieren. De gids kan zonder registratie worden gedownload. Bij actieve analyse kunnen anonieme gebruiksgegevens via cookies worden verwerkt (alleen met toestemming). Contact: info@sozialgeld-ch.com.",
+      privacyText: "Deze website verzamelt geen persoonsgegevens via formulieren. De gids kan zonder registratie worden gedownload. Bij actieve analyse kunnen anonieme gebruiksgegevens via cookies worden verwerkt (alleen met toestemming). Contact: info@benefitseurope.com.",
       sourcesTitle: "Bronnen",
       sourcesLinks: "belastingdienst.nl · rijksoverheid.nl",
       copyright: "© 2026 Nederland betaalt. Alle rechten voorbehouden.",

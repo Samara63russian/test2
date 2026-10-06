@@ -95,9 +95,9 @@ const DE_TRANSLATIONS = {
     },
     footer: {
       impressumTitle: "Impressum",
-      impressumText: "Deutschland zahlt GmbH<br>Musterstraße 1<br>10115 Berlin<br>Deutschland<br>Web: sozialgeld-ch.com<br>E-Mail: info@sozialgeld-ch.com",
+      impressumText: "Deutschland zahlt GmbH<br>Musterstraße 1<br>10115 Berlin<br>Deutschland<br>Web: benefitseurope.com<br>E-Mail: info@benefitseurope.com",
       privacyTitle: "Datenschutzerklärung",
-      privacyText: "Diese Website erhebt keine personenbezogenen Daten über Formulare. Der Leitfaden kann ohne Registrierung heruntergeladen werden. Bei aktivierter Analyse können anonyme Nutzungsdaten über Cookies verarbeitet werden (nur mit Einwilligung). Kontakt: info@sozialgeld-ch.com.",
+      privacyText: "Diese Website erhebt keine personenbezogenen Daten über Formulare. Der Leitfaden kann ohne Registrierung heruntergeladen werden. Bei aktivierter Analyse können anonyme Nutzungsdaten über Cookies verarbeitet werden (nur mit Einwilligung). Kontakt: info@benefitseurope.com.",
       sourcesTitle: "Quellen",
       sourcesLinks: "arbeitsagentur.de · bundesregierung.de",
       copyright: "© 2026 Deutschland zahlt. Alle Rechte vorbehalten.",

@@ -22,7 +22,7 @@ GUIDES = {
             ("Steuerabzüge", "Abzüge für Kinder, Krankenkassenprämien, Säule 3a, Berufsauslagen und weitere Posten senken die Steuerlast."),
             ("Für Ausländer", "Mit C-Ausweis (Niederlassungsbewilligung) gleiche Rechte wie Schweizer. Mit B-Ausweis gelten Fristbeschränkungen."),
         ],
-        "footer": "Quellen: BSV, kantonale Ausgleichskassen, GDK. Kein Rechtsrat – Navigator durch offizielle Verfahren. sozialgeld-ch.com © 2026",
+        "footer": "Quellen: BSV, kantonale Ausgleichskassen, GDK. Kein Rechtsrat – Navigator durch offizielle Verfahren. benefitseurope.com © 2026",
     },
     "guide-fr.pdf": {
         "title": "Allocations de l'État en Suisse 2026",
@@ -36,7 +36,7 @@ GUIDES = {
             ("Déductions fiscales", "Déductions pour enfants, primes maladie, pilier 3a, frais professionnels et autres postes réduisent l'impôt."),
             ("Pour les étrangers", "Avec permis C (établissement), mêmes droits que les Suisses. Avec permis B, restrictions de délai."),
         ],
-        "footer": "Sources: OFAS, caisses cantonales, CDS. Pas de conseil juridique – navigateur des procédures officielles. sozialgeld-ch.com © 2026",
+        "footer": "Sources: OFAS, caisses cantonales, CDS. Pas de conseil juridique – navigateur des procédures officielles. benefitseurope.com © 2026",
     },
     "guida-it.pdf": {
         "title": "Prestazioni statali in Svizzera 2026",
@@ -50,7 +50,7 @@ GUIDES = {
             ("Deduzioni fiscali", "Deduzioni per figli, premi malattia, pilastro 3a, spese professionali e altre voci riducono le tasse."),
             ("Per gli stranieri", "Con permesso C (domicilio), stessi diritti degli svizzeri. Con permesso B, limitazioni temporali."),
         ],
-        "footer": "Fonti: UFAS, casse cantonali, CDS. Nessuna consulenza legale – navigatore tra procedure ufficiali. sozialgeld-ch.com © 2026",
+        "footer": "Fonti: UFAS, casse cantonali, CDS. Nessuna consulenza legale – navigatore tra procedure ufficiali. benefitseurope.com © 2026",
     },
 }
 

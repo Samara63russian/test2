@@ -95,9 +95,9 @@ const BE_TRANSLATIONS = {
     },
     footer: {
       impressumTitle: "Colofon",
-      impressumText: "België betaalt BV<br>Voorbeeldstraat 1<br>1000 Brussel<br>België<br>Web: sozialgeld-ch.com<br>E-mail: info@sozialgeld-ch.com",
+      impressumText: "België betaalt BV<br>Voorbeeldstraat 1<br>1000 Brussel<br>België<br>Web: benefitseurope.com<br>E-mail: info@benefitseurope.com",
       privacyTitle: "Privacyverklaring",
-      privacyText: "Deze website verzamelt geen persoonsgegevens via formulieren. De gids kan zonder registratie worden gedownload. Bij actieve analyse kunnen anonieme gebruiksgegevens via cookies worden verwerkt (alleen met toestemming). Contact: info@sozialgeld-ch.com.",
+      privacyText: "Deze website verzamelt geen persoonsgegevens via formulieren. De gids kan zonder registratie worden gedownload. Bij actieve analyse kunnen anonieme gebruiksgegevens via cookies worden verwerkt (alleen met toestemming). Contact: info@benefitseurope.com.",
       sourcesTitle: "Bronnen",
       sourcesLinks: "socialsecurity.be · belgium.be",
       copyright: "© 2026 België betaalt. Alle rechten voorbehouden.",
@@ -205,9 +205,9 @@ const BE_TRANSLATIONS = {
     },
     footer: {
       impressumTitle: "Mentions légales",
-      impressumText: "La Belgique paie SA<br>Rue Exemple 1<br>1000 Bruxelles<br>Belgique<br>Web : sozialgeld-ch.com<br>E-mail : info@sozialgeld-ch.com",
+      impressumText: "La Belgique paie SA<br>Rue Exemple 1<br>1000 Bruxelles<br>Belgique<br>Web : benefitseurope.com<br>E-mail : info@benefitseurope.com",
       privacyTitle: "Politique de confidentialité",
-      privacyText: "Ce site ne collecte pas de données personnelles via des formulaires. Le guide peut être téléchargé sans inscription. Si l'analyse est activée, des données d'utilisation anonymes peuvent être traitées via des cookies (uniquement avec consentement). Contact : info@sozialgeld-ch.com.",
+      privacyText: "Ce site ne collecte pas de données personnelles via des formulaires. Le guide peut être téléchargé sans inscription. Si l'analyse est activée, des données d'utilisation anonymes peuvent être traitées via des cookies (uniquement avec consentement). Contact : info@benefitseurope.com.",
       sourcesTitle: "Sources",
       sourcesLinks: "socialsecurity.be · belgium.be",
       copyright: "© 2026 La Belgique paie. Tous droits réservés.",
