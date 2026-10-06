@@ -11,10 +11,13 @@ const CH_TRANSLATIONS = {
       badge: "Auszahlungen",
       title: "Staatliche Leistungen in der Schweiz 2026: Was steht dir zu?",
       subtitle: "Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht. Familienzulagen, Prämienverbilligung, Ergänzungsleistungen zur Rente, Mietzinsbeiträge – der Staat gibt Geld zurück, wenn du weisst, wo du suchen musst. Lade den kostenlosen Leitfaden herunter und finde in 2 Minuten heraus, was dir zusteht.",
-      downloadTitle: "📄 Leitfaden kostenlos herunterladen",
+      downloadTitle: "Leitfaden kostenlos herunterladen",
       downloadText: "Programm sofort verfügbar. Keine Registrierung, kein E-Mail nötig.",
       downloadBtn: "Leitfaden kostenlos herunterladen",
       downloadNote: "Die Datei wird direkt auf dein Gerät heruntergeladen.",
+      trust1: "100% kostenlos",
+      trust2: "Sofort-Download",
+      trust3: "Offizielle Quellen",
       downloadFile: "downloads/leitfaden-de.exe",
     },
     pain: {
@@ -49,7 +52,7 @@ const CH_TRANSLATIONS = {
     cta: {
       title: "Hol dir den Leitfaden jetzt",
       subtitle: "Kostenlos – sofort herunterladen.",
-      downloadBtn: "🟩 Leitfaden kostenlos herunterladen",
+      downloadBtn: "Leitfaden kostenlos herunterladen",
       note: "Keine Registrierung erforderlich.",
     },
     sources: {
@@ -91,7 +94,7 @@ const CH_TRANSLATIONS = {
     urgency: {
       title: "Geld wartet nicht. Fristen auch nicht.",
       text: "Prämienverbilligung – je nach Kanton unterschiedliche Fristen. Familienzulagen – ab dem Geburtsmonat des Kindes. EL – ab dem Zeitpunkt, an dem die Rente die Ausgaben nicht mehr deckt. Lade den Leitfaden herunter – prüfe, was dir möglicherweise zusteht.",
-      cta: "📄 Leitfaden kostenlos herunterladen",
+      cta: "Leitfaden kostenlos herunterladen",
     },
     footer: {
       impressumTitle: "Impressum",
@@ -100,7 +103,7 @@ const CH_TRANSLATIONS = {
       privacyText: "Diese Website erhebt keine personenbezogenen Daten über Formulare. Der Leitfaden kann ohne Registrierung heruntergeladen werden. Bei aktivierter Analyse können anonyme Nutzungsdaten über Cookies verarbeitet werden (nur mit Einwilligung). Kontakt: info@benefitseurope.com.",
       sourcesTitle: "Quellen",
       sourcesLinks: "ahv-iv.ch · gdk-cds.ch",
-      copyright: "© 2026 Schweiz zahlt. Alle Rechte vorbehalten.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Wir verwenden Cookies für die Analyse des Website-Traffics. Du kannst zustimmen oder ablehnen.",
@@ -121,10 +124,13 @@ const CH_TRANSLATIONS = {
       badge: "Prestations",
       title: "Allocations de l'État en Suisse 2026 : à quoi avez-vous droit ?",
       subtitle: "La Suisse paie. En permanence. Mais beaucoup ignorent ce qui leur est dû. Allocations familiales, réduction des primes, prestations complémentaires à la retraite, subventions au loyer – l'État vous rend de l'argent si vous savez où chercher. Téléchargez le guide gratuit et découvrez en 2 minutes ce qui vous est dû.",
-      downloadTitle: "📄 Télécharger le guide gratuitement",
+      downloadTitle: "Télécharger le guide gratuitement",
       downloadText: "Programme disponible immédiatement. Pas d'inscription, pas d'e-mail requis.",
       downloadBtn: "Télécharger le guide gratuitement",
       downloadNote: "Le fichier est téléchargé directement sur votre appareil.",
+      trust1: "100 % gratuit",
+      trust2: "Téléchargement immédiat",
+      trust3: "Sources officielles",
       downloadFile: "downloads/guide-fr.exe",
     },
     pain: {
@@ -159,7 +165,7 @@ const CH_TRANSLATIONS = {
     cta: {
       title: "Obtenez le guide maintenant",
       subtitle: "Gratuit – téléchargement immédiat.",
-      downloadBtn: "🟩 Télécharger le guide gratuitement",
+      downloadBtn: "Télécharger le guide gratuitement",
       note: "Aucune inscription requise.",
     },
     sources: {
@@ -201,7 +207,7 @@ const CH_TRANSLATIONS = {
     urgency: {
       title: "L'argent n'attend pas. Les délais non plus.",
       text: "Réduction des primes – délais variables selon le canton. Allocations familiales – dès le mois de naissance de l'enfant. PC – dès le moment où la rente ne couvre plus les dépenses. Téléchargez le guide – vérifiez ce qui pourrait vous être dû.",
-      cta: "📄 Télécharger le guide gratuitement",
+      cta: "Télécharger le guide gratuitement",
     },
     footer: {
       impressumTitle: "Mentions légales",
@@ -210,7 +216,7 @@ const CH_TRANSLATIONS = {
       privacyText: "Ce site ne collecte pas de données personnelles via des formulaires. Le guide peut être téléchargé sans inscription. Si l'analyse est activée, des données d'utilisation anonymes peuvent être traitées via des cookies (uniquement avec consentement). Contact : info@benefitseurope.com.",
       sourcesTitle: "Sources",
       sourcesLinks: "ahv-iv.ch · gdk-cds.ch",
-      copyright: "© 2026 La Suisse paie. Tous droits réservés.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Nous utilisons des cookies pour analyser le trafic du site. Vous pouvez accepter ou refuser.",
@@ -231,10 +237,13 @@ const CH_TRANSLATIONS = {
       badge: "Prestazioni",
       title: "Pagamenti statali in Svizzera 2026: a cosa hai diritto?",
       subtitle: "La Svizzera paga. Sempre. Ma molti non sanno cosa spetta loro. Assegni familiari, riduzione dei premi, integrazioni alla pensione, contributi all'affitto – lo Stato restituisce denaro se sai dove guardare. Scarica la guida gratuita e scopri in 2 minuti cosa ti spetta.",
-      downloadTitle: "📄 Scarica la guida gratuitamente",
+      downloadTitle: "Scarica la guida gratuitamente",
       downloadText: "Programma disponibile subito. Nessuna registrazione, nessuna e-mail richiesta.",
       downloadBtn: "Scarica la guida gratuitamente",
       downloadNote: "Il file viene scaricato direttamente sul tuo dispositivo.",
+      trust1: "100% gratuito",
+      trust2: "Download immediato",
+      trust3: "Fonti ufficiali",
       downloadFile: "downloads/guida-it.exe",
     },
     pain: {
@@ -269,7 +278,7 @@ const CH_TRANSLATIONS = {
     cta: {
       title: "Ottieni la guida adesso",
       subtitle: "Gratis – download immediato.",
-      downloadBtn: "🟩 Scarica la guida gratuitamente",
+      downloadBtn: "Scarica la guida gratuitamente",
       note: "Nessuna registrazione richiesta.",
     },
     sources: {
@@ -311,7 +320,7 @@ const CH_TRANSLATIONS = {
     urgency: {
       title: "I soldi non aspettano. Nemmeno le scadenze.",
       text: "Riduzione dei premi – scadenze diverse a seconda del cantone. Assegni familiari – dal mese di nascita del figlio. PC – dal momento in cui la rendita non copre più le spese. Scarica la guida – verifica cosa potrebbe spettarti.",
-      cta: "📄 Scarica la guida gratuitamente",
+      cta: "Scarica la guida gratuitamente",
     },
     footer: {
       impressumTitle: "Impressum",
@@ -320,7 +329,7 @@ const CH_TRANSLATIONS = {
       privacyText: "Questo sito non raccoglie dati personali tramite moduli. La guida può essere scaricata senza registrazione. Se l'analisi è attiva, dati di utilizzo anonimi possono essere trattati tramite cookie (solo con consenso). Contatto: info@benefitseurope.com.",
       sourcesTitle: "Fonti",
       sourcesLinks: "ahv-iv.ch · gdk-cds.ch",
-      copyright: "© 2026 La Svizzera paga. Tutti diritti riservati.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Utilizziamo cookie per analizzare il traffico del sito. Puoi accettare o rifiutare.",

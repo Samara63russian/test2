@@ -140,7 +140,7 @@
         (item) => `
       <div class="pain-point">
         <div class="pain-point__question">
-          <span class="pain-point__icon">❌</span>
+          <span class="pain-point__icon">?</span>
           ${item.question}
         </div>
         <p class="pain-point__answer">${item.answer}</p>
@@ -158,7 +158,7 @@
       .map(
         (item) => `
       <div class="feature">
-        <span class="feature__icon">✅</span>
+        <span class="feature__icon">✓</span>
         <div class="feature__text">
           <strong>${item.title}</strong>
           ${item.text}

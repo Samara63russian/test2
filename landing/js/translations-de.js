@@ -11,10 +11,13 @@ const DE_TRANSLATIONS = {
       badge: "Leistungen",
       title: "Staatliche Leistungen in Deutschland 2026: Was steht dir zu?",
       subtitle: "Der Staat zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht. Kindergeld, Wohngeld, Bürgergeld, Zuschüsse zur Krankenversicherung, Elterngeld – es gibt Geld zurück, wenn du weisst, wo du suchen musst. Lade den kostenlosen Leitfaden herunter und finde in 2 Minuten heraus, was dir zusteht.",
-      downloadTitle: "📄 Leitfaden kostenlos herunterladen",
+      downloadTitle: "Leitfaden kostenlos herunterladen",
       downloadText: "Programm sofort verfügbar. Keine Registrierung, kein E-Mail nötig.",
       downloadBtn: "Leitfaden kostenlos herunterladen",
       downloadNote: "Die Datei wird direkt auf dein Gerät heruntergeladen.",
+      trust1: "100% kostenlos",
+      trust2: "Sofort-Download",
+      trust3: "Offizielle Quellen",
       downloadFile: "downloads/leitfaden-de-de.exe",
     },
     pain: {
@@ -49,7 +52,7 @@ const DE_TRANSLATIONS = {
     cta: {
       title: "Hol dir den Leitfaden jetzt",
       subtitle: "Kostenlos – sofort herunterladen.",
-      downloadBtn: "🟩 Leitfaden kostenlos herunterladen",
+      downloadBtn: "Leitfaden kostenlos herunterladen",
       note: "Keine Registrierung erforderlich.",
     },
     sources: {
@@ -91,7 +94,7 @@ const DE_TRANSLATIONS = {
     urgency: {
       title: "Geld wartet nicht. Fristen auch nicht.",
       text: "Kindergeld – ab Geburt des Kindes beantragen. Wohngeld – ab Einzug in die Wohnung. Bürgergeld – ab dem Tag der Antragstellung. Lade den Leitfaden herunter – prüfe, was dir möglicherweise zusteht.",
-      cta: "📄 Leitfaden kostenlos herunterladen",
+      cta: "Leitfaden kostenlos herunterladen",
     },
     footer: {
       impressumTitle: "Impressum",
@@ -100,7 +103,7 @@ const DE_TRANSLATIONS = {
       privacyText: "Diese Website erhebt keine personenbezogenen Daten über Formulare. Der Leitfaden kann ohne Registrierung heruntergeladen werden. Bei aktivierter Analyse können anonyme Nutzungsdaten über Cookies verarbeitet werden (nur mit Einwilligung). Kontakt: info@benefitseurope.com.",
       sourcesTitle: "Quellen",
       sourcesLinks: "arbeitsagentur.de · bundesregierung.de",
-      copyright: "© 2026 Deutschland zahlt. Alle Rechte vorbehalten.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Wir verwenden Cookies für die Analyse des Website-Traffics. Du kannst zustimmen oder ablehnen.",

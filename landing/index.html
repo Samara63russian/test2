@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Familienzulagen, Prämienverbilligung, Ergänzungsleistungen und mehr – kostenloser Leitfaden für die Schweiz 2026.">
   <link rel="canonical" href="https://benefitseurope.com/">
-  <title>Auszahlungen – Staatliche Leistungen in der Schweiz 2026</title>
+  <title>Benefits Europe – Staatliche Leistungen 2026</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231a56db'/><text x='16' y='22' text-anchor='middle' fill='white' font-family='system-ui' font-weight='700' font-size='14'>BE</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <div class="header__inner">
-      <div class="header__logo">
-        <span class="header__logo-flag">🇨🇭</span>
-        <span data-i18n="header.logo">Schweiz zahlt</span>
-      </div>
+      <a href="#" class="header__logo" aria-label="Benefits Europe">
+        <span class="header__logo-mark">BE</span>
+        <span class="header__logo-text">
+          <span class="header__logo-name">Benefits Europe</span>
+          <span class="header__logo-tag">
+            <span class="header__logo-flag" aria-hidden="true">🇨🇭</span>
+            <span data-i18n="header.logo">Schweiz zahlt</span>
+          </span>
+        </span>
+      </a>
       <div class="lang-switch" role="group" aria-label="Language">
         <button class="lang-switch__btn lang-switch__btn--active" data-lang="de">DE</button>
         <button class="lang-switch__btn" data-lang="fr">FR</button>
@@ -29,92 +35,122 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <span class="hero__badge" data-i18n="hero.badge">Auszahlungen</span>
-      <h1 class="hero__title" data-i18n="hero.title">Staatliche Leistungen in der Schweiz 2026: Was steht dir zu?</h1>
-      <p class="hero__subtitle" data-i18n="hero.subtitle">Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht.</p>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__content">
+            <span class="hero__badge" data-i18n="hero.badge">Auszahlungen</span>
+            <h1 class="hero__title" data-i18n="hero.title">Staatliche Leistungen in der Schweiz 2026: Was steht dir zu?</h1>
+            <p class="hero__subtitle" data-i18n="hero.subtitle">Die Schweiz zahlt. Ständig. Aber viele wissen nicht, was ihnen zusteht.</p>
+            <ul class="trust-bar" aria-label="Highlights">
+              <li class="trust-bar__item">
+                <span class="trust-bar__icon">✓</span>
+                <span data-i18n="hero.trust1">100% kostenlos</span>
+              </li>
+              <li class="trust-bar__item">
+                <span class="trust-bar__icon">✓</span>
+                <span data-i18n="hero.trust2">Sofort-Download</span>
+              </li>
+              <li class="trust-bar__item">
+                <span class="trust-bar__icon">✓</span>
+                <span data-i18n="hero.trust3">Offizielle Quellen</span>
+              </li>
+            </ul>
+          </div>
 
-      <div class="download-card" id="download-hero">
-        <div class="download-card__title" data-i18n="hero.downloadTitle">📄 Leitfaden kostenlos herunterladen</div>
-        <p class="download-card__text" data-i18n="hero.downloadText">Programm sofort verfügbar. Keine Registrierung, kein E-Mail nötig.</p>
-        <a href="downloads/leitfaden-de.exe" class="btn btn--primary btn--download" id="download-btn-hero" download data-i18n="hero.downloadBtn">Leitfaden kostenlos herunterladen</a>
-        <p class="download-card__note" data-i18n="hero.downloadNote">Die Datei wird direkt auf dein Gerät heruntergeladen.</p>
+          <div class="download-card download-card--hero" id="download-hero">
+            <div class="download-card__header">
+              <span class="download-card__icon" aria-hidden="true">📄</span>
+              <div class="download-card__title" data-i18n="hero.downloadTitle">Leitfaden kostenlos herunterladen</div>
+            </div>
+            <p class="download-card__text" data-i18n="hero.downloadText">Programm sofort verfügbar. Keine Registrierung, kein E-Mail nötig.</p>
+            <a href="downloads/leitfaden-de.exe" class="btn btn--primary btn--download" id="download-btn-hero" download data-i18n="hero.downloadBtn">Leitfaden kostenlos herunterladen</a>
+            <p class="download-card__note" data-i18n="hero.downloadNote">Die Datei wird direkt auf dein Gerät heruntergeladen.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Pain Points -->
-  <section class="section">
-    <div class="container container--narrow">
-      <h2 class="section__title" data-i18n="pain.title">Geld liegt auf Konten. Du hast nur keinen Antrag gestellt.</h2>
-      <div class="pain-points" id="pain-points"></div>
-    </div>
-  </section>
-
-  <!-- Guide Features -->
-  <section class="section section--alt">
-    <div class="container container--narrow">
-      <h2 class="section__title" data-i18n="guide.title">Was du im Leitfaden findest</h2>
-      <div class="features" id="guide-features"></div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <h2 class="section__title" data-i18n="cta.title">Hol dir den Leitfaden jetzt</h2>
-      <p class="section__subtitle" data-i18n="cta.subtitle">Kostenlos – sofort herunterladen.</p>
-
-      <div class="download-card" id="download-cta">
-        <a href="downloads/leitfaden-de.exe" class="btn btn--primary btn--download" id="download-btn-cta" download data-i18n="cta.downloadBtn">🟩 Leitfaden kostenlos herunterladen</a>
-        <p class="download-card__note" data-i18n="cta.note">Keine Registrierung erforderlich.</p>
+    <section class="section">
+      <div class="container container--narrow">
+        <p class="section__eyebrow">Problem</p>
+        <h2 class="section__title" data-i18n="pain.title">Geld liegt auf Konten. Du hast nur keinen Antrag gestellt.</h2>
+        <div class="pain-points" id="pain-points"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Sources -->
-  <section class="sources">
-    <div class="container container--narrow">
-      <h2 class="section__title" data-i18n="sources.title">Woher stammen die Daten</h2>
-      <p class="sources__text" data-i18n="sources.text">Der Leitfaden basiert auf offenen Quellen.</p>
-      <div class="sources__links">
-        <a href="#" data-modal="impressum" data-i18n="sources.impressum">Impressum</a>
-        <a href="#" data-modal="privacy" data-i18n="sources.privacy">Datenschutzerklärung</a>
-        <span data-i18n="sources.officialSources">Offizielle Quellen:</span>
-        <span id="sources-official-links">
-          <a href="https://ahv-iv.ch" target="_blank" rel="noopener">ahv-iv.ch</a>
-          <a href="https://gdk-cds.ch" target="_blank" rel="noopener">gdk-cds.ch</a>
-        </span>
+    <section class="section section--alt">
+      <div class="container container--narrow">
+        <p class="section__eyebrow">Leitfaden</p>
+        <h2 class="section__title" data-i18n="guide.title">Was du im Leitfaden findest</h2>
+        <div class="features" id="guide-features"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section class="section section--alt">
-    <div class="container container--narrow">
-      <h2 class="section__title" data-i18n="faq.title">FAQ – Einwände ausräumen</h2>
-      <div class="faq" id="faq-list"></div>
-    </div>
-  </section>
+    <section class="cta-section">
+      <div class="container container--narrow">
+        <p class="section__eyebrow section__eyebrow--light">Download</p>
+        <h2 class="section__title" data-i18n="cta.title">Hol dir den Leitfaden jetzt</h2>
+        <p class="section__subtitle" data-i18n="cta.subtitle">Kostenlos – sofort herunterladen.</p>
+        <div class="download-card download-card--cta" id="download-cta">
+          <a href="downloads/leitfaden-de.exe" class="btn btn--primary btn--download" id="download-btn-cta" download data-i18n="cta.downloadBtn">Leitfaden kostenlos herunterladen</a>
+          <p class="download-card__note" data-i18n="cta.note">Keine Registrierung erforderlich.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Urgency -->
-  <section class="urgency">
-    <div class="container container--narrow">
-      <h2 class="section__title" data-i18n="urgency.title">Geld wartet nicht. Fristen auch nicht.</h2>
-      <p class="urgency__text" data-i18n="urgency.text">Prämienverbilligung – bis 31. Mai.</p>
-      <a href="#download-hero" class="btn btn--primary" data-i18n="urgency.cta">📄 Leitfaden kostenlos herunterladen</a>
-    </div>
-  </section>
+    <section class="sources">
+      <div class="container container--narrow">
+        <p class="section__eyebrow">Transparenz</p>
+        <h2 class="section__title" data-i18n="sources.title">Woher stammen die Daten</h2>
+        <p class="sources__text" data-i18n="sources.text">Der Leitfaden basiert auf offenen Quellen.</p>
+        <div class="sources__links">
+          <a href="#" class="sources__pill" data-modal="impressum" data-i18n="sources.impressum">Impressum</a>
+          <a href="#" class="sources__pill" data-modal="privacy" data-i18n="sources.privacy">Datenschutzerklärung</a>
+        </div>
+        <div class="sources__official">
+          <span class="sources__official-label" data-i18n="sources.officialSources">Offizielle Quellen:</span>
+          <span id="sources-official-links" class="sources__official-links">
+            <a href="https://ahv-iv.ch" target="_blank" rel="noopener">ahv-iv.ch</a>
+            <a href="https://gdk-cds.ch" target="_blank" rel="noopener">gdk-cds.ch</a>
+          </span>
+        </div>
+      </div>
+    </section>
 
-  <!-- Footer -->
+    <section class="section section--alt">
+      <div class="container container--narrow">
+        <p class="section__eyebrow">FAQ</p>
+        <h2 class="section__title" data-i18n="faq.title">FAQ – Einwände ausräumen</h2>
+        <div class="faq" id="faq-list"></div>
+      </div>
+    </section>
+
+    <section class="urgency">
+      <div class="container container--narrow">
+        <h2 class="section__title" data-i18n="urgency.title">Geld wartet nicht. Fristen auch nicht.</h2>
+        <p class="urgency__text" data-i18n="urgency.text">Prämienverbilligung – bis 31. Mai.</p>
+        <a href="#download-hero" class="btn btn--primary btn--lg" data-i18n="urgency.cta">Leitfaden kostenlos herunterladen</a>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
     <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="footer__logo-mark">BE</span>
+          <div>
+            <div class="footer__logo-name">Benefits Europe</div>
+            <div class="footer__logo-tag" data-i18n="header.logo">Schweiz zahlt</div>
+          </div>
+        </div>
+      </div>
       <div class="footer__grid">
         <div>
           <div class="footer__heading" data-i18n="footer.impressumTitle">Impressum</div>
-          <p data-i18n-html="footer.impressumText">Schweiz zahlt GmbH</p>
+          <p class="footer__text" data-i18n-html="footer.impressumText">Schweiz zahlt GmbH</p>
         </div>
         <div>
           <div class="footer__heading" data-i18n="footer.privacyTitle">Datenschutzerklärung</div>
@@ -131,11 +167,10 @@
           </ul>
         </div>
       </div>
-      <div class="footer__bottom" data-i18n="footer.copyright">© 2026 Schweiz zahlt. Alle Rechte vorbehalten.</div>
+      <div class="footer__bottom" data-i18n="footer.copyright">© 2026 Benefits Europe. Alle Rechte vorbehalten.</div>
     </div>
   </footer>
 
-  <!-- Cookie Banner -->
   <div class="cookie-banner" id="cookie-banner">
     <div class="cookie-banner__inner">
       <p class="cookie-banner__text" data-i18n="cookie.text">Wir verwenden Cookies für die Analyse.</p>
@@ -146,7 +181,6 @@
     </div>
   </div>
 
-  <!-- Modal -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal" role="dialog" aria-modal="true">
       <button class="modal__close" id="modal-close" aria-label="Close">&times;</button>
@@ -155,10 +189,10 @@
     </div>
   </div>
 
-  <script src="js/translations-ch.js?v=5"></script>
-  <script src="js/translations-nl.js?v=5"></script>
-  <script src="js/translations-be.js?v=5"></script>
-  <script src="js/translations.js?v=5"></script>
-  <script src="js/app.js?v=5"></script>
+  <script src="js/translations-ch.js?v=6"></script>
+  <script src="js/translations-nl.js?v=6"></script>
+  <script src="js/translations-be.js?v=6"></script>
+  <script src="js/translations.js?v=6"></script>
+  <script src="js/app.js?v=6"></script>
 </body>
 </html>

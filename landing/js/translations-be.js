@@ -11,10 +11,13 @@ const BE_TRANSLATIONS = {
       badge: "Uitkeringen",
       title: "Overheidsuitkeringen in België 2026: waar heb jij recht op?",
       subtitle: "De overheid betaalt. Continu. Maar velen weten niet waar ze recht op hebben. Kindergeld, zorgverzekering, leefloon, huurpremie, kinderopvang – er is geld terug als je weet waar je moet zoeken. Download de gratis gids en ontdek binnen 2 minuten waar jij recht op hebt.",
-      downloadTitle: "📄 Gids gratis downloaden",
+      downloadTitle: "Gids gratis downloaden",
       downloadText: "Programma direct beschikbaar. Geen registratie, geen e-mail nodig.",
       downloadBtn: "Gids gratis downloaden",
       downloadNote: "Het bestand wordt direct op je apparaat gedownload.",
+      trust1: "100% gratis",
+      trust2: "Direct downloaden",
+      trust3: "Officiële bronnen",
       downloadFile: "downloads/gids-be-nl.exe",
     },
     pain: {
@@ -49,7 +52,7 @@ const BE_TRANSLATIONS = {
     cta: {
       title: "Download de gids nu",
       subtitle: "Gratis – direct downloaden.",
-      downloadBtn: "🟩 Gids gratis downloaden",
+      downloadBtn: "Gids gratis downloaden",
       note: "Geen registratie vereist.",
     },
     sources: {
@@ -91,7 +94,7 @@ const BE_TRANSLATIONS = {
     urgency: {
       title: "Geld wacht niet. Deadlines ook niet.",
       text: "Kindergeld – vanaf geboorte aanvragen. Leefloon – vanaf dag van aanvraag. Huurpremie – per regio verschillende termijnen. Download de gids – controleer waar jij mogelijk recht op hebt.",
-      cta: "📄 Gids gratis downloaden",
+      cta: "Gids gratis downloaden",
     },
     footer: {
       impressumTitle: "Colofon",
@@ -100,7 +103,7 @@ const BE_TRANSLATIONS = {
       privacyText: "Deze website verzamelt geen persoonsgegevens via formulieren. De gids kan zonder registratie worden gedownload. Bij actieve analyse kunnen anonieme gebruiksgegevens via cookies worden verwerkt (alleen met toestemming). Contact: info@benefitseurope.com.",
       sourcesTitle: "Bronnen",
       sourcesLinks: "socialsecurity.be · belgium.be",
-      copyright: "© 2026 België betaalt. Alle rechten voorbehouden.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Wij gebruiken cookies voor website-analyse. Je kunt accepteren of weigeren.",
@@ -121,10 +124,13 @@ const BE_TRANSLATIONS = {
       badge: "Prestations",
       title: "Allocations publiques en Belgique 2026 : à quoi avez-vous droit ?",
       subtitle: "L'État paie. En permanence. Mais beaucoup ignorent ce qui leur est dû. Allocations familiales, assurance soins, revenu d'intégration, prime loyer – l'État vous rembourse si vous savez où chercher. Téléchargez le guide gratuit et découvrez en 2 minutes ce qui vous est dû.",
-      downloadTitle: "📄 Télécharger le guide gratuitement",
+      downloadTitle: "Télécharger le guide gratuitement",
       downloadText: "Programme disponible immédiatement. Pas d'inscription, pas d'e-mail requis.",
       downloadBtn: "Télécharger le guide gratuitement",
       downloadNote: "Le fichier est téléchargé directement sur votre appareil.",
+      trust1: "100 % gratuit",
+      trust2: "Téléchargement immédiat",
+      trust3: "Sources officielles",
       downloadFile: "downloads/guide-be-fr.exe",
     },
     pain: {
@@ -159,7 +165,7 @@ const BE_TRANSLATIONS = {
     cta: {
       title: "Obtenez le guide maintenant",
       subtitle: "Gratuit – téléchargement immédiat.",
-      downloadBtn: "🟩 Télécharger le guide gratuitement",
+      downloadBtn: "Télécharger le guide gratuitement",
       note: "Aucune inscription requise.",
     },
     sources: {
@@ -201,7 +207,7 @@ const BE_TRANSLATIONS = {
     urgency: {
       title: "L'argent n'attend pas. Les délais non plus.",
       text: "Allocations familiales – demander dès la naissance. Revenu d'intégration – à partir du jour de la demande. Prime loyer – délais variables par région. Téléchargez le guide – vérifiez ce qui pourrait vous être dû.",
-      cta: "📄 Télécharger le guide gratuitement",
+      cta: "Télécharger le guide gratuitement",
     },
     footer: {
       impressumTitle: "Mentions légales",
@@ -210,7 +216,7 @@ const BE_TRANSLATIONS = {
       privacyText: "Ce site ne collecte pas de données personnelles via des formulaires. Le guide peut être téléchargé sans inscription. Si l'analyse est activée, des données d'utilisation anonymes peuvent être traitées via des cookies (uniquement avec consentement). Contact : info@benefitseurope.com.",
       sourcesTitle: "Sources",
       sourcesLinks: "socialsecurity.be · belgium.be",
-      copyright: "© 2026 La Belgique paie. Tous droits réservés.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Nous utilisons des cookies pour analyser le trafic du site. Vous pouvez accepter ou refuser.",

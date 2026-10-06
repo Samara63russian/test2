@@ -11,10 +11,13 @@ const NL_TRANSLATIONS = {
       badge: "Uitkeringen",
       title: "Overheidstoeslagen in Nederland 2026: waar heb jij recht op?",
       subtitle: "De overheid betaalt. Continu. Maar velen weten niet waar ze recht op hebben. Kindgebonden budget, zorgtoeslag, huurtoeslag, kinderopvangtoeslag – er is geld terug als je weet waar je moet zoeken. Download de gratis gids en ontdek binnen 2 minuten waar jij recht op hebt.",
-      downloadTitle: "📄 Gids gratis downloaden",
+      downloadTitle: "Gids gratis downloaden",
       downloadText: "Programma direct beschikbaar. Geen registratie, geen e-mail nodig.",
       downloadBtn: "Gids gratis downloaden",
       downloadNote: "Het bestand wordt direct op je apparaat gedownload.",
+      trust1: "100% gratis",
+      trust2: "Direct downloaden",
+      trust3: "Officiële bronnen",
       downloadFile: "downloads/gids-nl.exe",
     },
     pain: {
@@ -49,7 +52,7 @@ const NL_TRANSLATIONS = {
     cta: {
       title: "Download de gids nu",
       subtitle: "Gratis – direct downloaden.",
-      downloadBtn: "🟩 Gids gratis downloaden",
+      downloadBtn: "Gids gratis downloaden",
       note: "Geen registratie vereist.",
     },
     sources: {
@@ -91,7 +94,7 @@ const NL_TRANSLATIONS = {
     urgency: {
       title: "Geld wacht niet. Deadlines ook niet.",
       text: "Toeslagen – aanvragen zodra je recht hebt. Kinderbijslag – vanaf geboorte van het kind. Huurtoeslag – vanaf ingang huurcontract. Download de gids – controleer waar jij mogelijk recht op hebt.",
-      cta: "📄 Gids gratis downloaden",
+      cta: "Gids gratis downloaden",
     },
     footer: {
       impressumTitle: "Colofon",
@@ -100,7 +103,7 @@ const NL_TRANSLATIONS = {
       privacyText: "Deze website verzamelt geen persoonsgegevens via formulieren. De gids kan zonder registratie worden gedownload. Bij actieve analyse kunnen anonieme gebruiksgegevens via cookies worden verwerkt (alleen met toestemming). Contact: info@benefitseurope.com.",
       sourcesTitle: "Bronnen",
       sourcesLinks: "belastingdienst.nl · rijksoverheid.nl",
-      copyright: "© 2026 Nederland betaalt. Alle rechten voorbehouden.",
+      copyright: "© 2026 Benefits Europe. Alle rechten voorbehouden.",
     },
     cookie: {
       text: "Wij gebruiken cookies voor website-analyse. Je kunt accepteren of weigeren.",
